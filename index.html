@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rischio da caldo · Worklimate</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/3.6.2/maplibre-gl.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/3.6.2/maplibre-gl.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2321;
+    --paper:#f7f6f2;
+    --panel:#ffffff;
+    --line:#dedad2;
+    --muted:#6b6f6c;
+    --green:#4c9a5b;
+    --yellow:#d9a824;
+    --orange:#e07b2b;
+    --red:#c8402f;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);}
+  #map{position:absolute;inset:0;}
+
+  .topbar{
+    position:absolute; top:16px; left:16px; z-index:5;
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:14px 16px; box-shadow:0 4px 16px rgba(28,35,33,.08);
+    max-width:280px;
+  }
+  .topbar h1{
+    font-size:15px; font-weight:700; margin:0 0 2px;
+    letter-spacing:.01em;
+  }
+  .topbar p{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
+    margin:0 0 12px; letter-spacing:.02em;
+  }
+
+  .day-toggle{ display:flex; gap:4px; }
+  .day-toggle button{
+    flex:1; padding:7px 6px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink);
+    border-radius:6px; cursor:pointer; transition:background .15s, color .15s;
+  }
+  .day-toggle button:hover{ background:#efece4; }
+  .day-toggle button.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+  .legend{
+    position:absolute; bottom:20px; left:16px; z-index:5;
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:12px 14px; box-shadow:0 4px 16px rgba(28,35,33,.08);
+    font-size:12px;
+  }
+  .legend-title{ font-weight:600; margin-bottom:8px; }
+  .legend-row{ display:flex; align-items:center; gap:8px; margin-bottom:5px; }
+  .legend-row:last-child{ margin-bottom:0; }
+  .swatch{ width:11px; height:11px; border-radius:50%; flex:none; }
+
+  .updated{
+    position:absolute; bottom:20px; right:16px; z-index:5;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted);
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:6px 10px;
+  }
+
+  .maplibregl-popup-content{
+    font-family:'Inter',system-ui,sans-serif; border-radius:10px; padding:14px 16px;
+    box-shadow:0 6px 20px rgba(28,35,33,.15);
+  }
+  .popup-title{ font-weight:700; font-size:14px; margin-bottom:6px; }
+  .popup-badge{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    padding:2px 8px; border-radius:20px; color:#fff; margin-bottom:8px;
+  }
+  .popup-desc{ font-size:12.5px; color:var(--muted); line-height:1.4; }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div class="topbar">
+  <h1>Rischio da caldo</h1>
+  <p>dati Worklimate · CNR</p>
+  <div class="day-toggle" id="dayToggle">
+    <button data-day="0" class="active">Oggi</button>
+    <button data-day="1">Domani</button>
+    <button data-day="2">Dopodom.</button>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-title">Livello di rischio</div>
+  <div class="legend-row"><span class="swatch" style="background:var(--green)"></span>Basso</div>
+  <div class="legend-row"><span class="swatch" style="background:var(--yellow)"></span>Moderato</div>
+  <div class="legend-row"><span class="swatch" style="background:var(--orange)"></span>Alto</div>
+  <div class="legend-row"><span class="swatch" style="background:var(--red)"></span>Emergenza</div>
+</div>
+
+<div class="updated" id="updatedAt"></div>
+
+<script>
+const COLORI = { green:'#4c9a5b', yellow:'#d9a824', orange:'#e07b2b', red:'#c8402f' };
+
+const map = new maplibregl.Map({
+  container: 'map',
+  style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+  center: [14.0, 37.6], // centro Sicilia, adatta ai tuoi punti
+  zoom: 6.6,
+});
+map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+let currentDay = 0;
+let geojsonData = null;
+const popup = new maplibregl.Popup({ closeButton: true, offset: 12 });
+
+function featureForDay(feature, dayIndex) {
+  const giorno = feature.properties.giorni_parsed[dayIndex] || feature.properties.giorni_parsed[0];
+  return {
+    ...feature,
+    properties: { ...feature.properties, colore: giorno.colore, label: giorno.label, desc: giorno.desc, data: giorno.data },
+  };
+}
+
+function render() {
+  if (!geojsonData) return;
+  const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
+  map.getSource('rischio').setData({ type: 'FeatureCollection', features });
+}
+
+map.on('load', async () => {
+  map.addSource('rischio', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+
+  map.addLayer({
+    id: 'rischio-circles',
+    type: 'circle',
+    source: 'rischio',
+    paint: {
+      'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 6, 10, 16],
+      'circle-color': ['match', ['get', 'colore'], 'green', COLORI.green, 'yellow', COLORI.yellow, 'orange', COLORI.orange, 'red', COLORI.red, '#999'],
+      'circle-stroke-width': 2,
+      'circle-stroke-color': '#ffffff',
+    },
+  });
+
+  try {
+    const res = await fetch('data/rischio.geojson');
+    const raw = await res.json();
+
+    // pre-parsa i 3 giorni (già presenti in properties.giorni dallo script)
+    raw.features.forEach((f) => {
+      f.properties.giorni_parsed = f.properties.giorni;
+    });
+
+    geojsonData = raw;
+    document.getElementById('updatedAt').textContent =
+      'aggiornato ' + new Date(raw.generated_at).toLocaleString('it-IT');
+    render();
+  } catch (err) {
+    document.getElementById('updatedAt').textContent = 'dati non disponibili';
+    console.error(err);
+  }
+
+  map.on('click', 'rischio-circles', (e) => {
+    const p = e.features[0].properties;
+    const colore = COLORI[p.colore] || '#999';
+    popup
+      .setLngLat(e.features[0].geometry.coordinates)
+      .setHTML(`
+        <div class="popup-title">${p.nome}</div>
+        <div class="popup-badge" style="background:${colore}">${p.label}</div>
+        <div class="popup-desc">${p.desc || ''}</div>
+      `)
+      .addTo(map);
+  });
+
+  map.on('mouseenter', 'rischio-circles', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'rischio-circles', () => { map.getCanvas().style.cursor = ''; });
+});
+
+document.getElementById('dayToggle').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  document.querySelectorAll('.day-toggle button').forEach((b) => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentDay = Number(btn.dataset.day);
+  render();
+});
+</script>
+
+</body>
+</html>

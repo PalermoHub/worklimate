@@ -1,0 +1,576 @@
+[
+  {
+    "nome": "Alia",
+    "provincia": "PA",
+    "codice_istat": "082001",
+    "lat": 37.779948,
+    "lon": 13.713856
+  },
+  {
+    "nome": "Alimena",
+    "provincia": "PA",
+    "codice_istat": "082002",
+    "lat": 37.693476,
+    "lon": 14.114651
+  },
+  {
+    "nome": "Aliminusa",
+    "provincia": "PA",
+    "codice_istat": "082003",
+    "lat": 37.864509,
+    "lon": 13.78116
+  },
+  {
+    "nome": "Altavilla Milicia",
+    "provincia": "PA",
+    "codice_istat": "082004",
+    "lat": 38.042734,
+    "lon": 13.550893
+  },
+  {
+    "nome": "Altofonte",
+    "provincia": "PA",
+    "codice_istat": "082005",
+    "lat": 38.044567,
+    "lon": 13.298702
+  },
+  {
+    "nome": "Bagheria",
+    "provincia": "PA",
+    "codice_istat": "082006",
+    "lat": 38.079351,
+    "lon": 13.509349
+  },
+  {
+    "nome": "Balestrate",
+    "provincia": "PA",
+    "codice_istat": "082007",
+    "lat": 38.051867,
+    "lon": 13.004266
+  },
+  {
+    "nome": "Baucina",
+    "provincia": "PA",
+    "codice_istat": "082008",
+    "lat": 37.925429,
+    "lon": 13.53771
+  },
+  {
+    "nome": "Belmonte Mezzagno",
+    "provincia": "PA",
+    "codice_istat": "082009",
+    "lat": 38.048449,
+    "lon": 13.390554
+  },
+  {
+    "nome": "Bisacquino",
+    "provincia": "PA",
+    "codice_istat": "082010",
+    "lat": 37.705431,
+    "lon": 13.258761
+  },
+  {
+    "nome": "Bolognetta",
+    "provincia": "PA",
+    "codice_istat": "082011",
+    "lat": 37.964742,
+    "lon": 13.45607
+  },
+  {
+    "nome": "Bompietro",
+    "provincia": "PA",
+    "codice_istat": "082012",
+    "lat": 37.746863,
+    "lon": 14.099838
+  },
+  {
+    "nome": "Borgetto",
+    "provincia": "PA",
+    "codice_istat": "082013",
+    "lat": 38.047103,
+    "lon": 13.142684
+  },
+  {
+    "nome": "Caccamo",
+    "provincia": "PA",
+    "codice_istat": "082014",
+    "lat": 37.9318,
+    "lon": 13.66349
+  },
+  {
+    "nome": "Caltavuturo",
+    "provincia": "PA",
+    "codice_istat": "082015",
+    "lat": 37.821066,
+    "lon": 13.890224
+  },
+  {
+    "nome": "Campofelice di Fitalia",
+    "provincia": "PA",
+    "codice_istat": "082016",
+    "lat": 37.826685,
+    "lon": 13.485936
+  },
+  {
+    "nome": "Campofelice di Roccella",
+    "provincia": "PA",
+    "codice_istat": "082017",
+    "lat": 37.992334,
+    "lon": 13.886183
+  },
+  {
+    "nome": "Campofiorito",
+    "provincia": "PA",
+    "codice_istat": "082018",
+    "lat": 37.753636,
+    "lon": 13.268767
+  },
+  {
+    "nome": "Camporeale",
+    "provincia": "PA",
+    "codice_istat": "082019",
+    "lat": 37.897145,
+    "lon": 13.093842
+  },
+  {
+    "nome": "Capaci",
+    "provincia": "PA",
+    "codice_istat": "082020",
+    "lat": 38.170718,
+    "lon": 13.23917
+  },
+  {
+    "nome": "Carini",
+    "provincia": "PA",
+    "codice_istat": "082021",
+    "lat": 38.131172,
+    "lon": 13.181885
+  },
+  {
+    "nome": "Castelbuono",
+    "provincia": "PA",
+    "codice_istat": "082022",
+    "lat": 37.931953,
+    "lon": 14.088562
+  },
+  {
+    "nome": "Casteldaccia",
+    "provincia": "PA",
+    "codice_istat": "082023",
+    "lat": 38.054118,
+    "lon": 13.530226
+  },
+  {
+    "nome": "Castellana Sicula",
+    "provincia": "PA",
+    "codice_istat": "082024",
+    "lat": 37.783179,
+    "lon": 14.041051
+  },
+  {
+    "nome": "Castronovo di Sicilia",
+    "provincia": "PA",
+    "codice_istat": "082025",
+    "lat": 37.678945,
+    "lon": 13.603455
+  },
+  {
+    "nome": "Cefalà Diana",
+    "provincia": "PA",
+    "codice_istat": "082026",
+    "lat": 37.915175,
+    "lon": 13.463549
+  },
+  {
+    "nome": "Cefalù",
+    "provincia": "PA",
+    "codice_istat": "082027",
+    "lat": 38.034957,
+    "lon": 14.024456
+  },
+  {
+    "nome": "Cerda",
+    "provincia": "PA",
+    "codice_istat": "082028",
+    "lat": 37.903579,
+    "lon": 13.81547
+  },
+  {
+    "nome": "Chiusa Sclafani",
+    "provincia": "PA",
+    "codice_istat": "082029",
+    "lat": 37.67722,
+    "lon": 13.270521
+  },
+  {
+    "nome": "Ciminna",
+    "provincia": "PA",
+    "codice_istat": "082030",
+    "lat": 37.896816,
+    "lon": 13.562345
+  },
+  {
+    "nome": "Cinisi",
+    "provincia": "PA",
+    "codice_istat": "082031",
+    "lat": 38.154943,
+    "lon": 13.109841
+  },
+  {
+    "nome": "Collesano",
+    "provincia": "PA",
+    "codice_istat": "082032",
+    "lat": 37.921477,
+    "lon": 13.937486
+  },
+  {
+    "nome": "Contessa Entellina",
+    "provincia": "PA",
+    "codice_istat": "082033",
+    "lat": 37.73098,
+    "lon": 13.183144
+  },
+  {
+    "nome": "Corleone",
+    "provincia": "PA",
+    "codice_istat": "082034",
+    "lat": 37.812078,
+    "lon": 13.301438
+  },
+  {
+    "nome": "Ficarazzi",
+    "provincia": "PA",
+    "codice_istat": "082035",
+    "lat": 38.088458,
+    "lon": 13.463786
+  },
+  {
+    "nome": "Gangi",
+    "provincia": "PA",
+    "codice_istat": "082036",
+    "lat": 37.795627,
+    "lon": 14.20672
+  },
+  {
+    "nome": "Geraci Siculo",
+    "provincia": "PA",
+    "codice_istat": "082037",
+    "lat": 37.859137,
+    "lon": 14.154416
+  },
+  {
+    "nome": "Giardinello",
+    "provincia": "PA",
+    "codice_istat": "082038",
+    "lat": 38.088049,
+    "lon": 13.157041
+  },
+  {
+    "nome": "Giuliana",
+    "provincia": "PA",
+    "codice_istat": "082039",
+    "lat": 37.670591,
+    "lon": 13.237804
+  },
+  {
+    "nome": "Godrano",
+    "provincia": "PA",
+    "codice_istat": "082040",
+    "lat": 37.903344,
+    "lon": 13.428924
+  },
+  {
+    "nome": "Gratteri",
+    "provincia": "PA",
+    "codice_istat": "082041",
+    "lat": 37.967377,
+    "lon": 13.97393
+  },
+  {
+    "nome": "Isnello",
+    "provincia": "PA",
+    "codice_istat": "082042",
+    "lat": 37.943953,
+    "lon": 14.005761
+  },
+  {
+    "nome": "Isola delle Femmine",
+    "provincia": "PA",
+    "codice_istat": "082043",
+    "lat": 38.198295,
+    "lon": 13.247344
+  },
+  {
+    "nome": "Lascari",
+    "provincia": "PA",
+    "codice_istat": "082044",
+    "lat": 38.000053,
+    "lon": 13.941459
+  },
+  {
+    "nome": "Lercara Friddi",
+    "provincia": "PA",
+    "codice_istat": "082045",
+    "lat": 37.746946,
+    "lon": 13.604854
+  },
+  {
+    "nome": "Marineo",
+    "provincia": "PA",
+    "codice_istat": "082046",
+    "lat": 37.952893,
+    "lon": 13.415024
+  },
+  {
+    "nome": "Mezzojuso",
+    "provincia": "PA",
+    "codice_istat": "082047",
+    "lat": 37.864532,
+    "lon": 13.464195
+  },
+  {
+    "nome": "Misilmeri",
+    "provincia": "PA",
+    "codice_istat": "082048",
+    "lat": 38.03522,
+    "lon": 13.451404
+  },
+  {
+    "nome": "Monreale",
+    "provincia": "PA",
+    "codice_istat": "082049",
+    "lat": 38.082632,
+    "lon": 13.291993
+  },
+  {
+    "nome": "Montelepre",
+    "provincia": "PA",
+    "codice_istat": "082050",
+    "lat": 38.088964,
+    "lon": 13.171343
+  },
+  {
+    "nome": "Montemaggiore Belsito",
+    "provincia": "PA",
+    "codice_istat": "082051",
+    "lat": 37.847752,
+    "lon": 13.762048
+  },
+  {
+    "nome": "Palazzo Adriano",
+    "provincia": "PA",
+    "codice_istat": "082052",
+    "lat": 37.681254,
+    "lon": 13.379266
+  },
+  {
+    "nome": "Palermo",
+    "provincia": "PA",
+    "codice_istat": "082053",
+    "lat": 38.111227,
+    "lon": 13.352443
+  },
+  {
+    "nome": "Partinico",
+    "provincia": "PA",
+    "codice_istat": "082054",
+    "lat": 38.043896,
+    "lon": 13.119821
+  },
+  {
+    "nome": "Petralia Soprana",
+    "provincia": "PA",
+    "codice_istat": "082055",
+    "lat": 37.79634,
+    "lon": 14.108468
+  },
+  {
+    "nome": "Petralia Sottana",
+    "provincia": "PA",
+    "codice_istat": "082056",
+    "lat": 37.808225,
+    "lon": 14.092513
+  },
+  {
+    "nome": "Piana degli Albanesi",
+    "provincia": "PA",
+    "codice_istat": "082057",
+    "lat": 37.994836,
+    "lon": 13.282689
+  },
+  {
+    "nome": "Polizzi Generosa",
+    "provincia": "PA",
+    "codice_istat": "082058",
+    "lat": 37.812819,
+    "lon": 13.999683
+  },
+  {
+    "nome": "Pollina",
+    "provincia": "PA",
+    "codice_istat": "082059",
+    "lat": 37.992894,
+    "lon": 14.145799
+  },
+  {
+    "nome": "Prizzi",
+    "provincia": "PA",
+    "codice_istat": "082060",
+    "lat": 37.721453,
+    "lon": 13.431265
+  },
+  {
+    "nome": "Roccamena",
+    "provincia": "PA",
+    "codice_istat": "082061",
+    "lat": 37.836028,
+    "lon": 13.153858
+  },
+  {
+    "nome": "Roccapalumba",
+    "provincia": "PA",
+    "codice_istat": "082062",
+    "lat": 37.805948,
+    "lon": 13.638455
+  },
+  {
+    "nome": "San Cipirello",
+    "provincia": "PA",
+    "codice_istat": "082063",
+    "lat": 37.96296,
+    "lon": 13.17538
+  },
+  {
+    "nome": "San Giuseppe Jato",
+    "provincia": "PA",
+    "codice_istat": "082064",
+    "lat": 37.970486,
+    "lon": 13.182489
+  },
+  {
+    "nome": "San Mauro Castelverde",
+    "provincia": "PA",
+    "codice_istat": "082065",
+    "lat": 37.914628,
+    "lon": 14.190378
+  },
+  {
+    "nome": "Santa Cristina Gela",
+    "provincia": "PA",
+    "codice_istat": "082066",
+    "lat": 37.984932,
+    "lon": 13.328096
+  },
+  {
+    "nome": "Santa Flavia",
+    "provincia": "PA",
+    "codice_istat": "082067",
+    "lat": 38.081331,
+    "lon": 13.52544
+  },
+  {
+    "nome": "Sciara",
+    "provincia": "PA",
+    "codice_istat": "082068",
+    "lat": 37.914892,
+    "lon": 13.762343
+  },
+  {
+    "nome": "Sclafani Bagni",
+    "provincia": "PA",
+    "codice_istat": "082069",
+    "lat": 37.821589,
+    "lon": 13.85478
+  },
+  {
+    "nome": "Termini Imerese",
+    "provincia": "PA",
+    "codice_istat": "082070",
+    "lat": 37.983651,
+    "lon": 13.695554
+  },
+  {
+    "nome": "Terrasini",
+    "provincia": "PA",
+    "codice_istat": "082071",
+    "lat": 38.152822,
+    "lon": 13.082122
+  },
+  {
+    "nome": "Torretta",
+    "provincia": "PA",
+    "codice_istat": "082072",
+    "lat": 38.130061,
+    "lon": 13.233501
+  },
+  {
+    "nome": "Trabia",
+    "provincia": "PA",
+    "codice_istat": "082073",
+    "lat": 37.994386,
+    "lon": 13.65651
+  },
+  {
+    "nome": "Trappeto",
+    "provincia": "PA",
+    "codice_istat": "082074",
+    "lat": 38.067008,
+    "lon": 13.03655
+  },
+  {
+    "nome": "Ustica",
+    "provincia": "PA",
+    "codice_istat": "082075",
+    "lat": 38.710381,
+    "lon": 13.191874
+  },
+  {
+    "nome": "Valledolmo",
+    "provincia": "PA",
+    "codice_istat": "082076",
+    "lat": 37.747448,
+    "lon": 13.827859
+  },
+  {
+    "nome": "Ventimiglia di Sicilia",
+    "provincia": "PA",
+    "codice_istat": "082077",
+    "lat": 37.923341,
+    "lon": 13.569255
+  },
+  {
+    "nome": "Vicari",
+    "provincia": "PA",
+    "codice_istat": "082078",
+    "lat": 37.825092,
+    "lon": 13.571302
+  },
+  {
+    "nome": "Villabate",
+    "provincia": "PA",
+    "codice_istat": "082079",
+    "lat": 38.076528,
+    "lon": 13.443667
+  },
+  {
+    "nome": "Villafrati",
+    "provincia": "PA",
+    "codice_istat": "082080",
+    "lat": 37.908012,
+    "lon": 13.48635
+  },
+  {
+    "nome": "Scillato",
+    "provincia": "PA",
+    "codice_istat": "082081",
+    "lat": 37.856724,
+    "lon": 13.906854
+  },
+  {
+    "nome": "Blufi",
+    "provincia": "PA",
+    "codice_istat": "082082",
+    "lat": 37.751474,
+    "lon": 14.074827
+  }
+]
