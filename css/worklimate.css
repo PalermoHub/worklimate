@@ -399,7 +399,11 @@
       transition: none;
     }
   }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+  th:nth-child(1), td:nth-child(1) { width: 38%; }
+  th:nth-child(2), td:nth-child(2) { width: 14%; }
+  th:nth-child(3), td:nth-child(3) { width: 22%; }
+  th:nth-child(4), td:nth-child(4) { width: 26%; }
   thead th {
     position: sticky; top: 0;
     background: var(--surface-1);
