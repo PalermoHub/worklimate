@@ -14,7 +14,7 @@ import path from 'node:path';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const COMUNI_PATH = path.join(ROOT, 'data', 'comuni-sicilia.json');
-const HTML_PATH = path.join(ROOT, 'index.html');
+const JSON_PATH = path.join(ROOT, 'data', 'rischio-oggi.json');
 const CSV_PATH = path.join(ROOT, 'data', 'storico-rischio.csv');
 
 const UA =
@@ -127,20 +127,10 @@ async function main() {
     );
   }
 
-  // 4. scrivi HTML sostituendo solo i marker GENERATED_AT e DATA
-  let html = await readFile(HTML_PATH, 'utf8');
+  // 4. scrivi il dato del giorno in JSON (letto da index.html via fetch)
   const today = new Date().toISOString().slice(0, 10);
-
-  const genAtRe = /const GENERATED_AT = "[^"]*";/;
-  if (!genAtRe.test(html)) throw new Error('Marker GENERATED_AT non trovato in ' + HTML_PATH);
-  html = html.replace(genAtRe, `const GENERATED_AT = "${today}";`);
-
-  const dataRe = /const DATA = \[.*?\];(?= \/\/ \[nome, provincia, g1, g2, g3\])/s;
-  if (!dataRe.test(html)) throw new Error('Marker DATA non trovato in ' + HTML_PATH);
-  html = html.replace(dataRe, `const DATA = ${JSON.stringify(compact)};`);
-
-  await writeFile(HTML_PATH, html, 'utf8');
-  console.log(`Scritto ${HTML_PATH} (GENERATED_AT=${today}, ${compact.length} comuni).`);
+  await writeFile(JSON_PATH, JSON.stringify({ generatedAt: today, data: compact }), 'utf8');
+  console.log(`Scritto ${JSON_PATH} (generatedAt=${today}, ${compact.length} comuni).`);
 
   // 5. accoda al CSV storico (append-only, una riga per comune per giorno)
   await appendCsvStorico(today, compact);
