@@ -85,6 +85,67 @@
   .provincia-chip:hover{ background:#efece4; }
   .provincia-chip.active{ opacity:1; background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
+  .legend-storico-btn{
+    width:100%; margin-top:10px; padding:7px 6px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink);
+    border-radius:6px; cursor:pointer; transition:background .15s;
+  }
+  .legend-storico-btn:hover{ background:#efece4; }
+
+  .storico-overlay{
+    position:fixed; inset:0; z-index:10; background:rgba(28,35,33,.45);
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .storico-overlay[hidden]{ display:none; }
+  .storico-modal{
+    background:var(--panel); border-radius:12px; box-shadow:0 12px 40px rgba(28,35,33,.25);
+    width:100%; max-width:960px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden;
+  }
+  .storico-header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px; border-bottom:1px solid var(--line);
+  }
+  .storico-header h2{ font-size:15px; margin:0; }
+  .storico-header p{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted); margin:2px 0 0; }
+  .storico-close{
+    border:none; background:none; font-size:20px; line-height:1; cursor:pointer; color:var(--muted);
+    padding:4px 8px;
+  }
+  .storico-close:hover{ color:var(--ink); }
+  .storico-toolbar{
+    display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+    padding:12px 18px; border-bottom:1px solid var(--line);
+  }
+  .storico-toolbar input[type="text"], .storico-toolbar select{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink);
+    border:1px solid var(--line); border-radius:6px; padding:6px 8px; background:var(--paper);
+  }
+  .storico-toolbar input[type="text"]{ flex:1 1 160px; min-width:120px; }
+  .storico-toolbar-actions{ display:flex; gap:6px; margin-left:auto; }
+  .storico-toolbar-actions button{
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink);
+    border-radius:6px; padding:6px 10px; cursor:pointer; transition:background .15s;
+  }
+  .storico-toolbar-actions button:hover{ background:#efece4; }
+  .storico-toolbar-actions button#storicoClearSelection{ color:var(--muted); border-style:dashed; }
+  .storico-body{ overflow:auto; padding:0 18px 18px; }
+  .storico-table{ width:100%; border-collapse:collapse; font-size:11.5px; }
+  .storico-table th, .storico-table td{
+    text-align:left; padding:6px 10px; border-bottom:1px solid var(--line); white-space:nowrap;
+  }
+  .storico-table th{
+    position:sticky; top:0; background:var(--panel); font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.03em;
+  }
+  .storico-table td.desc-cell{ white-space:normal; max-width:280px; color:var(--muted); }
+  .storico-table td.check-cell, .storico-table th.check-cell{ white-space:nowrap; width:1%; }
+  .storico-badge{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px;
+    padding:1px 7px; border-radius:20px; color:#fff;
+  }
+  .storico-empty{ font-size:12px; color:var(--muted); padding:18px 0; }
+
   .updated{
     position:absolute; bottom:20px; right:16px; z-index:5;
     font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted);
@@ -127,9 +188,36 @@
   <div class="legend-divider" id="provinciaDivider" hidden></div>
   <div class="legend-title" id="provinciaTitle" hidden>Provincia <span class="legend-hint">(filtro)</span></div>
   <div class="provincia-list" id="provinciaList"></div>
+  <button class="legend-storico-btn" id="storicoBtn">Storico rischio ↗</button>
 </div>
 
 <div class="updated" id="updatedAt"></div>
+
+<div class="storico-overlay" id="storicoOverlay" hidden>
+  <div class="storico-modal">
+    <div class="storico-header">
+      <div>
+        <h2>Storico rischio da caldo</h2>
+        <p id="storicoSubtitle">data/rischio_storico.csv</p>
+      </div>
+      <button class="storico-close" id="storicoClose" aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="storico-toolbar" id="storicoToolbar" hidden>
+      <input type="text" id="storicoSearch" placeholder="Cerca comune…" />
+      <select id="storicoFiltroColore"><option value="">Rischio: tutti</option></select>
+      <select id="storicoFiltroProvincia"><option value="">Provincia: tutte</option></select>
+      <select id="storicoFiltroData"><option value="">Data: tutte</option></select>
+      <div class="storico-toolbar-actions">
+        <button id="storicoClearSelection" hidden>Annulla selezione</button>
+        <button id="storicoDownloadCsv">Scarica CSV</button>
+        <button id="storicoDownloadJson">Scarica JSON</button>
+      </div>
+    </div>
+    <div class="storico-body" id="storicoBody">
+      <div class="storico-empty">Caricamento…</div>
+    </div>
+  </div>
+</div>
 
 <script>
 const COLORI = { green:'#4c9a5b', yellow:'#d9a824', orange:'#e07b2b', red:'#c8402f' };
@@ -338,6 +426,221 @@ document.getElementById('dayToggle').addEventListener('click', (e) => {
   btn.classList.add('active');
   currentDay = Number(btn.dataset.day);
   render();
+});
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [], field = '', inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') { inQuotes = false; }
+      else { field += c; }
+    } else if (c === '"') { inQuotes = true; }
+    else if (c === ',') { row.push(field); field = ''; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++;
+      row.push(field); field = '';
+      if (row.length > 1 || row[0] !== '') rows.push(row);
+      row = [];
+    } else { field += c; }
+  }
+  if (field !== '' || row.length) { row.push(field); rows.push(row); }
+  if (!rows.length) return [];
+  const header = rows[0];
+  return rows.slice(1).map((r) => Object.fromEntries(header.map((h, i) => [h, r[i] ?? ''])));
+}
+
+const STORICO_COLONNE = ['data', 'codice_istat', 'comune', 'provincia', 'colore', 'label', 'desc', 'pgrid'];
+
+let storicoLoaded = false;
+let storicoRows = [];       // tutte le righe, con _key aggiunta
+let storicoFiltered = [];   // righe visibili dopo i filtri correnti
+const storicoSelected = new Set(); // _key delle righe selezionate
+
+function storicoKey(r) { return `${r.data}|${r.codice_istat}`; }
+
+function csvEscape(value) {
+  const s = String(value ?? '');
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+function rowsToCSV(rows) {
+  const header = STORICO_COLONNE.join(',');
+  const lines = rows.map((r) => STORICO_COLONNE.map((c) => csvEscape(r[c])).join(','));
+  return [header, ...lines].join('\n') + '\n';
+}
+
+function rowsToJSON(rows) {
+  return JSON.stringify(
+    rows.map((r) => Object.fromEntries(STORICO_COLONNE.map((c) => [c, r[c]]))),
+    null,
+    2
+  );
+}
+
+function triggerDownload(filename, content, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function rowsPerDownload() {
+  // se c'è una selezione attiva scarica solo quella, altrimenti tutte le righe filtrate
+  return storicoSelected.size
+    ? storicoRows.filter((r) => storicoSelected.has(r._key))
+    : storicoFiltered;
+}
+
+function populateStoricoFilterOptions(rows) {
+  const coloreSel = document.getElementById('storicoFiltroColore');
+  const provinciaSel = document.getElementById('storicoFiltroProvincia');
+  const dataSel = document.getElementById('storicoFiltroData');
+
+  const coloreLabel = { green: 'Nessuno', yellow: 'Basso', orange: 'Moderato', red: 'Alto' };
+  coloreSel.innerHTML = '<option value="">Rischio: tutti</option>' +
+    [...new Set(rows.map((r) => r.colore))].filter(Boolean).sort()
+      .map((c) => `<option value="${c}">${coloreLabel[c] || c}</option>`).join('');
+
+  const province = [...new Set(rows.map((r) => r.provincia))].filter(Boolean).sort();
+  provinciaSel.innerHTML = '<option value="">Provincia: tutte</option>' +
+    province.map((p) => `<option value="${p}">${p}</option>`).join('');
+
+  const date = [...new Set(rows.map((r) => r.data))].filter(Boolean).sort().reverse();
+  dataSel.innerHTML = '<option value="">Data: tutte</option>' +
+    date.map((d) => `<option value="${d}">${d}</option>`).join('');
+}
+
+function renderStoricoTable() {
+  const body = document.getElementById('storicoBody');
+  const search = document.getElementById('storicoSearch').value.trim().toLowerCase();
+  const fColore = document.getElementById('storicoFiltroColore').value;
+  const fProvincia = document.getElementById('storicoFiltroProvincia').value;
+  const fData = document.getElementById('storicoFiltroData').value;
+
+  storicoFiltered = storicoRows.filter((r) =>
+    (!search || r.comune.toLowerCase().includes(search)) &&
+    (!fColore || r.colore === fColore) &&
+    (!fProvincia || r.provincia === fProvincia) &&
+    (!fData || r.data === fData)
+  );
+
+  document.getElementById('storicoSubtitle').textContent =
+    `${storicoFiltered.length}/${storicoRows.length} righe · data/rischio_storico.csv`;
+
+  if (!storicoFiltered.length) {
+    body.innerHTML = '<div class="storico-empty">Nessuna riga corrisponde ai filtri.</div>';
+  } else {
+    const allSelected = storicoFiltered.every((r) => storicoSelected.has(r._key));
+    const trs = storicoFiltered.map((r) => {
+      const colore = COLORI[r.colore] || '#999';
+      const checked = storicoSelected.has(r._key) ? 'checked' : '';
+      return `<tr>
+        <td class="check-cell"><input type="checkbox" class="storico-row-check" data-key="${r._key}" ${checked}></td>
+        <td>${r.data}</td>
+        <td>${r.codice_istat}</td>
+        <td>${r.comune}</td>
+        <td>${r.provincia}</td>
+        <td><span class="storico-badge" style="background:${colore}">${r.label}</span></td>
+        <td class="desc-cell">${r.desc}</td>
+        <td>${r.pgrid}</td>
+      </tr>`;
+    }).join('');
+    body.innerHTML = `<table class="storico-table">
+      <thead><tr>
+        <th class="check-cell"><input type="checkbox" id="storicoSelectAll" ${allSelected ? 'checked' : ''}></th>
+        <th>Data</th><th>Cod. ISTAT</th><th>Comune</th><th>Prov.</th><th>Rischio</th><th>Descrizione</th><th>Pgrid</th>
+      </tr></thead>
+      <tbody>${trs}</tbody>
+    </table>`;
+  }
+
+  updateStoricoActions();
+}
+
+function updateStoricoActions() {
+  const n = rowsPerDownload().length;
+  document.getElementById('storicoDownloadCsv').textContent = `Scarica CSV (${n})`;
+  document.getElementById('storicoDownloadJson').textContent = `Scarica JSON (${n})`;
+  document.getElementById('storicoClearSelection').hidden = storicoSelected.size === 0;
+}
+
+async function loadStorico() {
+  const body = document.getElementById('storicoBody');
+  try {
+    const res = await fetch('data/rischio_storico.csv');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    rows.forEach((r) => { r._key = storicoKey(r); });
+    rows.sort((a, b) => (b.data + b.comune).localeCompare(a.data + a.comune));
+    storicoRows = rows;
+    if (!rows.length) {
+      document.getElementById('storicoToolbar').hidden = true;
+      body.innerHTML = '<div class="storico-empty">Nessun dato storico ancora disponibile.</div>';
+      return;
+    }
+    populateStoricoFilterOptions(rows);
+    document.getElementById('storicoToolbar').hidden = false;
+    renderStoricoTable();
+    storicoLoaded = true;
+  } catch (err) {
+    body.innerHTML = '<div class="storico-empty">Storico non disponibile.</div>';
+    console.error(err);
+  }
+}
+
+const storicoOverlay = document.getElementById('storicoOverlay');
+document.getElementById('storicoBtn').addEventListener('click', () => {
+  storicoOverlay.hidden = false;
+  if (!storicoLoaded) loadStorico();
+});
+document.getElementById('storicoClose').addEventListener('click', () => { storicoOverlay.hidden = true; });
+storicoOverlay.addEventListener('click', (e) => { if (e.target === storicoOverlay) storicoOverlay.hidden = true; });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') storicoOverlay.hidden = true; });
+
+['storicoSearch', 'storicoFiltroColore', 'storicoFiltroProvincia', 'storicoFiltroData'].forEach((id) => {
+  document.getElementById(id).addEventListener('input', renderStoricoTable);
+});
+
+document.getElementById('storicoBody').addEventListener('change', (e) => {
+  if (e.target.id === 'storicoSelectAll') {
+    if (e.target.checked) storicoFiltered.forEach((r) => storicoSelected.add(r._key));
+    else storicoFiltered.forEach((r) => storicoSelected.delete(r._key));
+    renderStoricoTable();
+    return;
+  }
+  if (e.target.classList.contains('storico-row-check')) {
+    const key = e.target.dataset.key;
+    if (e.target.checked) storicoSelected.add(key); else storicoSelected.delete(key);
+    updateStoricoActions();
+    const selectAll = document.getElementById('storicoSelectAll');
+    if (selectAll) selectAll.checked = storicoFiltered.every((r) => storicoSelected.has(r._key));
+  }
+});
+
+document.getElementById('storicoClearSelection').addEventListener('click', () => {
+  storicoSelected.clear();
+  renderStoricoTable();
+});
+
+document.getElementById('storicoDownloadCsv').addEventListener('click', () => {
+  const rows = rowsPerDownload();
+  if (!rows.length) return;
+  triggerDownload('rischio_storico.csv', rowsToCSV(rows), 'text/csv;charset=utf-8');
+});
+
+document.getElementById('storicoDownloadJson').addEventListener('click', () => {
+  const rows = rowsPerDownload();
+  if (!rows.length) return;
+  triggerDownload('rischio_storico.json', rowsToJSON(rows), 'application/json;charset=utf-8');
 });
 
 document.querySelector('.legend').addEventListener('click', (e) => {
