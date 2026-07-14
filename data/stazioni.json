@@ -1,0 +1,650 @@
+[
+  {
+    "nome": "Alia",
+    "codice_istat": "082001",
+    "lat": 37.779948,
+    "lon": 13.713856,
+    "pgrid": 316773,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Alimena",
+    "codice_istat": "082002",
+    "lat": 37.693476,
+    "lon": 14.114651,
+    "pgrid": 319397,
+    "distanza_km": 0.9
+  },
+  {
+    "nome": "Aliminusa",
+    "codice_istat": "082003",
+    "lat": 37.864509,
+    "lon": 13.78116,
+    "pgrid": 314172,
+    "distanza_km": 0.5
+  },
+  {
+    "nome": "Altavilla Milicia",
+    "codice_istat": "082004",
+    "lat": 38.042734,
+    "lon": 13.550893,
+    "pgrid": 308302,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Altofonte",
+    "codice_istat": "082005",
+    "lat": 38.044567,
+    "lon": 13.298702,
+    "pgrid": 308289,
+    "distanza_km": 0.5
+  },
+  {
+    "nome": "Bagheria",
+    "codice_istat": "082006",
+    "lat": 38.079351,
+    "lon": 13.509349,
+    "pgrid": 306997,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Balestrate",
+    "codice_istat": "082007",
+    "lat": 38.051867,
+    "lon": 13.004266,
+    "pgrid": 307623,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Baucina",
+    "codice_istat": "082008",
+    "lat": 37.925429,
+    "lon": 13.53771,
+    "pgrid": 312207,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Belmonte Mezzagno",
+    "codice_istat": "082009",
+    "lat": 38.048449,
+    "lon": 13.390554,
+    "pgrid": 308294,
+    "distanza_km": 1.4
+  },
+  {
+    "nome": "Bisacquino",
+    "codice_istat": "082010",
+    "lat": 37.705431,
+    "lon": 13.258761,
+    "pgrid": 319354,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "Bolognetta",
+    "codice_istat": "082011",
+    "lat": 37.964742,
+    "lon": 13.45607,
+    "pgrid": 310901,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Bompietro",
+    "codice_istat": "082012",
+    "lat": 37.746863,
+    "lon": 14.099838,
+    "pgrid": 318094,
+    "distanza_km": 0.8
+  },
+  {
+    "nome": "Borgetto",
+    "codice_istat": "082013",
+    "lat": 38.047103,
+    "lon": 13.142684,
+    "pgrid": 308281,
+    "distanza_km": 0.8
+  },
+  {
+    "nome": "Caccamo",
+    "codice_istat": "082014",
+    "lat": 37.9318,
+    "lon": 13.66349,
+    "pgrid": 311562,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Caltavuturo",
+    "codice_istat": "082015",
+    "lat": 37.821066,
+    "lon": 13.890224,
+    "pgrid": 315480,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Campofelice di Fitalia",
+    "codice_istat": "082016",
+    "lat": 37.826685,
+    "lon": 13.485936,
+    "pgrid": 315459,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Campofelice di Roccella",
+    "codice_istat": "082017",
+    "lat": 37.992334,
+    "lon": 13.886183,
+    "pgrid": 309620,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Campofiorito",
+    "codice_istat": "082018",
+    "lat": 37.753636,
+    "lon": 13.268767,
+    "pgrid": 317401,
+    "distanza_km": 1.2
+  },
+  {
+    "nome": "Camporeale",
+    "codice_istat": "082019",
+    "lat": 37.897145,
+    "lon": 13.093842,
+    "pgrid": 312836,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "Capaci",
+    "codice_istat": "082020",
+    "lat": 38.170718,
+    "lon": 13.23917,
+    "pgrid": 303729,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Carini",
+    "codice_istat": "082021",
+    "lat": 38.131172,
+    "lon": 13.181885,
+    "pgrid": 305028,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Castelbuono",
+    "codice_istat": "082022",
+    "lat": 37.931953,
+    "lon": 14.088562,
+    "pgrid": 311584,
+    "distanza_km": 0.9
+  },
+  {
+    "nome": "Casteldaccia",
+    "codice_istat": "082023",
+    "lat": 38.054118,
+    "lon": 13.530226,
+    "pgrid": 307650,
+    "distanza_km": 1.3
+  },
+  {
+    "nome": "Castellana Sicula",
+    "codice_istat": "082024",
+    "lat": 37.783179,
+    "lon": 14.041051,
+    "pgrid": 316789,
+    "distanza_km": 0.4
+  },
+  {
+    "nome": "Castronovo di Sicilia",
+    "codice_istat": "082025",
+    "lat": 37.678945,
+    "lon": 13.603455,
+    "pgrid": 320022,
+    "distanza_km": 0.4
+  },
+  {
+    "nome": "Cefalà Diana",
+    "codice_istat": "082026",
+    "lat": 37.915175,
+    "lon": 13.463549,
+    "pgrid": 312203,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Cefalù",
+    "codice_istat": "082027",
+    "lat": 38.034957,
+    "lon": 14.024456,
+    "pgrid": 308325,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Cerda",
+    "codice_istat": "082028",
+    "lat": 37.903579,
+    "lon": 13.81547,
+    "pgrid": 312872,
+    "distanza_km": 0.5
+  },
+  {
+    "nome": "Chiusa Sclafani",
+    "codice_istat": "082029",
+    "lat": 37.67722,
+    "lon": 13.270521,
+    "pgrid": 320006,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Ciminna",
+    "codice_istat": "082030",
+    "lat": 37.896816,
+    "lon": 13.562345,
+    "pgrid": 312859,
+    "distanza_km": 0.4
+  },
+  {
+    "nome": "Cinisi",
+    "codice_istat": "082031",
+    "lat": 38.154943,
+    "lon": 13.109841,
+    "pgrid": 304373,
+    "distanza_km": 1.2
+  },
+  {
+    "nome": "Collesano",
+    "codice_istat": "082032",
+    "lat": 37.921477,
+    "lon": 13.937486,
+    "pgrid": 312227,
+    "distanza_km": 0.3
+  },
+  {
+    "nome": "Contessa Entellina",
+    "codice_istat": "082033",
+    "lat": 37.73098,
+    "lon": 13.183144,
+    "pgrid": 318048,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Corleone",
+    "codice_istat": "082034",
+    "lat": 37.812078,
+    "lon": 13.301438,
+    "pgrid": 315450,
+    "distanza_km": 0.9
+  },
+  {
+    "nome": "Ficarazzi",
+    "codice_istat": "082035",
+    "lat": 38.088458,
+    "lon": 13.463786,
+    "pgrid": 306995,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Gangi",
+    "codice_istat": "082036",
+    "lat": 37.795627,
+    "lon": 14.20672,
+    "pgrid": 316146,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Geraci Siculo",
+    "codice_istat": "082037",
+    "lat": 37.859137,
+    "lon": 14.154416,
+    "pgrid": 314191,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Giardinello",
+    "codice_istat": "082038",
+    "lat": 38.088049,
+    "lon": 13.157041,
+    "pgrid": 306980,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Giuliana",
+    "codice_istat": "082039",
+    "lat": 37.670591,
+    "lon": 13.237804,
+    "pgrid": 320004,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Godrano",
+    "codice_istat": "082040",
+    "lat": 37.903344,
+    "lon": 13.428924,
+    "pgrid": 312852,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Gratteri",
+    "codice_istat": "082041",
+    "lat": 37.967377,
+    "lon": 13.97393,
+    "pgrid": 310927,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Isnello",
+    "codice_istat": "082042",
+    "lat": 37.943953,
+    "lon": 14.005761,
+    "pgrid": 311579,
+    "distanza_km": 0.8
+  },
+  {
+    "nome": "Isola delle Femmine",
+    "codice_istat": "082043",
+    "lat": 38.198295,
+    "lon": 13.247344,
+    "pgrid": 303078,
+    "distanza_km": 0.8
+  },
+  {
+    "nome": "Lascari",
+    "codice_istat": "082044",
+    "lat": 38.000053,
+    "lon": 13.941459,
+    "pgrid": 309623,
+    "distanza_km": 0.2
+  },
+  {
+    "nome": "Lercara Friddi",
+    "codice_istat": "082045",
+    "lat": 37.746946,
+    "lon": 13.604854,
+    "pgrid": 318069,
+    "distanza_km": 0.9
+  },
+  {
+    "nome": "Marineo",
+    "codice_istat": "082046",
+    "lat": 37.952893,
+    "lon": 13.415024,
+    "pgrid": 310899,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Mezzojuso",
+    "codice_istat": "082047",
+    "lat": 37.864532,
+    "lon": 13.464195,
+    "pgrid": 314156,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Misilmeri",
+    "codice_istat": "082048",
+    "lat": 38.03522,
+    "lon": 13.451404,
+    "pgrid": 308297,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Monreale",
+    "codice_istat": "082049",
+    "lat": 38.082632,
+    "lon": 13.291993,
+    "pgrid": 306987,
+    "distanza_km": 0.9
+  },
+  {
+    "nome": "Montelepre",
+    "codice_istat": "082050",
+    "lat": 38.088964,
+    "lon": 13.171343,
+    "pgrid": 306981,
+    "distanza_km": 1.4
+  },
+  {
+    "nome": "Montemaggiore Belsito",
+    "codice_istat": "082051",
+    "lat": 37.847752,
+    "lon": 13.762048,
+    "pgrid": 314822,
+    "distanza_km": 0.9
+  },
+  {
+    "nome": "Palazzo Adriano",
+    "codice_istat": "082052",
+    "lat": 37.681254,
+    "lon": 13.379266,
+    "pgrid": 320011,
+    "distanza_km": 0.2
+  },
+  {
+    "nome": "Palermo",
+    "codice_istat": "082053",
+    "lat": 38.111227,
+    "lon": 13.352443,
+    "pgrid": 305688,
+    "distanza_km": 1.3
+  },
+  {
+    "nome": "Partinico",
+    "codice_istat": "082054",
+    "lat": 38.043896,
+    "lon": 13.119821,
+    "pgrid": 308280,
+    "distanza_km": 0.4
+  },
+  {
+    "nome": "Petralia Soprana",
+    "codice_istat": "082055",
+    "lat": 37.79634,
+    "lon": 14.108468,
+    "pgrid": 316141,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Petralia Sottana",
+    "codice_istat": "082056",
+    "lat": 37.808225,
+    "lon": 14.092513,
+    "pgrid": 316141,
+    "distanza_km": 1.2
+  },
+  {
+    "nome": "Piana degli Albanesi",
+    "codice_istat": "082057",
+    "lat": 37.994836,
+    "lon": 13.282689,
+    "pgrid": 309590,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "Polizzi Generosa",
+    "codice_istat": "082058",
+    "lat": 37.812819,
+    "lon": 13.999683,
+    "pgrid": 315485,
+    "distanza_km": 0.8
+  },
+  {
+    "nome": "Pollina",
+    "codice_istat": "082059",
+    "lat": 37.992894,
+    "lon": 14.145799,
+    "pgrid": 309633,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Prizzi",
+    "codice_istat": "082060",
+    "lat": 37.721453,
+    "lon": 13.431265,
+    "pgrid": 318712,
+    "distanza_km": 1
+  },
+  {
+    "nome": "Roccamena",
+    "codice_istat": "082061",
+    "lat": 37.836028,
+    "lon": 13.153858,
+    "pgrid": 314792,
+    "distanza_km": 0.8
+  },
+  {
+    "nome": "Roccapalumba",
+    "codice_istat": "082062",
+    "lat": 37.805948,
+    "lon": 13.638455,
+    "pgrid": 316118,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "San Cipirello",
+    "codice_istat": "082063",
+    "lat": 37.96296,
+    "lon": 13.17538,
+    "pgrid": 310887,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "San Giuseppe Jato",
+    "codice_istat": "082064",
+    "lat": 37.970486,
+    "lon": 13.182489,
+    "pgrid": 310236,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "San Mauro Castelverde",
+    "codice_istat": "082065",
+    "lat": 37.914628,
+    "lon": 14.190378,
+    "pgrid": 312240,
+    "distanza_km": 1.2
+  },
+  {
+    "nome": "Santa Cristina Gela",
+    "codice_istat": "082066",
+    "lat": 37.984932,
+    "lon": 13.328096,
+    "pgrid": 310243,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Santa Flavia",
+    "codice_istat": "082067",
+    "lat": 38.081331,
+    "lon": 13.52544,
+    "pgrid": 306998,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "Sciara",
+    "codice_istat": "082068",
+    "lat": 37.914892,
+    "lon": 13.762343,
+    "pgrid": 312218,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "Sclafani Bagni",
+    "codice_istat": "082069",
+    "lat": 37.821589,
+    "lon": 13.85478,
+    "pgrid": 315478,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "Termini Imerese",
+    "codice_istat": "082070",
+    "lat": 37.983651,
+    "lon": 13.695554,
+    "pgrid": 310262,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "Terrasini",
+    "codice_istat": "082071",
+    "lat": 38.152822,
+    "lon": 13.082122,
+    "pgrid": 304372,
+    "distanza_km": 0.8
+  },
+  {
+    "nome": "Torretta",
+    "codice_istat": "082072",
+    "lat": 38.130061,
+    "lon": 13.233501,
+    "pgrid": 305031,
+    "distanza_km": 1.3
+  },
+  {
+    "nome": "Trabia",
+    "codice_istat": "082073",
+    "lat": 37.994386,
+    "lon": 13.65651,
+    "pgrid": 309609,
+    "distanza_km": 0.7
+  },
+  {
+    "nome": "Trappeto",
+    "codice_istat": "082074",
+    "lat": 38.067008,
+    "lon": 13.03655,
+    "pgrid": 307625,
+    "distanza_km": 0.9
+  },
+  {
+    "nome": "Valledolmo",
+    "codice_istat": "082076",
+    "lat": 37.747448,
+    "lon": 13.827859,
+    "pgrid": 318080,
+    "distanza_km": 1.2
+  },
+  {
+    "nome": "Ventimiglia di Sicilia",
+    "codice_istat": "082077",
+    "lat": 37.923341,
+    "lon": 13.569255,
+    "pgrid": 312208,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Vicari",
+    "codice_istat": "082078",
+    "lat": 37.825092,
+    "lon": 13.571302,
+    "pgrid": 315464,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Villabate",
+    "codice_istat": "082079",
+    "lat": 38.076528,
+    "lon": 13.443667,
+    "pgrid": 306994,
+    "distanza_km": 0.6
+  },
+  {
+    "nome": "Villafrati",
+    "codice_istat": "082080",
+    "lat": 37.908012,
+    "lon": 13.48635,
+    "pgrid": 312855,
+    "distanza_km": 1.1
+  },
+  {
+    "nome": "Scillato",
+    "codice_istat": "082081",
+    "lat": 37.856724,
+    "lon": 13.906854,
+    "pgrid": 314178,
+    "distanza_km": 0.8
+  },
+  {
+    "nome": "Blufi",
+    "codice_istat": "082082",
+    "lat": 37.751474,
+    "lon": 14.074827,
+    "pgrid": 317442,
+    "distanza_km": 1.1
+  }
+]

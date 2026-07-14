@@ -4,8 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Rischio da caldo · Worklimate</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/3.6.2/maplibre-gl.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/3.6.2/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" integrity="sha384-p5cy4wHtKSqjnLUNjQ+8ffCwUp0vlLS+6lg1lc3qqXax2E1EmVCMCAimU+R0MOZH" crossorigin="anonymous" />
+<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js" integrity="sha384-3WUbXI7T+/GIrWP/5MDMjhzLyHQ+0utF3PnJ7ozD7UeN1/bbZ96Hk+Vvd024VYfW" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/pmtiles@3.0.7/dist/pmtiles.js" integrity="sha384-MjejsnWXHmuz93aE35YWLh5AbS/6ceRB3Vb+ukOwqFzJRTpQ8vvbkLbNV7I0QK4f" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -105,6 +106,9 @@
 <script>
 const COLORI = { green:'#4c9a5b', yellow:'#d9a824', orange:'#e07b2b', red:'#c8402f' };
 
+const pmtilesProtocol = new pmtiles.Protocol();
+maplibregl.addProtocol('pmtiles', pmtilesProtocol.tile);
+
 const map = new maplibregl.Map({
   container: 'map',
   style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
@@ -132,6 +136,26 @@ function render() {
 }
 
 map.on('load', async () => {
+  map.addSource('comuni-boundaries', {
+    type: 'vector',
+    url: 'pmtiles://https://gbvitrano.it/anncus/data/comuni.pmtiles',
+  });
+
+  map.addLayer({
+    id: 'comuni-fill',
+    type: 'fill',
+    source: 'comuni-boundaries',
+    'source-layer': 'comuni',
+    paint: { 'fill-color': '#1c2321', 'fill-opacity': 0.03 },
+  });
+  map.addLayer({
+    id: 'comuni-outline',
+    type: 'line',
+    source: 'comuni-boundaries',
+    'source-layer': 'comuni',
+    paint: { 'line-color': '#1c2321', 'line-width': 0.6, 'line-opacity': 0.25 },
+  });
+
   map.addSource('rischio', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
 
   map.addLayer({
