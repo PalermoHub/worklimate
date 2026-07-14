@@ -28,6 +28,7 @@
     <button data-day="1">Domani<span class="day-date" id="date-1"></span></button>
     <button data-day="2">Dopodom.<span class="day-date" id="date-2"></span></button>
   </div>
+  <a href="https://www.worklimate.it/scelta-mappa/sole-attivita-fisica-alta/" target="_blank" rel="noopener" class="topbar-link">Worklimate.it ↗</a>
 </div>
 
 <div class="legend">
@@ -48,6 +49,120 @@
   </a>
   <div class="updated" id="updatedAt"></div>
 </div>
+
+<!-- ═══ BOTTOM INFO PANEL ═══ -->
+<div id="info-panel">
+
+  <div id="panel-handle" onclick="panelToggle()" title="Info · Credits">
+    <svg id="panel-handle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </div>
+
+  <div id="panel-body">
+
+    <nav id="panel-nav">
+      <button class="ptab active" data-tab="worklimate"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M4 15l4-6 4 3 6-8"/></svg> Worklimate</button>
+      <button class="ptab" data-tab="info"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Info</button>
+      <button class="ptab" data-tab="credits"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Credits</button>
+    </nav>
+
+    <!-- Tab: Info -->
+    <div id="tab-info" class="tab-pane">
+      <p class="analysis-intro">
+        <strong>Rischio da caldo</strong> mostra il livello di rischio da eccesso di calore
+        stimato per i comuni della Sicilia, con previsione a 3 giorni (oggi, domani, dopodomani).
+        I dati arrivano dal progetto <strong>Worklimate</strong>, sviluppato dal
+        <strong>CNR</strong> per la tutela dei lavoratori esposti al caldo.
+      </p>
+      <div class="credits-section">
+        <h3>Come si legge la mappa</h3>
+        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--green)"></span></span><div><strong>Nessuno</strong> — nessuna condizione di rischio significativa</div></div>
+        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--yellow)"></span></span><div><strong>Basso</strong> — attenzione per i lavori più gravosi</div></div>
+        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--orange)"></span></span><div><strong>Moderato</strong> — necessarie misure di prevenzione</div></div>
+        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--red)"></span></span><div><strong>Alto</strong> — rischio elevato per la salute dei lavoratori</div></div>
+      </div>
+      <div class="credits-section">
+        <h3>Funzioni</h3>
+        <div class="credit-item"><div>Clicca un comune sulla mappa per vederne il dettaglio del rischio.</div></div>
+        <div class="credit-item"><div>Usa i pulsanti <strong>Oggi / Domani / Dopodom.</strong> per cambiare giorno di previsione.</div></div>
+        <div class="credit-item"><div>Clicca un livello o una provincia in legenda per filtrare/isolare i comuni sulla mappa.</div></div>
+        <div class="credit-item"><div>Apri <strong>Storico rischio</strong> dalla legenda per consultare ed esportare lo storico giornaliero (CSV/JSON).</div></div>
+      </div>
+    </div>
+
+    <!-- Tab: Credits -->
+    <div id="tab-credits" class="tab-pane">
+      <div class="credits-grid">
+
+        <div class="credits-section">
+          <h3>Dati</h3>
+          <div class="credit-item">
+            <div>
+              <strong>Worklimate — CNR</strong>
+              Indice di rischio da caldo per i lavoratori, elaborato dal Consiglio Nazionale delle Ricerche.
+            </div>
+          </div>
+          <div class="credit-item">
+            <div>
+              <strong>Confini comunali</strong>
+              Sezioni comunali della Sicilia, distribuite come tiles vettoriali PMTiles.
+            </div>
+          </div>
+        </div>
+
+        <div class="credits-section">
+          <h3>Strumenti</h3>
+          <div class="credit-item"><div><strong>MapLibre GL JS 3.x</strong> — visualizzazione web interattiva</div></div>
+          <div class="credit-item"><div><strong>PMTiles</strong> — distribuzione confini comunali</div></div>
+          <div class="credit-item"><div><strong>CARTO Positron</strong> — basemap</div></div>
+        </div>
+
+        <div class="credits-section">
+          <h3>Sviluppo e distribuzione</h3>
+          <div class="credit-item">
+            <div>Dati e mappa a cura di <a href="https://opendatasicilia.it/" target="_blank" rel="noopener">Open Data Sicilia</a>.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab: Worklimate CLI -->
+    <div id="tab-worklimate" class="tab-pane active">
+      <p class="analysis-intro">
+        <strong>Worklimate</strong> (<a href="https://www.worklimate.it/scelta-mappa/sole-attivita-fisica-alta/" target="_blank" rel="noopener">worklimate.it</a>)
+        è una mappa del <strong>CNR</strong>, fatta insieme all'<strong>INAIL</strong>, che dice quanto è
+        rischioso lavorare all'aperto col caldo. Copre l'Italia e mostra 4 orari al giorno
+        (8, 12, 16, 20) e 4 livelli di rischio (nessuno, basso, moderato, alto), con consigli
+        pratici tipo "bevi di più" o "fai più pause". Serve a chi lavora sotto il sole e a chi
+        deve organizzare i turni.
+      </p>
+      <div class="credits-section">
+        <h3>Cos'è worklimate-cli</h3>
+        <div class="credit-item"><div>
+          <a href="https://github.com/aborruso/worklimate" target="_blank" rel="noopener">github.com/aborruso/worklimate</a>
+          è un piccolo programma da riga di comando creato da <strong>Andrea Borruso</strong> che va a
+          leggere i dati pubblici di Worklimate al posto tuo, senza bisogno di aprire il sito ogni volta.
+          Questa mappa lo usa per prendere i dati comune per comune.
+        </div></div>
+      </div>
+      <div class="credits-section">
+        <h3>Cosa fa</h3>
+        <div class="credit-item"><div>Va a prendere, comune per comune, il rischio da caldo previsto per i lavoratori all'aperto (oggi, domani, dopodomani).</div></div>
+        <div class="credit-item"><div>Trova da solo la stazione meteo più vicina a un indirizzo o a un comune.</div></div>
+        <div class="credit-item"><div>Recupera anche lo storico stagionale delle rilevazioni.</div></div>
+        <div class="credit-item"><div>Restituisce i dati in tabella leggibile a schermo, oppure in JSON/CSV per essere riusati da altri programmi (come questa mappa).</div></div>
+      </div>
+      <div class="credits-section">
+        <h3>Link</h3>
+        <div class="credit-item"><div><a href="https://github.com/aborruso/worklimate" target="_blank" rel="noopener">github.com/aborruso/worklimate</a> — codice sorgente del CLI</div></div>
+        <div class="credit-item"><div><a href="https://github.com/aborruso" target="_blank" rel="noopener">github.com/aborruso</a> — altri progetti di Andrea Borruso</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /info-panel -->
 
 <div class="storico-overlay" id="storicoOverlay" hidden>
   <div class="storico-modal">
@@ -529,6 +644,25 @@ document.querySelector('.legend').addEventListener('click', (e) => {
     applyFilters();
     zoomToFiltered();
   }
+
+
+
+});
+
+const infoPanel = document.getElementById('info-panel');
+let infoPanelOpen = false;
+window.panelToggle = function () {
+  infoPanelOpen = !infoPanelOpen;
+  infoPanel.classList.toggle('open', infoPanelOpen);
+};
+
+document.querySelectorAll('.ptab').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.ptab').forEach((b) => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach((p) => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
 });
 </script>
 

@@ -40,6 +40,12 @@
     display:block; font-size:10px; opacity:.65; margin-top:2px;
   }
 
+  .topbar-link{
+    display:block; margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    color:var(--muted); text-decoration:none; letter-spacing:.02em;
+  }
+  .topbar-link:hover{ color:var(--ink); text-decoration:underline; }
+
   .legend{
     position:absolute; bottom:20px; left:16px; z-index:5;
     background:var(--panel); border:1px solid var(--line); border-radius:10px;
@@ -155,5 +161,85 @@
     padding:2px 8px; border-radius:20px; color:#fff; margin-bottom:8px;
   }
   .popup-desc{ font-size:12.5px; color:var(--muted); line-height:1.4; }
+
+  /* ════════════════════════════════════════
+     BOTTOM INFO PANEL
+  ════════════════════════════════════════ */
+  #info-panel{
+    position:fixed; bottom:0; left:50%;
+    transform:translateX(-50%) translateY(calc(100% - 20px));
+    width:900px; max-width:100vw; height:70vh;
+    z-index:20; display:flex; flex-direction:column;
+    transition:transform .48s cubic-bezier(.22,1,.36,1);
+  }
+  #info-panel.open{ transform:translateX(-50%) translateY(0); }
+
+  #panel-handle{
+    width:60px; height:20px; align-self:center; padding:0;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    flex-shrink:0; border-radius:8px 8px 0 0;
+    background:var(--panel); border:1px solid var(--line); border-bottom:none;
+    box-shadow:0 -4px 16px rgba(28,35,33,.1); color:var(--muted);
+    transition:background .15s, color .15s;
+  }
+  #panel-handle:hover{ background:#efece4; color:var(--ink); }
+  #panel-handle-icon{ transition:transform .38s cubic-bezier(.22,1,.36,1); }
+  #info-panel.open #panel-handle-icon{ transform:rotate(180deg); }
+
+  #panel-body{
+    flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0;
+    background:var(--panel); box-shadow:0 -6px 40px rgba(28,35,33,.14);
+    border:1px solid var(--line); border-bottom:none;
+  }
+
+  #panel-nav{
+    display:flex; gap:2px; padding:8px 16px 0;
+    border-bottom:1px solid var(--line); flex-shrink:0; background:var(--paper);
+  }
+  .ptab{
+    display:inline-flex; align-items:center; gap:5px;
+    background:none; border:none; border-bottom:2px solid transparent;
+    color:var(--muted); padding:8px 16px 9px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
+    cursor:pointer; letter-spacing:.03em; transition:color .2s, border-color .2s;
+    margin-bottom:-1px; white-space:nowrap;
+  }
+  .ptab:hover{ color:var(--ink); }
+  .ptab.active{ color:var(--ink); border-bottom-color:var(--ink); }
+
+  .tab-pane{
+    display:none; flex:1; overflow-y:auto; padding:18px 22px 24px;
+    scrollbar-width:thin; scrollbar-color:var(--line) transparent;
+  }
+  .tab-pane::-webkit-scrollbar{ width:5px; }
+  .tab-pane::-webkit-scrollbar-thumb{ background:var(--line); border-radius:3px; }
+  .tab-pane.active{ display:block; }
+
+  .analysis-intro{ font-size:12.5px; line-height:1.6; color:var(--ink); margin:0 0 18px; }
+
+  .credits-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:22px;
+  }
+  .credits-section{ margin-bottom:18px; }
+  .credits-section h3{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:700; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.06em; margin:0 0 12px;
+    padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .credit-item{
+    display:flex; gap:10px; margin-bottom:12px; font-size:12px; line-height:1.55; color:var(--muted);
+  }
+  .credit-item .ci-icon{ display:flex; align-items:flex-start; flex-shrink:0; padding-top:1px; }
+  .credit-item .ci-icon .swatch{ margin-top:2px; }
+  .credit-item strong{ display:block; color:var(--ink); font-size:13px; margin-bottom:2px; }
+  .credit-item a{ color:var(--orange); text-decoration:none; }
+  .credit-item a:hover{ color:var(--red); text-decoration:underline; }
+
+  @media (max-width: 640px){
+    #info-panel{ width:100%; left:0; transform:translateY(calc(100% - 20px)); }
+    #info-panel.open{ transform:translateY(0); }
+    #panel-body{ border-left:none; border-right:none; }
+    .ptab{ padding:8px 10px 9px; font-size:10.5px; }
+  }
 
 
