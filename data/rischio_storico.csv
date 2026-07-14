@@ -1,0 +1,389 @@
+data,codice_istat,comune,provincia,colore,label,desc,pgrid
+2026-07-14,081001,Alcamo,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",310225
+2026-07-14,081002,Buseto Palizzolo,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308911
+2026-07-14,081003,Calatafimi-Segesta,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",312824
+2026-07-14,081004,Campobello di Mazara,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",321281
+2026-07-14,081005,Castellammare del Golfo,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308919
+2026-07-14,081006,Castelvetrano,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",319982
+2026-07-14,081007,Custonaci,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306956
+2026-07-14,081008,Erice,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308905
+2026-07-14,081009,Favignana,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",312153
+2026-07-14,081010,Gibellina,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",316084
+2026-07-14,081011,Marsala,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",316058
+2026-07-14,081012,Mazara del Vallo,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",320622
+2026-07-14,081013,Paceco,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",310205
+2026-07-14,081015,Partanna,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",318684
+2026-07-14,081016,Poggioreale,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",317390
+2026-07-14,081017,Salaparuta,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",317388
+2026-07-14,081018,Salemi,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",315425
+2026-07-14,081019,Santa Ninfa,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",316731
+2026-07-14,081020,San Vito Lo Capo,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303704
+2026-07-14,081021,Trapani,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",312817
+2026-07-14,081022,Valderice,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308255
+2026-07-14,081023,Vita,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",314124
+2026-07-14,081024,Petrosino,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",318665
+2026-07-14,081025,Misiliscemi,TP,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",312157
+2026-07-14,082001,Alia,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316773
+2026-07-14,082002,Alimena,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,319397
+2026-07-14,082003,Aliminusa,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314172
+2026-07-14,082004,Altavilla Milicia,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308302
+2026-07-14,082005,Altofonte,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,308289
+2026-07-14,082006,Bagheria,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306997
+2026-07-14,082007,Balestrate,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",307623
+2026-07-14,082008,Baucina,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312207
+2026-07-14,082009,Belmonte Mezzagno,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308294
+2026-07-14,082010,Bisacquino,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,319354
+2026-07-14,082011,Bolognetta,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310901
+2026-07-14,082012,Bompietro,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",318094
+2026-07-14,082013,Borgetto,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308281
+2026-07-14,082014,Caccamo,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,311562
+2026-07-14,082015,Caltavuturo,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,315480
+2026-07-14,082016,Campofelice di Fitalia,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,315459
+2026-07-14,082017,Campofelice di Roccella,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",309620
+2026-07-14,082018,Campofiorito,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,317401
+2026-07-14,082019,Camporeale,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",312836
+2026-07-14,082020,Capaci,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303729
+2026-07-14,082021,Carini,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305028
+2026-07-14,082022,Castelbuono,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",311584
+2026-07-14,082023,Casteldaccia,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",307650
+2026-07-14,082024,Castellana Sicula,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316789
+2026-07-14,082025,Castronovo di Sicilia,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,320022
+2026-07-14,082026,Cefalà Diana,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312203
+2026-07-14,082027,Cefalù,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308325
+2026-07-14,082028,Cerda,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",312872
+2026-07-14,082029,Chiusa Sclafani,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",320006
+2026-07-14,082030,Ciminna,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312859
+2026-07-14,082031,Cinisi,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304373
+2026-07-14,082032,Collesano,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312227
+2026-07-14,082033,Contessa Entellina,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",318048
+2026-07-14,082034,Corleone,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,315450
+2026-07-14,082035,Ficarazzi,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306995
+2026-07-14,082036,Gangi,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316146
+2026-07-14,082037,Geraci Siculo,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314191
+2026-07-14,082038,Giardinello,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306980
+2026-07-14,082039,Giuliana,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",320004
+2026-07-14,082040,Godrano,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312852
+2026-07-14,082041,Gratteri,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310927
+2026-07-14,082042,Isnello,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,311579
+2026-07-14,082043,Isola delle Femmine,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303078
+2026-07-14,082044,Lascari,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",309623
+2026-07-14,082045,Lercara Friddi,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,318069
+2026-07-14,082046,Marineo,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310899
+2026-07-14,082047,Mezzojuso,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314156
+2026-07-14,082048,Misilmeri,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308297
+2026-07-14,082049,Monreale,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,306987
+2026-07-14,082050,Montelepre,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306981
+2026-07-14,082051,Montemaggiore Belsito,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314822
+2026-07-14,082052,Palazzo Adriano,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,320011
+2026-07-14,082053,Palermo,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305688
+2026-07-14,082054,Partinico,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308280
+2026-07-14,082055,Petralia Soprana,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316141
+2026-07-14,082056,Petralia Sottana,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316141
+2026-07-14,082057,Piana degli Albanesi,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309590
+2026-07-14,082058,Polizzi Generosa,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,315485
+2026-07-14,082059,Pollina,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",309633
+2026-07-14,082060,Prizzi,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,318712
+2026-07-14,082061,Roccamena,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",314792
+2026-07-14,082062,Roccapalumba,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316118
+2026-07-14,082063,San Cipirello,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",310887
+2026-07-14,082064,San Giuseppe Jato,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",310236
+2026-07-14,082065,San Mauro Castelverde,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312240
+2026-07-14,082066,Santa Cristina Gela,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310243
+2026-07-14,082067,Santa Flavia,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306998
+2026-07-14,082068,Sciara,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312218
+2026-07-14,082069,Sclafani Bagni,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,315478
+2026-07-14,082070,Termini Imerese,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",310262
+2026-07-14,082071,Terrasini,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304372
+2026-07-14,082072,Torretta,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305031
+2026-07-14,082073,Trabia,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",309609
+2026-07-14,082074,Trappeto,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",307625
+2026-07-14,082076,Valledolmo,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,318080
+2026-07-14,082077,Ventimiglia di Sicilia,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312208
+2026-07-14,082078,Vicari,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,315464
+2026-07-14,082079,Villabate,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306994
+2026-07-14,082080,Villafrati,PA,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312855
+2026-07-14,082081,Scillato,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",314178
+2026-07-14,082082,Blufi,PA,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",317442
+2026-07-14,083001,Alcara li Fusi,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310312
+2026-07-14,083002,Alì,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309046
+2026-07-14,083003,Alì Terme,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309046
+2026-07-14,083004,Antillo,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310339
+2026-07-14,083005,Barcellona Pozzo di Gotto,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305130
+2026-07-14,083006,Basicò,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307726
+2026-07-14,083007,Brolo,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304459
+2026-07-14,083008,Capizzi,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314858
+2026-07-14,083009,Capo d'Orlando,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304455
+2026-07-14,083010,Capri Leone,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307059
+2026-07-14,083011,Caronia,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308997
+2026-07-14,083012,Casalvecchio Siculo,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310994
+2026-07-14,083013,Castel di Lucio,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,313548
+2026-07-14,083014,Castell'Umberto,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307062
+2026-07-14,083015,Castelmola,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314247
+2026-07-14,083016,Castroreale,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,306432
+2026-07-14,083017,Cesarò,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314870
+2026-07-14,083018,Condrò,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303833
+2026-07-14,083019,Falcone,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305774
+2026-07-14,083020,Ficarra,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306412
+2026-07-14,083021,Fiumedinisi,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309044
+2026-07-14,083022,Floresta,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310322
+2026-07-14,083023,Fondachelli-Fantina,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309685
+2026-07-14,083024,Forza d'Agrò,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312297
+2026-07-14,083025,Francavilla di Sicilia,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",312938
+2026-07-14,083026,Frazzanò,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307710
+2026-07-14,083027,Furci Siculo,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",310997
+2026-07-14,083028,Furnari,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306427
+2026-07-14,083029,Gaggi,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314244
+2026-07-14,083030,Galati Mamertino,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,308363
+2026-07-14,083031,Gallodoro,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312946
+2026-07-14,083032,Giardini-Naxos,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314898
+2026-07-14,083033,Gioiosa Marea,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303812
+2026-07-14,083034,Graniti,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312942
+2026-07-14,083035,Gualtieri Sicaminò,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304484
+2026-07-14,083036,Itala,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307745
+2026-07-14,083037,Leni,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303162
+2026-07-14,083038,Letojanni,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,313597
+2026-07-14,083039,Librizzi,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",306419
+2026-07-14,083040,Limina,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,311643
+2026-07-14,083041,Lipari,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303162
+2026-07-14,083042,Longi,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309013
+2026-07-14,083043,Malfa,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303162
+2026-07-14,083044,Malvagna,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312283
+2026-07-14,083045,Mandanici,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309692
+2026-07-14,083046,Mazzarrà Sant'Andrea,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",307079
+2026-07-14,083047,Merì,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304481
+2026-07-14,083048,Messina,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303194
+2026-07-14,083049,Milazzo,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",302527
+2026-07-14,083050,Militello Rosmarino,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,308358
+2026-07-14,083051,Mirto,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307060
+2026-07-14,083052,Mistretta,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312248
+2026-07-14,083053,Moio Alcantara,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312933
+2026-07-14,083054,Monforte San Giorgio,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304487
+2026-07-14,083055,Mongiuffi Melia,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312944
+2026-07-14,083056,Montagnareale,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305116
+2026-07-14,083057,Montalbano Elicona,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309026
+2026-07-14,083058,Motta Camastra,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312940
+2026-07-14,083059,Motta d'Affermo,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310292
+2026-07-14,083060,Naso,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305759
+2026-07-14,083061,Nizza di Sicilia,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",309697
+2026-07-14,083062,Novara di Sicilia,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309032
+2026-07-14,083063,Oliveri,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305773
+2026-07-14,083064,Pace del Mela,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303832
+2026-07-14,083065,Pagliara,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310345
+2026-07-14,083066,Patti,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305117
+2026-07-14,083067,Pettineo,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310943
+2026-07-14,083068,Piraino,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304461
+2026-07-14,083069,Raccuja,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307718
+2026-07-14,083070,Reitano,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310294
+2026-07-14,083071,Roccafiorita,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",311642
+2026-07-14,083072,Roccalumera,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310347
+2026-07-14,083073,Roccavaldina,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303836
+2026-07-14,083074,Roccella Valdemone,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,311629
+2026-07-14,083075,Rodì Milici,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307732
+2026-07-14,083076,Rometta,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303838
+2026-07-14,083077,San Filippo del Mela,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304482
+2026-07-14,083078,San Fratello,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,309005
+2026-07-14,083079,San Marco d'Alunzio,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",307057
+2026-07-14,083080,San Pier Niceto,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",304486
+2026-07-14,083081,San Piero Patti,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307721
+2026-07-14,083082,San Salvatore di Fitalia,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307061
+2026-07-14,083083,Santa Domenica Vittoria,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312278
+2026-07-14,083084,Sant'Agata di Militello,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",307705
+2026-07-14,083085,Sant'Alessio Siculo,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,312297
+2026-07-14,083086,Santa Lucia del Mela,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305133
+2026-07-14,083087,Santa Marina Salina,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303162
+2026-07-14,083088,Sant'Angelo di Brolo,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,305764
+2026-07-14,083089,Santa Teresa di Riva,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,311647
+2026-07-14,083090,San Teodoro,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314869
+2026-07-14,083091,Santo Stefano di Camastra,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308992
+2026-07-14,083092,Saponara,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303188
+2026-07-14,083093,Savoca,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310995
+2026-07-14,083094,Scaletta Zanclea,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",308397
+2026-07-14,083095,Sinagra,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,307064
+2026-07-14,083096,Spadafora,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",302534
+2026-07-14,083097,Taormina,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314247
+2026-07-14,083098,Torregrotta,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303184
+2026-07-14,083099,Tortorici,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,308365
+2026-07-14,083100,Tripi,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,308379
+2026-07-14,083101,Tusa,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,310289
+2026-07-14,083102,Ucria,ME,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,308368
+2026-07-14,083103,Valdina,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303185
+2026-07-14,083104,Venetico,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",303185
+2026-07-14,083105,Villafranca Tirrena,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",301886
+2026-07-14,083106,Terme Vigliatore,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",305127
+2026-07-14,083107,Acquedolci,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",307702
+2026-07-14,083108,Torrenova,ME,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",307056
+2026-07-14,084001,Agrigento,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,331739
+2026-07-14,084002,Alessandria della Rocca,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323270
+2026-07-14,084003,Aragona,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",329137
+2026-07-14,084004,Bivona,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,321967
+2026-07-14,084005,Burgio,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322611
+2026-07-14,084006,Calamonaci,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325214
+2026-07-14,084007,Caltabellotta,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323258
+2026-07-14,084008,Camastra,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",334354
+2026-07-14,084009,Cammarata,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,321326
+2026-07-14,084010,Campobello di Licata,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",333709
+2026-07-14,084011,Canicattì,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",330451
+2026-07-14,084012,Casteltermini,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",324581
+2026-07-14,084013,Castrofilippo,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,331097
+2026-07-14,084014,Cattolica Eraclea,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",327824
+2026-07-14,084015,Cianciana,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325222
+2026-07-14,084016,Comitini,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",329138
+2026-07-14,084017,Favara,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,331743
+2026-07-14,084018,Grotte,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",329141
+2026-07-14,084019,Joppolo Giancaxio,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",329785
+2026-07-14,084021,Licata,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",338918
+2026-07-14,084022,Lucca Sicula,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323262
+2026-07-14,084023,Menfi,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322594
+2026-07-14,084024,Montallegro,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,329124
+2026-07-14,084025,Montevago,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",319339
+2026-07-14,084026,Naro,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",332401
+2026-07-14,084027,Palma di Montechiaro,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",335654
+2026-07-14,084028,Porto Empedocle,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,333038
+2026-07-14,084029,Racalmuto,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",329143
+2026-07-14,084030,Raffadali,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",329133
+2026-07-14,084031,Ravanusa,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",333712
+2026-07-14,084032,Realmonte,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",332384
+2026-07-14,084033,Ribera,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325864
+2026-07-14,084034,Sambuca di Sicilia,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,321300
+2026-07-14,084035,San Biagio Platani,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",325227
+2026-07-14,084036,San Giovanni Gemini,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,321977
+2026-07-14,084037,Santa Elisabetta,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",327832
+2026-07-14,084038,Santa Margherita di Belice,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",319342
+2026-07-14,084039,Sant'Angelo Muxaro,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",327178
+2026-07-14,084040,Santo Stefano Quisquina,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",321970
+2026-07-14,084041,Sciacca,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325855
+2026-07-14,084042,Siculiana,AG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",331080
+2026-07-14,084043,Villafranca Sicula,AG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323261
+2026-07-14,085001,Acquaviva Platani,CL,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323282
+2026-07-14,085002,Bompensiere,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",326541
+2026-07-14,085003,Butera,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",336326
+2026-07-14,085004,Caltanissetta,CL,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325904
+2026-07-14,085005,Campofranco,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",326537
+2026-07-14,085006,Delia,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",330454
+2026-07-14,085007,Gela,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",340236
+2026-07-14,085008,Marianopoli,CL,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322642
+2026-07-14,085009,Mazzarino,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",332422
+2026-07-14,085010,Milena,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",326539
+2026-07-14,085011,Montedoro,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",327194
+2026-07-14,085012,Mussomeli,CL,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323285
+2026-07-14,085013,Niscemi,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",337639
+2026-07-14,085014,Resuttano,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",321347
+2026-07-14,085015,Riesi,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",333066
+2026-07-14,085016,San Cataldo,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",325901
+2026-07-14,085017,Santa Caterina Villarmosa,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",322648
+2026-07-14,085018,Serradifalco,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",327197
+2026-07-14,085019,Sommatino,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",331109
+2026-07-14,085020,Sutera,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",325237
+2026-07-14,085021,Vallelunga Pratameno,CL,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",320034
+2026-07-14,085022,Villalba,CL,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,320685
+2026-07-14,086001,Agira,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,320719
+2026-07-14,086002,Aidone,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,328527
+2026-07-14,086003,Assoro,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322668
+2026-07-14,086004,Barrafranca,EN,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",329817
+2026-07-14,086005,Calascibetta,EN,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",322660
+2026-07-14,086006,Catenanuova,EN,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",323983
+2026-07-14,086007,Centuripe,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322032
+2026-07-14,086008,Cerami,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,315510
+2026-07-14,086009,Enna,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323962
+2026-07-14,086010,Gagliano Castelferrato,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,318767
+2026-07-14,086011,Leonforte,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,321364
+2026-07-14,086012,Nicosia,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,318109
+2026-07-14,086013,Nissoria,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,320715
+2026-07-14,086014,Piazza Armerina,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,329825
+2026-07-14,086015,Pietraperzia,EN,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",328512
+2026-07-14,086016,Regalbuto,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,320725
+2026-07-14,086017,Sperlinga,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,317456
+2026-07-14,086018,Troina,EN,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",316817
+2026-07-14,086019,Valguarnera Caropepe,EN,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325921
+2026-07-14,086020,Villarosa,EN,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",323306
+2026-07-14,087001,Aci Bonaccorsi,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322701
+2026-07-14,087002,Aci Castello,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",324005
+2026-07-14,087003,Aci Catena,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322703
+2026-07-14,087004,Acireale,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322053
+2026-07-14,087005,Aci Sant'Antonio,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322702
+2026-07-14,087006,Adrano,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,320735
+2026-07-14,087007,Belpasso,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323346
+2026-07-14,087008,Biancavilla,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,321387
+2026-07-14,087009,Bronte,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316829
+2026-07-14,087010,Calatabiano,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",315546
+2026-07-14,087011,Caltagirone,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",334390
+2026-07-14,087012,Camporotondo Etneo,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323998
+2026-07-14,087013,Castel di Iudica,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325935
+2026-07-14,087014,Castiglione di Sicilia,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,313588
+2026-07-14,087015,Catania,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",325955
+2026-07-14,087016,Fiumefreddo di Sicilia,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316196
+2026-07-14,087017,Giarre,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,318799
+2026-07-14,087018,Grammichele,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",335047
+2026-07-14,087019,Gravina di Catania,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,324001
+2026-07-14,087020,Licodia Eubea,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",337003
+2026-07-14,087021,Linguaglossa,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314891
+2026-07-14,087022,Maletto,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314877
+2026-07-14,087023,Mascali,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",317498
+2026-07-14,087024,Mascalucia,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323350
+2026-07-14,087025,Militello in Val di Catania,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,333102
+2026-07-14,087026,Milo,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,318796
+2026-07-14,087027,Mineo,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",333748
+2026-07-14,087028,Mirabella Imbaccari,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",331782
+2026-07-14,087029,Misterbianco,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325300
+2026-07-14,087030,Motta Sant'Anastasia,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,325298
+2026-07-14,087031,Nicolosi,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322046
+2026-07-14,087032,Palagonia,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",331797
+2026-07-14,087033,Paternò,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323993
+2026-07-14,087034,Pedara,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322048
+2026-07-14,087035,Piedimonte Etneo,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,316195
+2026-07-14,087036,Raddusa,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,326579
+2026-07-14,087037,Ramacca,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,329842
+2026-07-14,087038,Randazzo,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,313579
+2026-07-14,087039,Riposto,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",318149
+2026-07-14,087040,San Cono,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,332429
+2026-07-14,087041,San Giovanni la Punta,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323352
+2026-07-14,087042,San Gregorio di Catania,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,324004
+2026-07-14,087043,San Michele di Ganzaria,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",333083
+2026-07-14,087044,San Pietro Clarenza,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323999
+2026-07-14,087045,Sant'Agata li Battiati,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,324002
+2026-07-14,087046,Sant'Alfio,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,318146
+2026-07-14,087047,Santa Maria di Licodia,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322039
+2026-07-14,087048,Santa Venerina,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,320099
+2026-07-14,087049,Scordia,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",332453
+2026-07-14,087050,Trecastagni,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322049
+2026-07-14,087051,Tremestieri Etneo,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323351
+2026-07-14,087052,Valverde,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,323353
+2026-07-14,087053,Viagrande,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,322050
+2026-07-14,087054,Vizzini,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,337005
+2026-07-14,087055,Zafferana Etnea,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,319446
+2026-07-14,087056,Mazzarrone,CT,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",339600
+2026-07-14,087057,Maniace,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,314223
+2026-07-14,087058,Ragalna,CT,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,321391
+2026-07-14,088001,Acate,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",341550
+2026-07-14,088002,Chiaramonte Gulfi,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",340909
+2026-07-14,088003,Comiso,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",343508
+2026-07-14,088004,Giarratana,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",340914
+2026-07-14,088005,Ispica,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",349382
+2026-07-14,088006,Modica,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",346771
+2026-07-14,088007,Monterosso Almo,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",339610
+2026-07-14,088008,Pozzallo,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",351332
+2026-07-14,088009,Ragusa,RG,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,344817
+2026-07-14,088010,Santa Croce Camerina,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",348061
+2026-07-14,088011,Scicli,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",348721
+2026-07-14,088012,Vittoria,RG,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",343505
+2026-07-14,089001,Augusta,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",334425
+2026-07-14,089002,Avola,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",345488
+2026-07-14,089003,Buccheri,SR,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,338313
+2026-07-14,089004,Buscemi,SR,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,339616
+2026-07-14,089005,Canicattini Bagni,SR,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,340927
+2026-07-14,089006,Carlentini,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",333113
+2026-07-14,089007,Cassaro,SR,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,338968
+2026-07-14,089008,Ferla,SR,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,338317
+2026-07-14,089009,Floridia,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",339630
+2026-07-14,089010,Francofonte,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",334408
+2026-07-14,089011,Lentini,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",333112
+2026-07-14,089012,Melilli,SR,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,336373
+2026-07-14,089013,Noto,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",345485
+2026-07-14,089014,Pachino,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",351345
+2026-07-14,089015,Palazzolo Acreide,SR,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,340268
+2026-07-14,089016,Rosolini,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",348083
+2026-07-14,089017,Siracusa,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",340935
+2026-07-14,089018,Solarino,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",338977
+2026-07-14,089019,Sortino,SR,orange,Moderato,Sorseggia acqua frequentemente e aumenta il numero di pause in luoghi freschi.,337019
+2026-07-14,089020,Portopalo di Capo Passero,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",352649
+2026-07-14,089021,Priolo Gargallo,SR,red,Alto,"Bevi spesso, anche poco più di 1 L/h e programma pause frequenti in luoghi ombreggiati o aree condizionate.",337027
