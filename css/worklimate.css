@@ -157,6 +157,11 @@
   .rp-cal-legend span{ display:inline-flex; align-items:center; gap:4px; }
   .rp-cal-legend-forecast{ font-family:'IBM Plex Mono',monospace; }
   .rp-cal-empty{ font-size:12px; color:var(--muted); padding:12px 0; }
+  .rp-cal-caveat{
+    margin-top:12px; padding-top:10px; border-top:1px solid var(--line);
+    font-size:11px; line-height:1.55; color:var(--muted);
+  }
+  .rp-cal-caveat strong{ color:var(--ink); }
 
   @media (max-width:640px){
     #right-panel{ width:88vw; }
@@ -265,7 +270,8 @@
   }
   .credit-item .ci-icon{ display:flex; align-items:flex-start; flex-shrink:0; padding-top:1px; }
   .credit-item .ci-icon .swatch{ margin-top:2px; }
-  .credit-item strong{ display:block; color:var(--ink); font-size:13px; margin-bottom:2px; }
+  .credit-item .ci-icon + div > strong{ display:block; color:var(--ink); font-size:13px; margin-bottom:2px; }
+  .credit-item strong{ color:var(--ink); }
   .credit-item a{ color:var(--orange); text-decoration:none; }
   .credit-item a:hover{ color:var(--red); text-decoration:underline; }
 
