@@ -48,6 +48,9 @@
   }
   .day-toggle button:hover{ background:#efece4; }
   .day-toggle button.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .day-date{
+    display:block; font-size:10px; opacity:.65; margin-top:2px;
+  }
 
   .legend{
     position:absolute; bottom:20px; left:16px; z-index:5;
@@ -109,18 +112,18 @@
   <h1>Rischio da caldo</h1>
   <p>dati Worklimate · CNR</p>
   <div class="day-toggle" id="dayToggle">
-    <button data-day="0" class="active">Oggi</button>
-    <button data-day="1">Domani</button>
-    <button data-day="2">Dopodom.</button>
+    <button data-day="0" class="active">Oggi<span class="day-date" id="date-0"></span></button>
+    <button data-day="1">Domani<span class="day-date" id="date-1"></span></button>
+    <button data-day="2">Dopodom.<span class="day-date" id="date-2"></span></button>
   </div>
 </div>
 
 <div class="legend">
   <div class="legend-title">Livello di rischio <span class="legend-hint">(filtro)</span></div>
-  <button class="legend-row active" data-colore="green"><span class="swatch" style="background:var(--green)"></span><span class="legend-label">Basso</span><span class="legend-count" id="count-green"></span></button>
-  <button class="legend-row active" data-colore="yellow"><span class="swatch" style="background:var(--yellow)"></span><span class="legend-label">Moderato</span><span class="legend-count" id="count-yellow"></span></button>
-  <button class="legend-row active" data-colore="orange"><span class="swatch" style="background:var(--orange)"></span><span class="legend-label">Alto</span><span class="legend-count" id="count-orange"></span></button>
-  <button class="legend-row active" data-colore="red"><span class="swatch" style="background:var(--red)"></span><span class="legend-label">Emergenza</span><span class="legend-count" id="count-red"></span></button>
+  <button class="legend-row active" data-colore="green"><span class="swatch" style="background:var(--green)"></span><span class="legend-label">Nessuno</span><span class="legend-count" id="count-green"></span></button>
+  <button class="legend-row active" data-colore="yellow"><span class="swatch" style="background:var(--yellow)"></span><span class="legend-label">Basso</span><span class="legend-count" id="count-yellow"></span></button>
+  <button class="legend-row active" data-colore="orange"><span class="swatch" style="background:var(--orange)"></span><span class="legend-label">Moderato</span><span class="legend-count" id="count-orange"></span></button>
+  <button class="legend-row active" data-colore="red"><span class="swatch" style="background:var(--red)"></span><span class="legend-label">Alto</span><span class="legend-count" id="count-red"></span></button>
   <div class="legend-divider" id="provinciaDivider" hidden></div>
   <div class="legend-title" id="provinciaTitle" hidden>Provincia <span class="legend-hint">(filtro)</span></div>
   <div class="provincia-list" id="provinciaList"></div>
@@ -174,6 +177,17 @@ function updateLegendLabels(features) {
   document.querySelectorAll('.legend-row').forEach((btn) => {
     const label = labelPerColore[btn.dataset.colore];
     if (label) btn.querySelector('.legend-label').textContent = label;
+  });
+}
+
+function populateDayDates(features) {
+  const giorni = features[0]?.properties?.giorni;
+  if (!giorni) return;
+  giorni.forEach((g, i) => {
+    const el = document.getElementById(`date-${i}`);
+    if (!el || !g.data) return;
+    const [y, m, d] = g.data.split('-');
+    el.textContent = `${d}/${m}`;
   });
 }
 
@@ -292,6 +306,7 @@ map.on('load', async () => {
     document.getElementById('updatedAt').textContent =
       'aggiornato ' + new Date(raw.generated_at).toLocaleString('it-IT');
     updateLegendLabels(raw.features);
+    populateDayDates(raw.features);
     populateProvinciaChips(raw.features);
     render();
   } catch (err) {
@@ -329,7 +344,14 @@ document.querySelector('.legend').addEventListener('click', (e) => {
   const row = e.target.closest('.legend-row');
   if (row) {
     const colore = row.dataset.colore;
-    activeColori.has(colore) ? activeColori.delete(colore) : activeColori.add(colore);
+    if (activeColori.size === 1 && activeColori.has(colore)) {
+      // riclicco l'unico livello isolato: torno a mostrare tutti i livelli
+      document.querySelectorAll('.legend-row').forEach((r) => activeColori.add(r.dataset.colore));
+    } else {
+      // isola solo il livello cliccato
+      activeColori.clear();
+      activeColori.add(colore);
+    }
     applyFilters();
     zoomToFiltered();
     return;
