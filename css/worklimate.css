@@ -81,6 +81,34 @@
   .provincia-chip:hover{ background:#efece4; }
   .provincia-chip.active{ opacity:1; background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
+  .rp-search-wrap{ position:relative; margin-bottom:12px; }
+  .rp-search{
+    width:100%; box-sizing:border-box; padding:7px 28px 7px 10px;
+    font-family:'Inter',system-ui,sans-serif; font-size:12.5px; color:var(--ink);
+    background:var(--paper); border:1px solid var(--line); border-radius:8px;
+    outline:none; transition:border-color .15s;
+  }
+  .rp-search:focus{ border-color:var(--ink); }
+  .rp-search-clear{
+    position:absolute; top:50%; right:6px; transform:translateY(-50%);
+    width:20px; height:20px; line-height:1; border:none; background:none;
+    color:var(--muted); font-size:16px; cursor:pointer; border-radius:50%;
+  }
+  .rp-search-clear:hover{ background:#efece4; color:var(--ink); }
+  .rp-search-results{
+    position:absolute; top:calc(100% + 4px); left:0; right:0; z-index:20;
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    box-shadow:0 4px 16px rgba(28,35,33,.12); max-height:220px; overflow:auto;
+  }
+  .rp-search-item{
+    display:block; width:100%; text-align:left; padding:7px 10px;
+    font-family:'Inter',system-ui,sans-serif; font-size:12.5px; color:var(--ink);
+    background:none; border:none; cursor:pointer;
+  }
+  .rp-search-item:hover{ background:#efece4; }
+  .rp-search-prov{ color:var(--muted); font-size:10.5px; }
+  .rp-search-empty{ padding:8px 10px; font-size:11.5px; color:var(--muted); }
+
   /* ════════════════════════════════════════
      PANNELLO DX — CALENDARIO BOLLETTINI
   ════════════════════════════════════════ */
@@ -209,6 +237,14 @@
     font-size:10.5px; color:var(--muted); line-height:1.35; opacity:.75;
     margin-top:8px; padding-top:8px; border-top:1px solid var(--line);
   }
+
+  .hover-tooltip .maplibregl-popup-content{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:5px 10px;
+    box-shadow:0 3px 10px rgba(28,35,33,.18);
+  }
+  .hover-tooltip .maplibregl-popup-tip{ display:none; }
+  .tooltip-nome{ font-weight:700; }
+  .tooltip-provincia{ color:var(--muted); }
 
   /* ════════════════════════════════════════
      BOTTOM INFO PANEL

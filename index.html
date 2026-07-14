@@ -203,6 +203,11 @@
     </div>
 
     <div class="rp-body">
+      <div class="rp-search-wrap">
+        <input type="text" id="rpSearch" class="rp-search" placeholder="Cerca comune…" autocomplete="off">
+        <button id="rpSearchClear" class="rp-search-clear" title="Azzera ricerca" hidden>&times;</button>
+        <div id="rpSearchResults" class="rp-search-results" hidden></div>
+      </div>
       <div class="legend-title" id="provinciaTitle" hidden>Provincia <span class="legend-hint">(filtro)</span></div>
       <div class="provincia-list" id="provinciaList"></div>
       <div class="legend-divider" id="provinciaDivider" hidden></div>
@@ -256,6 +261,12 @@ map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-ri
 let currentDay = 0;
 let geojsonData = null;
 const popup = new maplibregl.Popup({ closeButton: true, offset: 12 });
+const hoverTooltip = new maplibregl.Popup({
+  closeButton: false,
+  closeOnClick: false,
+  offset: 8,
+  className: 'hover-tooltip',
+});
 
 const activeColori = new Set(['green', 'yellow', 'orange', 'red']);
 const activeProvince = new Set(); // popolato al caricamento dati, solo se ci sono >=2 province
@@ -372,6 +383,27 @@ function zoomToFiltered() {
   map.fitBounds(bounds, { padding: 60, maxZoom: 11, duration: 600 });
 }
 
+function setHighlight(codiceIstat) {
+  map.setFilter('comuni-highlight', ['==', ['get', 'pro_com_t'], codiceIstat || '__none__']);
+}
+
+function openComunePopup(match, lngLat) {
+  const p = featureForDay(match, currentDay).properties;
+  const colore = COLORI[p.colore] || '#999';
+  popup
+    .setLngLat(lngLat || match.geometry.coordinates)
+    .setHTML(`
+      <div class="popup-title">${p.nome}</div>
+      <div class="popup-badge" style="background:${colore}">${p.label}</div>
+      <div class="popup-desc">${p.desc || ''}</div>
+      <div class="popup-caveat">Valore riferito all'intero territorio comunale (risoluzione del dato Worklimate/CNR: comune, non indirizzo).</div>
+    `)
+    .addTo(map);
+  selectedComune = { codice_istat: p.codice_istat, nome: p.nome, provincia: p.provincia };
+  setHighlight(p.codice_istat);
+  if (rpOpen) renderCalendar();
+}
+
 map.on('load', async () => {
   map.addSource('comuni-boundaries', {
     type: 'vector',
@@ -402,6 +434,15 @@ map.on('load', async () => {
     'source-layer': 'comuni',
     filter: ['==', ['get', 'cod_reg'], 19],
     paint: { 'line-color': '#1c2321', 'line-width': 0.6, 'line-opacity': 0.25 },
+  });
+
+  map.addLayer({
+    id: 'comuni-highlight',
+    type: 'line',
+    source: 'comuni-boundaries',
+    'source-layer': 'comuni',
+    filter: ['==', ['get', 'pro_com_t'], '__none__'],
+    paint: { 'line-color': '#1c2321', 'line-width': 3, 'line-opacity': 0.9 },
   });
 
   try {
@@ -442,30 +483,34 @@ map.on('load', async () => {
     const codice = e.features[0].properties.pro_com_t;
     const match = geojsonData.features.find((f) => f.properties.codice_istat === codice);
     if (!match) return;
-    const p = featureForDay(match, currentDay).properties;
-    const colore = COLORI[p.colore] || '#999';
-    popup
-      .setLngLat(e.lngLat)
-      .setHTML(`
-        <div class="popup-title">${p.nome}</div>
-        <div class="popup-badge" style="background:${colore}">${p.label}</div>
-        <div class="popup-desc">${p.desc || ''}</div>
-        <div class="popup-caveat">Valore riferito all'intero territorio comunale (risoluzione del dato Worklimate/CNR: comune, non indirizzo).</div>
-      `)
-      .addTo(map);
-    selectedComune = { codice_istat: p.codice_istat, nome: p.nome, provincia: p.provincia };
-    if (rpOpen) renderCalendar();
+    openComunePopup(match, e.lngLat);
   });
 
   popup.on('close', () => {
     selectedComune = null;
+    setHighlight(null);
     if (rpOpen) renderCalendar();
   });
 
   map.on('mouseenter', 'rischio-fill', (e) => {
     map.getCanvas().style.cursor = e.features[0].properties.pro_com_t ? 'pointer' : '';
   });
-  map.on('mouseleave', 'rischio-fill', () => { map.getCanvas().style.cursor = ''; });
+  map.on('mouseleave', 'rischio-fill', () => {
+    map.getCanvas().style.cursor = '';
+    hoverTooltip.remove();
+  });
+
+  map.on('mousemove', 'rischio-fill', (e) => {
+    if (!geojsonData) return;
+    const codice = e.features[0].properties.pro_com_t;
+    const match = geojsonData.features.find((f) => f.properties.codice_istat === codice);
+    if (!match) { hoverTooltip.remove(); return; }
+    const p = match.properties;
+    hoverTooltip
+      .setLngLat(e.lngLat)
+      .setHTML(`<span class="tooltip-nome">${p.nome}</span> <span class="tooltip-provincia">(${p.provincia})</span>`)
+      .addTo(map);
+  });
 });
 
 document.getElementById('dayToggle').addEventListener('click', (e) => {
@@ -531,6 +576,7 @@ function computeAllComuni(features) {
       nome: f.properties.nome,
       provincia: f.properties.provincia,
       lat: f.geometry && f.geometry.coordinates && f.geometry.coordinates[1],
+      lon: f.geometry && f.geometry.coordinates && f.geometry.coordinates[0],
     }))
     .sort((a, b) => (b.lat || 0) - (a.lat || 0));
 }
@@ -613,6 +659,9 @@ function renderCalendar() {
   const reset = document.getElementById('rpCalReset');
   if (reset) reset.addEventListener('click', () => {
     selectedComune = null;
+    setHighlight(null);
+    popup.remove();
+    resetRicercaComune();
     if (filtroProvinciaAttivo && activeProvince.size === 1) resetProvinciaFilter();
     renderCalendar();
   });
@@ -683,8 +732,77 @@ document.getElementById('right-panel').addEventListener('click', (e) => {
     applyFilters();
     zoomToFiltered();
     selectedComune = null;
+    setHighlight(null);
+    popup.remove();
+    resetRicercaComune();
     if (rpOpen) renderCalendar();
   }
+});
+
+function normalizza(s) {
+  return (s || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+const rpSearchInput = document.getElementById('rpSearch');
+const rpSearchResults = document.getElementById('rpSearchResults');
+const rpSearchClear = document.getElementById('rpSearchClear');
+
+function renderSearchResults(query) {
+  const q = normalizza(query.trim());
+  if (!q) { rpSearchResults.hidden = true; rpSearchResults.innerHTML = ''; return; }
+  const match = allComuni.filter((c) => normalizza(c.nome).includes(q)).slice(0, 8);
+  if (!match.length) {
+    rpSearchResults.innerHTML = '<div class="rp-search-empty">Nessun comune trovato.</div>';
+    rpSearchResults.hidden = false;
+    return;
+  }
+  rpSearchResults.innerHTML = match
+    .map((c) => `<button class="rp-search-item" data-codice="${c.codice_istat}">${c.nome} <span class="rp-search-prov">(${c.provincia})</span></button>`)
+    .join('');
+  rpSearchResults.hidden = false;
+}
+
+function selectComuneDaRicerca(codice) {
+  const c = allComuni.find((x) => x.codice_istat === codice);
+  if (!c || !geojsonData) return;
+  const match = geojsonData.features.find((f) => f.properties.codice_istat === codice);
+  rpSearchInput.value = c.nome;
+  rpSearchResults.hidden = true;
+  rpSearchResults.innerHTML = '';
+  rpSearchClear.hidden = false;
+  if (c.lon != null && c.lat != null) map.flyTo({ center: [c.lon, c.lat], zoom: 10, duration: 700 });
+  if (match) openComunePopup(match, match.geometry.coordinates);
+}
+
+function resetRicercaComune() {
+  rpSearchInput.value = '';
+  rpSearchResults.hidden = true;
+  rpSearchResults.innerHTML = '';
+  rpSearchClear.hidden = true;
+}
+
+rpSearchInput.addEventListener('input', () => {
+  renderSearchResults(rpSearchInput.value);
+  rpSearchClear.hidden = !rpSearchInput.value.trim();
+});
+rpSearchInput.addEventListener('focus', () => { if (rpSearchInput.value.trim()) renderSearchResults(rpSearchInput.value); });
+
+rpSearchResults.addEventListener('click', (e) => {
+  const item = e.target.closest('.rp-search-item');
+  if (item) selectComuneDaRicerca(item.dataset.codice);
+});
+
+rpSearchClear.addEventListener('click', () => {
+  resetRicercaComune();
+  selectedComune = null;
+  setHighlight(null);
+  popup.remove();
+  if (rpOpen) renderCalendar();
+  rpSearchInput.focus();
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.rp-search-wrap')) { rpSearchResults.hidden = true; }
 });
 
 const infoPanel = document.getElementById('info-panel');
