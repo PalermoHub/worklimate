@@ -43,6 +43,7 @@ function main() {
         geometry: { type: "Point", coordinates: [s.lon, s.lat] },
         properties: {
           nome: s.nome,
+          codice_istat: s.codice_istat,
           provincia: s.provincia,
           pgrid: s.pgrid,
           data: oggi.data,

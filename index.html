@@ -81,6 +81,25 @@
         <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--yellow)"></span></span><div><strong>Basso</strong> — attenzione per i lavori più gravosi</div></div>
         <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--orange)"></span></span><div><strong>Moderato</strong> — necessarie misure di prevenzione</div></div>
         <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--red)"></span></span><div><strong>Alto</strong> — rischio elevato per la salute dei lavoratori</div></div>
+        <div class="credit-item"><div>
+          Il colore riempie il <strong>territorio comunale</strong> intero: è la risoluzione a cui il CNR
+          fornisce e raccomanda di leggere questo dato (non un punto preciso, non un indirizzo).
+          Il valore proviene dalla stazione Worklimate più vicina al comune, non da una misura per ogni
+          singolo punto del territorio.
+        </div></div>
+        <div class="credit-item"><div>
+          Il CNR non pubblica un'API per interrogare il raster della mappa punto per punto: piccole aree
+          (es. picchi montani disabitati) visibili sulla mappa ufficiale worklimate.it possono non comparire
+          qui, perché il dato è risolto a livello di comune, non di singolo pixel.
+        </div></div>
+        <div class="credit-item"><div>
+          Se in Sicilia vedi solo Moderato/Alto ma la mappa raster ufficiale di worklimate.it sembra
+          mostrare più giallo (Basso), controlla bene la zona: spesso è la <strong>Calabria</strong>
+          (punta dello stivale, appena oltre lo Stretto di Messina) — nell'immagine è adiacente alla
+          Sicilia e facile da confondere, ma questa mappa copre solo il territorio siciliano
+          (Regione ISTAT 19). Verificato confrontando le mappe ufficiali orarie (12:00/16:00) del giorno:
+          la Sicilia stessa risulta quasi interamente Moderato/Alto, con al più pochi pixel isolati di Basso.
+        </div></div>
       </div>
       <div class="credits-section">
         <h3>Funzioni</h3>
@@ -191,7 +210,7 @@
 </div>
 
 <script>
-const COLORI = { green:'#4c9a5b', yellow:'#d9a824', orange:'#e07b2b', red:'#c8402f' };
+const COLORI = { green:'#4c9a5b', yellow:'#f0c419', orange:'#e07b2b', red:'#c8402f' };
 
 const pmtilesProtocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', pmtilesProtocol.tile);
@@ -269,13 +288,25 @@ function populateProvinciaChips(features) {
   document.getElementById('provinciaTitle').hidden = false;
 }
 
-function applyFilters() {
-  const filter = ['all',
-    ['in', ['get', 'colore'], ['literal', [...activeColori]]],
-    filtroProvinciaAttivo ? ['in', ['get', 'provincia'], ['literal', [...activeProvince]]] : true,
-  ];
-  map.setFilter('rischio-circles', filter);
+// Colora il poligono comunale vero (join su codice ISTAT, campo `pro_com_t`
+// del layer PMTiles) invece di un punto/cerchio: il dato Worklimate è
+// pensato dal CNR per essere letto a livello di comune, non più preciso
+// (vedi tab Info), quindi il territorio comunale intero è la rappresentazione
+// corretta, non un'approssimazione.
+function buildFillColorExpr(features) {
+  const expr = ['match', ['get', 'pro_com_t']];
+  features.forEach((f) => {
+    const codice = f.properties.codice_istat;
+    if (!codice) return;
+    const visibile = activeColori.has(f.properties.colore) &&
+      (!filtroProvinciaAttivo || activeProvince.has(f.properties.provincia));
+    expr.push(codice, visibile ? (COLORI[f.properties.colore] || '#999') : 'rgba(0,0,0,0)');
+  });
+  expr.push('rgba(0,0,0,0)'); // comuni senza dato (o fuori filtro): nessun riempimento
+  return expr;
+}
 
+function applyFilters() {
   document.querySelectorAll('.legend-row').forEach((btn) => {
     btn.classList.toggle('active', activeColori.has(btn.dataset.colore));
   });
@@ -283,22 +314,21 @@ function applyFilters() {
     chip.classList.toggle('active', activeProvince.has(chip.dataset.provincia));
   });
 
-  if (geojsonData) {
-    const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
-    const visibili = filtroProvinciaAttivo
-      ? features.filter((f) => activeProvince.has(f.properties.provincia))
-      : features;
-    ['green', 'yellow', 'orange', 'red'].forEach((c) => {
-      document.getElementById(`count-${c}`).textContent =
-        visibili.filter((f) => f.properties.colore === c).length;
-    });
-  }
+  if (!geojsonData) return;
+  const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
+  map.setPaintProperty('rischio-fill', 'fill-color', buildFillColorExpr(features));
+
+  const visibili = filtroProvinciaAttivo
+    ? features.filter((f) => activeProvince.has(f.properties.provincia))
+    : features;
+  ['green', 'yellow', 'orange', 'red'].forEach((c) => {
+    document.getElementById(`count-${c}`).textContent =
+      visibili.filter((f) => f.properties.colore === c).length;
+  });
 }
 
 function render() {
   if (!geojsonData) return;
-  const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
-  map.getSource('rischio').setData({ type: 'FeatureCollection', features });
   applyFilters();
 }
 
@@ -330,6 +360,15 @@ map.on('load', async () => {
     paint: { 'fill-color': '#1c2321', 'fill-opacity': 0.03 },
   });
   map.addLayer({
+    id: 'rischio-fill',
+    type: 'fill',
+    source: 'comuni-boundaries',
+    'source-layer': 'comuni',
+    filter: ['==', ['get', 'cod_reg'], 19],
+    paint: { 'fill-color': 'rgba(0,0,0,0)', 'fill-opacity': 0.75 },
+  });
+
+  map.addLayer({
     id: 'comuni-outline',
     type: 'line',
     source: 'comuni-boundaries',
@@ -338,26 +377,22 @@ map.on('load', async () => {
     paint: { 'line-color': '#1c2321', 'line-width': 0.6, 'line-opacity': 0.25 },
   });
 
-  map.addSource('rischio', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-
-  map.addLayer({
-    id: 'rischio-circles',
-    type: 'circle',
-    source: 'rischio',
-    paint: {
-      'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 6, 10, 16],
-      'circle-color': ['match', ['get', 'colore'], 'green', COLORI.green, 'yellow', COLORI.yellow, 'orange', COLORI.orange, 'red', COLORI.red, '#999'],
-      'circle-stroke-width': 2,
-      'circle-stroke-color': '#ffffff',
-    },
-  });
-
   try {
-    const res = await fetch('data/rischio.geojson');
-    const raw = await res.json();
+    const [resRischio, resStazioni] = await Promise.all([
+      fetch('data/rischio.geojson'),
+      fetch('data/stazioni.json'),
+    ]);
+    const raw = await resRischio.json();
+    const stazioni = await resStazioni.json();
 
-    // pre-parsa i 3 giorni (già presenti in properties.giorni dallo script)
+    // join rischio.geojson -> codice ISTAT via nome+provincia (chiave univoca
+    // per comune in stazioni.json; pgrid NON è univoco, più comuni possono
+    // condividere la stessa stazione più vicina) per mappare ogni feature sul
+    // poligono comunale vero (campo pro_com_t del layer PMTiles).
+    const codiceByComune = new Map(stazioni.map((s) => [`${s.nome}|${s.provincia}`, s.codice_istat]));
     raw.features.forEach((f) => {
+      f.properties.codice_istat = codiceByComune.get(`${f.properties.nome}|${f.properties.provincia}`) || null;
+      // pre-parsa i 3 giorni (già presenti in properties.giorni dallo script)
       f.properties.giorni_parsed = f.properties.giorni;
     });
 
@@ -373,21 +408,28 @@ map.on('load', async () => {
     console.error(err);
   }
 
-  map.on('click', 'rischio-circles', (e) => {
-    const p = e.features[0].properties;
+  map.on('click', 'rischio-fill', (e) => {
+    if (!geojsonData) return;
+    const codice = e.features[0].properties.pro_com_t;
+    const match = geojsonData.features.find((f) => f.properties.codice_istat === codice);
+    if (!match) return;
+    const p = featureForDay(match, currentDay).properties;
     const colore = COLORI[p.colore] || '#999';
     popup
-      .setLngLat(e.features[0].geometry.coordinates)
+      .setLngLat(e.lngLat)
       .setHTML(`
         <div class="popup-title">${p.nome}</div>
         <div class="popup-badge" style="background:${colore}">${p.label}</div>
         <div class="popup-desc">${p.desc || ''}</div>
+        <div class="popup-caveat">Valore riferito all'intero territorio comunale (risoluzione del dato Worklimate/CNR: comune, non indirizzo).</div>
       `)
       .addTo(map);
   });
 
-  map.on('mouseenter', 'rischio-circles', () => { map.getCanvas().style.cursor = 'pointer'; });
-  map.on('mouseleave', 'rischio-circles', () => { map.getCanvas().style.cursor = ''; });
+  map.on('mouseenter', 'rischio-fill', (e) => {
+    map.getCanvas().style.cursor = e.features[0].properties.pro_com_t ? 'pointer' : '';
+  });
+  map.on('mouseleave', 'rischio-fill', () => { map.getCanvas().style.cursor = ''; });
 });
 
 document.getElementById('dayToggle').addEventListener('click', (e) => {

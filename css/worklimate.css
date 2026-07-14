@@ -5,7 +5,7 @@
     --line:#dedad2;
     --muted:#6b6f6c;
     --green:#4c9a5b;
-    --yellow:#d9a824;
+    --yellow:#f0c419;
     --orange:#e07b2b;
     --red:#c8402f;
   }
@@ -161,6 +161,10 @@
     padding:2px 8px; border-radius:20px; color:#fff; margin-bottom:8px;
   }
   .popup-desc{ font-size:12.5px; color:var(--muted); line-height:1.4; }
+  .popup-caveat{
+    font-size:10.5px; color:var(--muted); line-height:1.35; opacity:.75;
+    margin-top:8px; padding-top:8px; border-top:1px solid var(--line);
+  }
 
   /* ════════════════════════════════════════
      BOTTOM INFO PANEL
