@@ -161,6 +161,7 @@
   .table-wrap {
     max-height: 560px;
     overflow-y: auto;
+    overflow-x: auto;
     border: 1px solid var(--gridline);
     border-radius: 14px;
   }
@@ -232,6 +233,9 @@
 
   footer { font-size: 11.5px; color: var(--muted); margin-top: 18px; line-height: 1.6; }
   footer a { color: inherit; }
+  .footer-logo { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; }
+  .footer-logo img { height: 32px; width: auto; display: block; flex: none; }
+  .footer-logo span { flex: 1 1 auto; min-width: 0; }
 
   .law-banner {
     background: linear-gradient(135deg, color-mix(in srgb, var(--serious) 14%, var(--surface-1)), var(--surface-1));
@@ -254,6 +258,26 @@
   }
   .law-banner a { color: var(--text-primary); font-weight: 700; text-decoration: underline; text-decoration-color: var(--serious); }
   .law-banner a:hover { text-decoration-color: currentColor; }
+
+  @media (max-width: 640px) {
+    .viz-root { padding: 14px 10px 32px; }
+    .header-row { flex-wrap: wrap; row-gap: 8px; }
+    .header-row > div { order: 2; flex: 1 1 100%; }
+    .logo-link { order: 1; }
+    .theme-toggle { order: 3; margin-left: auto; }
+    .controls { flex-direction: column; }
+    .controls input, .controls select { width: 100%; min-width: 0; }
+    .search-wrap { min-width: 0; }
+    .search-clear { width: 28px; height: 28px; }
+    .theme-toggle { padding: 9px 14px; }
+    .table-wrap { -webkit-overflow-scrolling: touch; }
+    table { min-width: 480px; }
+    .footer-logo { flex-wrap: wrap; }
+  }
+
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -313,6 +337,12 @@
   <footer>
     <span id="updatedNote"></span><br>
     Fonte: <a href="https://app.worklimate.it" target="_blank" rel="noopener">app.worklimate.it</a> via endpoint pubblico <code>osm-stazioni.php</code> (repo <a href="https://github.com/aborruso/worklimate" target="_blank" rel="noopener">aborruso/worklimate</a>, strumenti open source non ufficiali per interrogare i dati di rischio da stress termico di Worklimate/protezione civile). Coordinate comuni: centroidi da confini amministrativi ISTAT (openpolis/geojson-italy). Isole minori Pantelleria e Ustica escluse (nessuna stazione a griglia disponibile). Aggiornato automaticamente ogni giorno via GitHub Actions.
+    <div class="footer-logo">
+      <a href="https://palermohub.opendatasicilia.it/" title="PalermoHub" target="_blank" rel="noopener">
+        <img src="img/pa_hub_new.png" alt="PalermoHub">
+      </a>
+      <span>PalermoHub: mappe interattive su Palermo e Sicilia (traffico, monumenti, geologia, piste ciclabili...) che traducono dati tecnici e istituzionali in forma visiva e comprensibile.</span>
+    </div>
   </footer>
 </div>
 
