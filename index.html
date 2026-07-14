@@ -431,7 +431,7 @@ map.on('load', async () => {
     populateProvinciaChips(raw.features);
     allComuni = computeAllComuni(raw.features);
     render();
-    if (window.innerWidth > 760) setRightPanel(true);
+    if (mqDesktop.matches) setRightPanel(true);
   } catch (err) {
     document.getElementById('updatedAt').textContent = 'dati non disponibili';
     console.error(err);
@@ -630,6 +630,8 @@ document.getElementById('rpCalWrap').addEventListener('click', (e) => {
 
 const rpWrap = document.getElementById('rp-wrap');
 let rpOpen = false;
+const mqDesktop = window.matchMedia('(min-width: 761px)');
+mqDesktop.addEventListener('change', (e) => setRightPanel(e.matches));
 
 function setRightPanel(open) {
   rpOpen = open;
