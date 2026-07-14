@@ -53,12 +53,34 @@
     position:absolute; bottom:20px; left:16px; z-index:5;
     background:var(--panel); border:1px solid var(--line); border-radius:10px;
     padding:12px 14px; box-shadow:0 4px 16px rgba(28,35,33,.08);
-    font-size:12px;
+    font-size:12px; max-width:220px;
   }
   .legend-title{ font-weight:600; margin-bottom:8px; }
-  .legend-row{ display:flex; align-items:center; gap:8px; margin-bottom:5px; }
-  .legend-row:last-child{ margin-bottom:0; }
+  .legend-hint{ font-weight:400; color:var(--muted); font-size:10.5px; }
+  .legend-row{
+    display:flex; align-items:center; gap:8px; margin-bottom:5px;
+    width:100%; border:none; background:none; padding:3px 4px; border-radius:6px;
+    font-family:'Inter',system-ui,sans-serif; font-size:12px; color:var(--ink);
+    cursor:pointer; opacity:.35; transition:opacity .15s, background .15s;
+  }
+  .legend-row:hover{ background:#efece4; }
+  .legend-row.active{ opacity:1; }
+  .legend-row:last-of-type{ margin-bottom:0; }
   .swatch{ width:11px; height:11px; border-radius:50%; flex:none; }
+  .legend-label{ flex:1; text-align:left; }
+  .legend-count{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted);
+  }
+
+  .legend-divider{ height:1px; background:var(--line); margin:10px 0; }
+  .provincia-list{ display:flex; flex-wrap:wrap; gap:4px; }
+  .provincia-chip{
+    padding:4px 8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink);
+    border-radius:20px; cursor:pointer; opacity:.4; transition:opacity .15s, background .15s;
+  }
+  .provincia-chip:hover{ background:#efece4; }
+  .provincia-chip.active{ opacity:1; background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
   .updated{
     position:absolute; bottom:20px; right:16px; z-index:5;
@@ -94,11 +116,14 @@
 </div>
 
 <div class="legend">
-  <div class="legend-title">Livello di rischio</div>
-  <div class="legend-row"><span class="swatch" style="background:var(--green)"></span>Basso</div>
-  <div class="legend-row"><span class="swatch" style="background:var(--yellow)"></span>Moderato</div>
-  <div class="legend-row"><span class="swatch" style="background:var(--orange)"></span>Alto</div>
-  <div class="legend-row"><span class="swatch" style="background:var(--red)"></span>Emergenza</div>
+  <div class="legend-title">Livello di rischio <span class="legend-hint">(filtro)</span></div>
+  <button class="legend-row active" data-colore="green"><span class="swatch" style="background:var(--green)"></span><span class="legend-label">Basso</span><span class="legend-count" id="count-green"></span></button>
+  <button class="legend-row active" data-colore="yellow"><span class="swatch" style="background:var(--yellow)"></span><span class="legend-label">Moderato</span><span class="legend-count" id="count-yellow"></span></button>
+  <button class="legend-row active" data-colore="orange"><span class="swatch" style="background:var(--orange)"></span><span class="legend-label">Alto</span><span class="legend-count" id="count-orange"></span></button>
+  <button class="legend-row active" data-colore="red"><span class="swatch" style="background:var(--red)"></span><span class="legend-label">Emergenza</span><span class="legend-count" id="count-red"></span></button>
+  <div class="legend-divider" id="provinciaDivider" hidden></div>
+  <div class="legend-title" id="provinciaTitle" hidden>Provincia <span class="legend-hint">(filtro)</span></div>
+  <div class="provincia-list" id="provinciaList"></div>
 </div>
 
 <div class="updated" id="updatedAt"></div>
@@ -109,17 +134,24 @@ const COLORI = { green:'#4c9a5b', yellow:'#d9a824', orange:'#e07b2b', red:'#c840
 const pmtilesProtocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', pmtilesProtocol.tile);
 
+const SICILIA_BOUNDS = [[11.9, 36.5], [15.7, 38.9]];
+
 const map = new maplibregl.Map({
   container: 'map',
   style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-  center: [14.0, 37.6], // centro Sicilia, adatta ai tuoi punti
-  zoom: 6.6,
+  bounds: SICILIA_BOUNDS,
+  fitBoundsOptions: { padding: 24 },
+  hash: true,
 });
 map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
 let currentDay = 0;
 let geojsonData = null;
 const popup = new maplibregl.Popup({ closeButton: true, offset: 12 });
+
+const activeColori = new Set(['green', 'yellow', 'orange', 'red']);
+const activeProvince = new Set(); // popolato al caricamento dati, solo se ci sono >=2 province
+let filtroProvinciaAttivo = false;
 
 function featureForDay(feature, dayIndex) {
   const giorno = feature.properties.giorni_parsed[dayIndex] || feature.properties.giorni_parsed[0];
@@ -129,10 +161,85 @@ function featureForDay(feature, dayIndex) {
   };
 }
 
+function updateLegendLabels(features) {
+  // Il "label" testuale arriva dall'API Worklimate: non assumiamo una mappatura
+  // fissa colore→etichetta (il README ufficiale la documenta, ma i dati live
+  // possono discostarsene), usiamo quella osservata nei dati.
+  const labelPerColore = {};
+  features.forEach((f) => {
+    (f.properties.giorni || []).forEach((g) => {
+      if (g.colore && g.label && !labelPerColore[g.colore]) labelPerColore[g.colore] = g.label;
+    });
+  });
+  document.querySelectorAll('.legend-row').forEach((btn) => {
+    const label = labelPerColore[btn.dataset.colore];
+    if (label) btn.querySelector('.legend-label').textContent = label;
+  });
+}
+
+function populateProvinciaChips(features) {
+  const province = [...new Set(features.map((f) => f.properties.provincia).filter(Boolean))].sort();
+  if (province.length < 2) return; // niente da filtrare con un solo valore (o dato assente)
+  filtroProvinciaAttivo = true;
+  province.forEach((p) => activeProvince.add(p));
+
+  const list = document.getElementById('provinciaList');
+  list.innerHTML = '';
+  province.forEach((p) => {
+    const chip = document.createElement('button');
+    chip.className = 'provincia-chip active';
+    chip.dataset.provincia = p;
+    chip.textContent = p;
+    list.appendChild(chip);
+  });
+  document.getElementById('provinciaDivider').hidden = false;
+  document.getElementById('provinciaTitle').hidden = false;
+}
+
+function applyFilters() {
+  const filter = ['all',
+    ['in', ['get', 'colore'], ['literal', [...activeColori]]],
+    filtroProvinciaAttivo ? ['in', ['get', 'provincia'], ['literal', [...activeProvince]]] : true,
+  ];
+  map.setFilter('rischio-circles', filter);
+
+  document.querySelectorAll('.legend-row').forEach((btn) => {
+    btn.classList.toggle('active', activeColori.has(btn.dataset.colore));
+  });
+  document.querySelectorAll('.provincia-chip').forEach((chip) => {
+    chip.classList.toggle('active', activeProvince.has(chip.dataset.provincia));
+  });
+
+  if (geojsonData) {
+    const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
+    const visibili = filtroProvinciaAttivo
+      ? features.filter((f) => activeProvince.has(f.properties.provincia))
+      : features;
+    ['green', 'yellow', 'orange', 'red'].forEach((c) => {
+      document.getElementById(`count-${c}`).textContent =
+        visibili.filter((f) => f.properties.colore === c).length;
+    });
+  }
+}
+
 function render() {
   if (!geojsonData) return;
   const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
   map.getSource('rischio').setData({ type: 'FeatureCollection', features });
+  applyFilters();
+}
+
+function zoomToFiltered() {
+  if (!geojsonData) return;
+  const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
+  const visibili = features.filter((f) =>
+    activeColori.has(f.properties.colore) &&
+    (!filtroProvinciaAttivo || activeProvince.has(f.properties.provincia))
+  );
+  if (!visibili.length) return;
+  const bounds = new maplibregl.LngLatBounds();
+  visibili.forEach((f) => bounds.extend(f.geometry.coordinates));
+  map.fitBounds(bounds, { padding: 60, maxZoom: 11, duration: 600 });
 }
 
 map.on('load', async () => {
@@ -146,6 +253,7 @@ map.on('load', async () => {
     type: 'fill',
     source: 'comuni-boundaries',
     'source-layer': 'comuni',
+    filter: ['==', ['get', 'cod_reg'], 19],
     paint: { 'fill-color': '#1c2321', 'fill-opacity': 0.03 },
   });
   map.addLayer({
@@ -153,6 +261,7 @@ map.on('load', async () => {
     type: 'line',
     source: 'comuni-boundaries',
     'source-layer': 'comuni',
+    filter: ['==', ['get', 'cod_reg'], 19],
     paint: { 'line-color': '#1c2321', 'line-width': 0.6, 'line-opacity': 0.25 },
   });
 
@@ -182,6 +291,8 @@ map.on('load', async () => {
     geojsonData = raw;
     document.getElementById('updatedAt').textContent =
       'aggiornato ' + new Date(raw.generated_at).toLocaleString('it-IT');
+    updateLegendLabels(raw.features);
+    populateProvinciaChips(raw.features);
     render();
   } catch (err) {
     document.getElementById('updatedAt').textContent = 'dati non disponibili';
@@ -212,6 +323,31 @@ document.getElementById('dayToggle').addEventListener('click', (e) => {
   btn.classList.add('active');
   currentDay = Number(btn.dataset.day);
   render();
+});
+
+document.querySelector('.legend').addEventListener('click', (e) => {
+  const row = e.target.closest('.legend-row');
+  if (row) {
+    const colore = row.dataset.colore;
+    activeColori.has(colore) ? activeColori.delete(colore) : activeColori.add(colore);
+    applyFilters();
+    zoomToFiltered();
+    return;
+  }
+  const chip = e.target.closest('.provincia-chip');
+  if (chip) {
+    const p = chip.dataset.provincia;
+    if (activeProvince.size === 1 && activeProvince.has(p)) {
+      // riclicco l'unica provincia isolata: torno a mostrare tutte le province
+      document.querySelectorAll('.provincia-chip').forEach((c) => activeProvince.add(c.dataset.provincia));
+    } else {
+      // isola solo la provincia cliccata
+      activeProvince.clear();
+      activeProvince.add(p);
+    }
+    applyFilters();
+    zoomToFiltered();
+  }
 });
 </script>
 

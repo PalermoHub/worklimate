@@ -35,6 +35,7 @@ function main() {
         geometry: { type: "Point", coordinates: [s.lon, s.lat] },
         properties: {
           nome: s.nome,
+          provincia: s.provincia,
           pgrid: s.pgrid,
           data: oggi.data,
           colore: oggi.colore,

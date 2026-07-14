@@ -42,6 +42,7 @@ async function main() {
       const res = worklimateSearch(query);
       stazioni.push({
         nome: punto.nome,
+        provincia: punto.provincia || null,
         codice_istat: punto.codice_istat || null,
         // Preferisce il centroide ufficiale del Municipio (da ISTAT/
         // opendatasicilia), se presente in punti.json: è il punto giusto
