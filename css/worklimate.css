@@ -71,6 +71,8 @@
 
   .legend-divider{ height:1px; background:var(--line); margin:10px 0; }
   .provincia-list{ display:flex; flex-wrap:wrap; gap:4px; }
+  #right-panel .provincia-list{ justify-content:center; }
+  #right-panel #provinciaTitle{ text-align:center; }
   .provincia-chip{
     padding:4px 8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px;
     border:1px solid var(--line); background:var(--paper); color:var(--ink);
