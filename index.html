@@ -636,16 +636,35 @@ function resetProvinciaFilter() {
   zoomToFiltered();
 }
 
-// Righe calendario: comune cliccato > provincia isolata in legenda > tutti i comuni
+// Righe calendario: comune cliccato > provincia isolata in legenda > filtro colore legenda > tutti i comuni
 function buildCalendarScope() {
   if (selectedComune) {
     return { comuni: allComuni.filter((c) => c.codice_istat === selectedComune.codice_istat), label: selectedComune.nome, isolated: true };
   }
+
+  let comuni = allComuni;
+  let label = `Tutti i comuni · Sicilia (${allComuni.length}, Nord → Sud)`;
+  let isolated = false;
+
   if (filtroProvinciaAttivo && activeProvince.size === 1) {
     const p = [...activeProvince][0];
-    return { comuni: allComuni.filter((c) => c.provincia === p), label: p, isolated: true };
+    comuni = comuni.filter((c) => c.provincia === p);
+    label = p;
+    isolated = true;
   }
-  return { comuni: allComuni, label: `Tutti i comuni · Sicilia (${allComuni.length}, Nord → Sud)`, isolated: false };
+
+  if (activeColori.size < 4) {
+    const featByCodice = new Map((geojsonData ? geojsonData.features : []).map((f) => [f.properties.codice_istat, f]));
+    comuni = comuni.filter((c) => {
+      const feat = featByCodice.get(c.codice_istat);
+      return feat && activeColori.has(feat.properties.colore);
+    });
+    const colorLabel = [...activeColori].map((k) => COLORE_LABEL[k]).join(', ');
+    label = isolated ? `${label} · ${colorLabel}` : `${colorLabel} (${comuni.length})`;
+    isolated = true;
+  }
+
+  return { comuni, label, isolated };
 }
 
 function renderCalendar() {
@@ -712,6 +731,11 @@ function renderCalendar() {
     popup.remove();
     resetRicercaComune();
     if (filtroProvinciaAttivo && activeProvince.size === 1) resetProvinciaFilter();
+    if (activeColori.size < 4) {
+      document.querySelectorAll('.legend-row').forEach((r) => activeColori.add(r.dataset.colore));
+      applyFilters();
+      zoomToFiltered();
+    }
     renderCalendar();
   });
 }
@@ -763,6 +787,7 @@ document.querySelector('.legend').addEventListener('click', (e) => {
     }
     applyFilters();
     zoomToFiltered();
+    if (rpOpen) renderCalendar();
   }
 });
 
