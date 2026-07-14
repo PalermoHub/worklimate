@@ -32,13 +32,19 @@ function fmtDDMM(d) {
 function fmtLong(d) {
   return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 }
+function fmtFreshness(ts) {
+  const hours = Math.max(0, Math.floor((Date.now() - new Date(ts).getTime()) / 36e5));
+  if (hours < 1) return 'aggiornato da poco';
+  if (hours < 24) return `aggiornato ${hours}h fa`;
+  return `aggiornato ${Math.floor(hours / 24)}g fa`;
+}
 
 async function main() {
   const [res, resComuni] = await Promise.all([
     fetch('data/rischio-oggi.json'),
     fetch('data/comuni-sicilia.json'),
   ]);
-  const { generatedAt: GENERATED_AT, data: DATA } = await res.json();
+  const { generatedAt: GENERATED_AT, generatedAtTimestamp: GENERATED_TS, data: DATA } = await res.json();
   const comuniList = await resComuni.json();
   const rows = DATA.map(d => ({ nome: d[0], provincia: d[1], g1: d[2], g2: d[3], g3: d[4] }));
 
@@ -53,6 +59,9 @@ document.getElementById('pageSubtitle').textContent =
 document.getElementById('thG1').textContent = `Oggi (${fmtDDMM(D0)})`;
 document.querySelector('.trend-th').textContent = `Andamento ${fmtDDMM(D1)} → ${fmtDDMM(D2)}`;
 document.getElementById('updatedNote').textContent = `Aggiornato al ${fmtLong(D0)}.`;
+if (GENERATED_TS) {
+  document.getElementById('freshnessBadge').textContent = fmtFreshness(GENERATED_TS);
+}
 
 // ---- legend ----
 const legendEl = document.getElementById('legend');
@@ -102,12 +111,31 @@ const countNote = document.getElementById('countNote');
 const flatTableWrap = document.getElementById('flatTableWrap');
 const groupedViewEl = document.getElementById('groupedView');
 const groupCheckbox = document.getElementById('groupByProvince');
+const emptyState = document.getElementById('emptyState');
+const emptyStateReset = document.getElementById('emptyStateReset');
 
 const activeFiltersEl = document.getElementById('activeFilters');
 const LEVEL_ORDER = { 'Basso': 0, 'Moderato': 1, 'Alto': 2, 'Emergenza': 3 };
 let sortKey = 'g1';
 let sortDir = -1;
 const activeLevels = new Set();
+
+// ---- persistenza filtri (provincia, livelli, raggruppamento) ----
+const FILTERS_KEY = 'sicilia-rischio-caldo-filtri';
+function saveFilters() {
+  localStorage.setItem(FILTERS_KEY, JSON.stringify({
+    prov: provSel.value,
+    levels: [...activeLevels],
+    grouped: groupCheckbox.checked,
+  }));
+}
+function loadFilters() {
+  try {
+    return JSON.parse(localStorage.getItem(FILTERS_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
 
 // ---- filtro per livello (chip cliccabili, multi-selezione) ----
 const levelFilterEl = document.getElementById('levelFilter');
@@ -141,8 +169,9 @@ function trendHtml(r) {
 }
 
 function rowHtml(r) {
-  return `<tr data-nome="${r.nome}">
-      <td>${r.nome}</td>
+  const isEmergenza = r.g1 === 'Emergenza';
+  return `<tr data-nome="${r.nome}"${isEmergenza ? ' class="row-emergenza"' : ''}>
+      <td>${r.nome} ${isEmergenza ? '<span class="emergenza-badge" title="Rischio massimo oggi">⚠ Emergenza</span> ' : ''}<button type="button" class="share-btn" data-nome="${r.nome}" title="Copia link a questo comune" aria-label="Copia link a questo comune">🔗</button></td>
       <td><span class="prov-badge">${r.provincia}</span></td>
       <td>${cellHtml(r.g1)}</td>
       <td>${trendHtml(r)}</td>
@@ -258,15 +287,32 @@ function render() {
     th.classList.toggle('sorted', th.dataset.key === sortKey);
   });
 
-  const grouped = groupCheckbox.checked;
-  flatTableWrap.hidden = grouped;
-  groupedViewEl.hidden = !grouped;
+  const isEmpty = filtered.length === 0;
+  emptyState.hidden = !isEmpty;
 
-  if (grouped) {
-    renderGrouped(filtered);
-  } else {
-    tbody.innerHTML = filtered.map(rowHtml).join('');
+  const grouped = groupCheckbox.checked;
+  flatTableWrap.hidden = grouped || isEmpty;
+  groupedViewEl.hidden = !grouped || isEmpty;
+
+  if (!isEmpty) {
+    const activeContainer = grouped ? groupedViewEl : flatTableWrap;
+    fadeSwap(activeContainer, () => {
+      if (grouped) {
+        renderGrouped(filtered);
+      } else {
+        tbody.innerHTML = filtered.map(rowHtml).join('');
+      }
+    });
   }
+  saveFilters();
+}
+
+function fadeSwap(el, updateFn) {
+  el.classList.add('is-updating');
+  requestAnimationFrame(() => {
+    updateFn();
+    requestAnimationFrame(() => el.classList.remove('is-updating'));
+  });
 }
 
 searchEl.addEventListener('input', () => {
@@ -277,6 +323,14 @@ searchClear.addEventListener('click', () => {
   searchEl.value = '';
   searchWrap.classList.remove('has-value');
   searchEl.focus();
+  render();
+});
+emptyStateReset.addEventListener('click', () => {
+  searchEl.value = '';
+  searchWrap.classList.remove('has-value');
+  provSel.value = '';
+  activeLevels.clear();
+  levelFilterEl.querySelectorAll('.level-chip.active').forEach(c => c.classList.remove('active'));
   render();
 });
 provSel.addEventListener('change', render);
@@ -325,6 +379,34 @@ function goToComune(nome) {
   setTimeout(() => target.classList.remove('row-highlight'), 2600);
 }
 
+// ---- condivisione: link con query string ?comune=NOME per stato singolo comune ----
+function shareUrl(nome) {
+  const url = new URL(location.href);
+  url.search = '';
+  if (nome) url.searchParams.set('comune', nome);
+  return url.toString();
+}
+
+async function copyShareLink(nome, btn) {
+  const url = shareUrl(nome);
+  try {
+    await navigator.clipboard.writeText(url);
+    const original = btn.textContent;
+    btn.textContent = '✓';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1400);
+  } catch {
+    window.prompt('Copia il link:', url);
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.share-btn');
+  if (!btn) return;
+  e.stopPropagation();
+  copyShareLink(btn.dataset.nome, btn);
+});
+
 const locateBtn = document.getElementById('locateBtn');
 const locateStatus = document.getElementById('locateStatus');
 const GEO_ERROR_MSG = {
@@ -363,7 +445,23 @@ locateBtn.addEventListener('click', () => {
   );
 });
 
+// ---- applica filtri salvati (provincia, livelli, raggruppamento) ----
+const savedFilters = loadFilters();
+if (savedFilters.prov && provinces.includes(savedFilters.prov)) provSel.value = savedFilters.prov;
+(savedFilters.levels || []).forEach(l => {
+  if (!LEVELS.includes(l)) return;
+  activeLevels.add(l);
+  levelFilterEl.querySelector(`.level-chip[data-level="${l}"]`)?.classList.add('active');
+});
+if (typeof savedFilters.grouped === 'boolean') groupCheckbox.checked = savedFilters.grouped;
+
+// ---- deep link: preseleziona provincia/comune da query string (sovrascrive filtri salvati) ----
+const params = new URLSearchParams(location.search);
+const initProv = params.get('provincia');
+const initComune = params.get('comune');
+if (initProv && provinces.includes(initProv)) provSel.value = initProv;
 render();
+if (initComune && rowsByNome.has(initComune)) goToComune(initComune);
 }
 
 main().catch((e) => {
@@ -379,5 +477,23 @@ window.addEventListener('scroll', () => {
 backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ---- indicatore scroll orizzontale tabella (ombra ai bordi quando il contenuto eccede) ----
+function updateTableScrollShadow(el) {
+  const canScroll = el.scrollWidth > el.clientWidth + 1;
+  el.classList.toggle('can-scroll-left', canScroll && el.scrollLeft > 1);
+  el.classList.toggle('can-scroll-right', canScroll && el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+}
+function updateAllTableScrollShadows() {
+  document.querySelectorAll('.table-wrap').forEach(updateTableScrollShadow);
+}
+document.addEventListener('scroll', (e) => {
+  if (e.target.classList && e.target.classList.contains('table-wrap')) {
+    updateTableScrollShadow(e.target);
+  }
+}, true);
+window.addEventListener('resize', updateAllTableScrollShadows);
+new MutationObserver(updateAllTableScrollShadows).observe(document.body, { childList: true, subtree: true });
+updateAllTableScrollShadows();
 
 

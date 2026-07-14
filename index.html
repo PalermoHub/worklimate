@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -82,6 +84,12 @@
     <div class="level-filter" id="levelFilter"></div>
     <div class="active-filters" id="activeFilters" hidden></div>
     <div class="count-note" id="countNote"></div>
+    <div class="empty-state" id="emptyState" hidden>
+      <div class="empty-state-icon">🔍</div>
+      <p class="empty-state-title">Nessun comune trovato</p>
+      <p class="empty-state-sub">Prova a modificare la ricerca o i filtri attivi.</p>
+      <button type="button" class="empty-state-reset" id="emptyStateReset">Rimuovi filtri</button>
+    </div>
     <div class="table-wrap" id="flatTableWrap">
       <table>
         <thead id="flatThead">
@@ -104,7 +112,7 @@
   </div>
 
   <footer>
-    <span id="updatedNote"></span><br>
+    <span id="updatedNote"></span> <span id="freshnessBadge" class="freshness-badge"></span><br>
     Fonte: <a href="https://app.worklimate.it" target="_blank" rel="noopener">app.worklimate.it</a> via endpoint pubblico <code>osm-stazioni.php</code> (repo <a href="https://github.com/aborruso/worklimate" target="_blank" rel="noopener">aborruso/worklimate</a>, strumenti open source non ufficiali per interrogare i dati di rischio da stress termico di Worklimate/protezione civile). Coordinate comuni: centroidi da confini amministrativi ISTAT (openpolis/geojson-italy). Isole minori Pantelleria e Ustica escluse (nessuna stazione a griglia disponibile). Aggiornato automaticamente ogni giorno via GitHub Actions.
     <div class="footer-logo">
       <a href="https://palermohub.opendatasicilia.it/" title="PalermoHub" target="_blank" rel="noopener">

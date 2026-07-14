@@ -128,8 +128,13 @@ async function main() {
   }
 
   // 4. scrivi il dato del giorno in JSON (letto da index.html via fetch)
-  const today = new Date().toISOString().slice(0, 10);
-  await writeFile(JSON_PATH, JSON.stringify({ generatedAt: today, data: compact }), 'utf8');
+  const now = new Date();
+  const today = now.toISOString().slice(0, 10);
+  await writeFile(
+    JSON_PATH,
+    JSON.stringify({ generatedAt: today, generatedAtTimestamp: now.toISOString(), data: compact }),
+    'utf8',
+  );
   console.log(`Scritto ${JSON_PATH} (generatedAt=${today}, ${compact.length} comuni).`);
 
   // 5. accoda al CSV storico (append-only, una riga per comune per giorno)
