@@ -34,9 +34,16 @@ function fmtLong(d) {
 }
 
 async function main() {
-  const res = await fetch('data/rischio-oggi.json');
+  const [res, resComuni] = await Promise.all([
+    fetch('data/rischio-oggi.json'),
+    fetch('data/comuni-sicilia.json'),
+  ]);
   const { generatedAt: GENERATED_AT, data: DATA } = await res.json();
+  const comuniList = await resComuni.json();
   const rows = DATA.map(d => ({ nome: d[0], provincia: d[1], g1: d[2], g2: d[3], g3: d[4] }));
+
+  const rowsByNome = new Map(rows.map(r => [r.nome, r]));
+  const geoComuni = comuniList.filter(c => rowsByNome.has(c.nome));
 
   const D0 = addDays(GENERATED_AT, 0), D1 = addDays(GENERATED_AT, 1), D2 = addDays(GENERATED_AT, 2);
 
@@ -74,6 +81,13 @@ summaryEl.innerHTML = dayDefs.map(d => {
   return `<div class="summary-day"><div class="daylabel">${d.label}</div>${bars}</div>`;
 }).join('');
 
+// ---- KPI: comuni in Alto/Emergenza oggi ----
+function isRischioAlto(level) { return level === 'Alto' || level === 'Emergenza'; }
+
+const totalRisk = rows.filter(r => isRischioAlto(r.g1)).length;
+document.getElementById('kpiNumber').textContent = totalRisk;
+document.getElementById('kpiSub').textContent = `su ${rows.length} · Alto/Emergenza oggi`;
+
 // ---- controls ----
 const provinces = [...new Set(rows.map(r => r.provincia))].sort();
 const provSel = document.getElementById('provFilter');
@@ -85,9 +99,29 @@ const searchWrap = document.getElementById('searchWrap');
 const searchClear = document.getElementById('searchClear');
 const tbody = document.getElementById('tbody');
 const countNote = document.getElementById('countNote');
+const flatTableWrap = document.getElementById('flatTableWrap');
+const groupedViewEl = document.getElementById('groupedView');
+const groupCheckbox = document.getElementById('groupByProvince');
 
-let sortKey = 'nome';
-let sortDir = 1;
+const activeFiltersEl = document.getElementById('activeFilters');
+const LEVEL_ORDER = { 'Basso': 0, 'Moderato': 1, 'Alto': 2, 'Emergenza': 3 };
+let sortKey = 'g1';
+let sortDir = -1;
+const activeLevels = new Set();
+
+// ---- filtro per livello (chip cliccabili, multi-selezione) ----
+const levelFilterEl = document.getElementById('levelFilter');
+levelFilterEl.innerHTML = LEVELS.map(l =>
+  `<button type="button" class="level-chip ${LEVEL_CLASS[l]}" data-level="${l}">${l}</button>`
+).join('');
+levelFilterEl.querySelectorAll('.level-chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const level = btn.dataset.level;
+    if (activeLevels.has(level)) activeLevels.delete(level); else activeLevels.add(level);
+    btn.classList.toggle('active', activeLevels.has(level));
+    render();
+  });
+});
 
 function cellHtml(level) {
   const cls = LEVEL_CLASS[level] || '';
@@ -106,25 +140,133 @@ function trendHtml(r) {
   return `<span class="trend">${dots}</span>`;
 }
 
-function render() {
-  const q = searchEl.value.trim().toLowerCase();
-  const prov = provSel.value;
-  let filtered = rows.filter(r =>
-    (!q || r.nome.toLowerCase().includes(q)) &&
-    (!prov || r.provincia === prov)
-  );
-  filtered.sort((a, b) => {
-    const av = a[sortKey], bv = b[sortKey];
-    return av < bv ? -1 * sortDir : av > bv ? 1 * sortDir : 0;
-  });
-  countNote.textContent = `${filtered.length} di ${rows.length} comuni`;
-  tbody.innerHTML = filtered.map(r => `
-    <tr>
+function rowHtml(r) {
+  return `<tr data-nome="${r.nome}">
       <td>${r.nome}</td>
       <td><span class="prov-badge">${r.provincia}</span></td>
       <td>${cellHtml(r.g1)}</td>
       <td>${trendHtml(r)}</td>
-    </tr>`).join('');
+    </tr>`;
+}
+
+const thG1Label = document.getElementById('thG1').textContent;
+const trendLabel = document.querySelector('.trend-th').textContent;
+function theadRowHtml() {
+  return `<tr>
+      <th data-key="nome" class="${sortKey === 'nome' ? 'sorted' : ''}">Comune</th>
+      <th data-key="provincia" class="${sortKey === 'provincia' ? 'sorted' : ''}">Prov.</th>
+      <th data-key="g1" class="${sortKey === 'g1' ? 'sorted' : ''}">${thG1Label}</th>
+      <th class="trend-th">${trendLabel}</th>
+    </tr>`;
+}
+
+function renderGrouped(filtered) {
+  const byProv = {};
+  filtered.forEach(r => { (byProv[r.provincia] ??= []).push(r); });
+  const groups = Object.keys(byProv).map(p => {
+    const provRows = byProv[p];
+    const riskCount = provRows.filter(r => isRischioAlto(r.g1)).length;
+    return { prov: p, rows: provRows, riskCount };
+  }).sort((a, b) => b.riskCount - a.riskCount || a.prov.localeCompare(b.prov));
+
+  const PREVIEW_COUNT = 5;
+  groupedViewEl.innerHTML = groups.map(g => {
+    const hasMore = g.rows.length > PREVIEW_COUNT;
+    const previewRows = g.rows.slice(0, PREVIEW_COUNT);
+    return `
+    <div class="prov-group collapsed">
+      <button type="button" class="prov-group-header" aria-expanded="false">
+        <span class="prov-badge">${g.prov}</span>
+        <span class="prov-group-meta">${g.rows.length} comun${g.rows.length === 1 ? 'e' : 'i'} · ${g.riskCount} in Alto/Emergenza</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="prov-group-preview">
+        <div class="table-wrap">
+          <table>
+            <thead>${theadRowHtml()}</thead>
+            <tbody>${previewRows.map(rowHtml).join('')}</tbody>
+          </table>
+        </div>
+        ${hasMore ? `<div class="prov-group-more">+${g.rows.length - PREVIEW_COUNT} altri comuni…</div>` : ''}
+      </div>
+      <div class="prov-group-body">
+        <div class="table-wrap">
+          <table>
+            <thead>${theadRowHtml()}</thead>
+            <tbody>${g.rows.map(rowHtml).join('')}</tbody>
+          </table>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  groupedViewEl.querySelectorAll('.prov-group-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      btn.closest('.prov-group').classList.toggle('collapsed', expanded);
+    });
+  });
+}
+
+function renderActiveFilters(prov) {
+  const chips = [];
+  if (prov) chips.push(`<button type="button" class="active-filter-chip" data-filter-type="prov"><span class="prov-badge">${prov}</span><span class="remove-x">×</span></button>`);
+  [...activeLevels].forEach(l => {
+    chips.push(`<button type="button" class="active-filter-chip" data-filter-type="level" data-filter-value="${l}"><span class="cell ${LEVEL_CLASS[l]}"><span class="dot"></span>${l}</span><span class="remove-x">×</span></button>`);
+  });
+  if (chips.length > 1) chips.push('<button type="button" class="active-filters-clear" data-filter-type="clear">Rimuovi tutti</button>');
+  activeFiltersEl.innerHTML = chips.join('');
+  activeFiltersEl.hidden = chips.length === 0;
+}
+
+activeFiltersEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  const type = btn.dataset.filterType;
+  if (type === 'prov') {
+    provSel.value = '';
+  } else if (type === 'level') {
+    const level = btn.dataset.filterValue;
+    activeLevels.delete(level);
+    levelFilterEl.querySelector(`.level-chip[data-level="${level}"]`)?.classList.remove('active');
+  } else if (type === 'clear') {
+    provSel.value = '';
+    activeLevels.clear();
+    levelFilterEl.querySelectorAll('.level-chip.active').forEach(c => c.classList.remove('active'));
+  }
+  render();
+});
+
+function render() {
+  const q = searchEl.value.trim().toLowerCase();
+  const prov = provSel.value;
+  renderActiveFilters(prov);
+  let filtered = rows.filter(r =>
+    (!q || r.nome.toLowerCase().includes(q)) &&
+    (!prov || r.provincia === prov) &&
+    (activeLevels.size === 0 || activeLevels.has(r.g1))
+  );
+  filtered.sort((a, b) => {
+    const av = sortKey === 'g1' ? LEVEL_ORDER[a[sortKey]] : a[sortKey];
+    const bv = sortKey === 'g1' ? LEVEL_ORDER[b[sortKey]] : b[sortKey];
+    return av < bv ? -1 * sortDir : av > bv ? 1 * sortDir : 0;
+  });
+  countNote.textContent = `${filtered.length} di ${rows.length} comuni`;
+
+  document.querySelectorAll('#flatThead th[data-key]').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.key === sortKey);
+  });
+
+  const grouped = groupCheckbox.checked;
+  flatTableWrap.hidden = grouped;
+  groupedViewEl.hidden = !grouped;
+
+  if (grouped) {
+    renderGrouped(filtered);
+  } else {
+    tbody.innerHTML = filtered.map(rowHtml).join('');
+  }
 }
 
 searchEl.addEventListener('input', () => {
@@ -138,16 +280,88 @@ searchClear.addEventListener('click', () => {
   render();
 });
 provSel.addEventListener('change', render);
-document.querySelectorAll('thead th[data-key]').forEach(th => {
-  th.addEventListener('click', () => {
-    const key = th.dataset.key;
-    if (sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = 1; }
-    document.querySelectorAll('thead th').forEach(t => t.classList.remove('sorted'));
-    th.classList.add('sorted');
-    render();
-  });
+groupCheckbox.addEventListener('change', render);
+document.addEventListener('click', (e) => {
+  const th = e.target.closest('th[data-key]');
+  if (!th) return;
+  const key = th.dataset.key;
+  if (sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = 1; }
+  render();
 });
-document.querySelector(`thead th[data-key="${sortKey}"]`).classList.add('sorted');
+
+// ---- "il mio comune": geolocalizzazione opt-in, scroll+evidenzia riga (no mappa) ----
+function haversineKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+function goToComune(nome) {
+  searchEl.value = '';
+  searchWrap.classList.remove('has-value');
+  provSel.value = '';
+  activeLevels.clear();
+  levelFilterEl.querySelectorAll('.level-chip.active').forEach(c => c.classList.remove('active'));
+  render();
+
+  let target = null;
+  if (groupCheckbox.checked) {
+    const anyRow = groupedViewEl.querySelector(`tr[data-nome="${CSS.escape(nome)}"]`);
+    const group = anyRow?.closest('.prov-group');
+    if (group) {
+      group.classList.remove('collapsed');
+      group.querySelector('.prov-group-header')?.setAttribute('aria-expanded', 'true');
+      target = group.querySelector(`.prov-group-body tr[data-nome="${CSS.escape(nome)}"]`);
+    }
+  } else {
+    target = tbody.querySelector(`tr[data-nome="${CSS.escape(nome)}"]`);
+  }
+  if (!target) return;
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  target.classList.add('row-highlight');
+  setTimeout(() => target.classList.remove('row-highlight'), 2600);
+}
+
+const locateBtn = document.getElementById('locateBtn');
+const locateStatus = document.getElementById('locateStatus');
+const GEO_ERROR_MSG = {
+  1: 'Permesso di geolocalizzazione negato.',
+  2: 'Posizione non disponibile.',
+  3: 'Richiesta di posizione scaduta.',
+};
+locateBtn.addEventListener('click', () => {
+  if (!('geolocation' in navigator)) {
+    locateStatus.textContent = 'Geolocalizzazione non supportata da questo browser.';
+    return;
+  }
+  locateBtn.disabled = true;
+  locateStatus.textContent = 'Localizzazione in corso…';
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      locateBtn.disabled = false;
+      const { latitude, longitude } = pos.coords;
+      let nearest = null, minDist = Infinity;
+      geoComuni.forEach(c => {
+        const d = haversineKm(latitude, longitude, c.lat, c.lon);
+        if (d < minDist) { minDist = d; nearest = c; }
+      });
+      if (!nearest) {
+        locateStatus.textContent = 'Nessun comune trovato.';
+        return;
+      }
+      locateStatus.textContent = `Comune più vicino: ${nearest.nome} (~${minDist.toFixed(0)} km)`;
+      goToComune(nearest.nome);
+    },
+    (err) => {
+      locateBtn.disabled = false;
+      locateStatus.textContent = GEO_ERROR_MSG[err.code] || 'Errore nella geolocalizzazione.';
+    },
+    { timeout: 10000 }
+  );
+});
 
 render();
 }

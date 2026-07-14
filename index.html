@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -39,8 +40,28 @@
     <button class="theme-toggle" id="themeToggle" type="button"></button>
   </div>
 
+  <div class="locate-row" id="locateRow">
+    <button class="locate-btn" id="locateBtn" type="button">📍 Il mio comune</button>
+    <span class="locate-status" id="locateStatus"></span>
+  </div>
+
   <div class="caveat">
     <b>Perché una tabella e non una mappa.</b> Worklimate assegna il rischio alla stazione meteo-modello più vicina a un punto: non è un dato che segue i confini comunali, e nemmeno una griglia densa che giustifichi un'interpolazione spaziale continua. Colorare i poligoni dei comuni (coropletica) implicherebbe salti netti ai confini amministrativi che il fenomeno meteorologico non ha; una mappa a punti mostrerebbe solo l'ubicazione dei comuni, non aggiungerebbe informazione al colore stesso. La struttura reale del dato è <b>luogo × giorno → livello</b>: una matrice/tabella colorata la rappresenta senza inventare continuità spaziale che i dati non hanno.
+  </div>
+
+  <div class="kpi-top-row">
+    <div class="card kpi-mini">
+      <h2>Oggi in sintesi</h2>
+      <div class="kpi-number" id="kpiNumber"></div>
+      <div class="kpi-sub" id="kpiSub"></div>
+    </div>
+    <div class="card kpi-mini">
+      <h2>Vista</h2>
+      <label class="view-toggle">
+        <input type="checkbox" id="groupByProvince" checked>
+        Raggruppa per provincia (ordina per criticità)
+      </label>
+    </div>
   </div>
 
   <div class="card">
@@ -58,10 +79,12 @@
       </div>
       <select id="provFilter"></select>
     </div>
+    <div class="level-filter" id="levelFilter"></div>
+    <div class="active-filters" id="activeFilters" hidden></div>
     <div class="count-note" id="countNote"></div>
-    <div class="table-wrap">
+    <div class="table-wrap" id="flatTableWrap">
       <table>
-        <thead>
+        <thead id="flatThead">
           <tr>
             <th data-key="nome">Comune</th>
             <th data-key="provincia">Prov.</th>
@@ -72,6 +95,7 @@
         <tbody id="tbody"></tbody>
       </table>
     </div>
+    <div class="grouped-view" id="groupedView" hidden></div>
   </div>
 
   <div class="law-banner">
