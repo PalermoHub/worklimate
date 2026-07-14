@@ -15,6 +15,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const COMUNI_PATH = path.join(ROOT, 'data', 'comuni-sicilia.json');
 const HTML_PATH = path.join(ROOT, 'index.html');
+const CSV_PATH = path.join(ROOT, 'data', 'storico-rischio.csv');
 
 const UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
@@ -47,6 +48,29 @@ async function nearestStation(place, lat, lon) {
 async function todayRisk(pgrid) {
   const params = new URLSearchParams({ pgrid: String(pgrid), sys: 'regular' });
   return getJson(`https://app.worklimate.it/osm-stazioni.php?${params}`);
+}
+
+function csvField(v) {
+  const s = String(v);
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+async function appendCsvStorico(today, compact) {
+  // solo il rischio reale del giorno (g1): g2/g3 sono previsione e verranno
+  // registrate come g1 nei run successivi, includerle qui duplicherebbe il dato.
+  const header = 'data,comune,provincia,rischio\n';
+  let existing = '';
+  try {
+    existing = await readFile(CSV_PATH, 'utf8');
+  } catch {
+    // file non esiste ancora: verrà creato con l'header
+  }
+  const righe = compact
+    .map(([nome, sigla, g1]) => [today, nome, sigla, g1].map(csvField).join(','))
+    .join('\n');
+  const out = existing ? `${existing}${righe}\n` : `${header}${righe}\n`;
+  await writeFile(CSV_PATH, out, 'utf8');
+  console.log(`Aggiornato ${CSV_PATH} (+${compact.length} righe).`);
 }
 
 async function main() {
@@ -86,12 +110,17 @@ async function main() {
 
   // 3. join finale [nome, sigla, g1, g2, g3]
   const compact = [];
+  const joinErrors = [];
   for (const c of withStation) {
     const r = riskByPgrid.get(c.pgrid);
-    if (!r) continue;
+    if (!r?.g1 || !r?.g2 || !r?.g3) {
+      joinErrors.push([c.nome, c.pgrid]);
+      continue;
+    }
     compact.push([c.nome, c.sigla, r.g1.label, r.g2.label, r.g3.label]);
   }
   console.log(`Comuni con dato completo: ${compact.length}`);
+  if (joinErrors.length) console.log('Rischio incompleto per:', joinErrors);
   if (compact.length < comuni.length * 0.8) {
     throw new Error(
       `Troppi comuni senza dato (${compact.length}/${comuni.length}): possibile problema con l'API, aborto senza scrivere l'HTML.`,
@@ -112,6 +141,9 @@ async function main() {
 
   await writeFile(HTML_PATH, html, 'utf8');
   console.log(`Scritto ${HTML_PATH} (GENERATED_AT=${today}, ${compact.length} comuni).`);
+
+  // 5. accoda al CSV storico (append-only, una riga per comune per giorno)
+  await appendCsvStorico(today, compact);
 }
 
 main().catch((e) => {
