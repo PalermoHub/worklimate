@@ -37,10 +37,6 @@
   <button class="legend-row active" data-colore="yellow"><span class="swatch" style="background:var(--yellow)"></span><span class="legend-label">Basso</span><span class="legend-count" id="count-yellow"></span></button>
   <button class="legend-row active" data-colore="orange"><span class="swatch" style="background:var(--orange)"></span><span class="legend-label">Moderato</span><span class="legend-count" id="count-orange"></span></button>
   <button class="legend-row active" data-colore="red"><span class="swatch" style="background:var(--red)"></span><span class="legend-label">Alto</span><span class="legend-count" id="count-red"></span></button>
-  <div class="legend-divider" id="provinciaDivider" hidden></div>
-  <div class="legend-title" id="provinciaTitle" hidden>Provincia <span class="legend-hint">(filtro)</span></div>
-  <div class="provincia-list" id="provinciaList"></div>
-  <button class="legend-storico-btn" id="storicoBtn" hidden>Storico rischio ↗</button>
 </div>
 
 <div class="updated-wrap">
@@ -128,6 +124,12 @@
               Sezioni comunali della Sicilia, distribuite come tiles vettoriali PMTiles.
             </div>
           </div>
+          <div class="credit-item">
+            <div>
+              <strong><a href="https://ondata.github.io/ondate-calore/" target="_blank" rel="noopener">onData — Ondate di calore</a></strong>
+              Progetto di onData da cui questa mappa prende ispirazione: monitora le ondate di calore in Italia incrociando dati e allerte ufficiali.
+            </div>
+          </div>
         </div>
 
         <div class="credits-section">
@@ -183,31 +185,42 @@
   </div>
 </div><!-- /info-panel -->
 
-<div class="storico-overlay" id="storicoOverlay" hidden>
-  <div class="storico-modal">
-    <div class="storico-header">
-      <div>
-        <h2>Storico rischio da caldo</h2>
-        <p id="storicoSubtitle">data/rischio_storico.csv</p>
-      </div>
-      <button class="storico-close" id="storicoClose" aria-label="Chiudi">&times;</button>
-    </div>
-    <div class="storico-toolbar" id="storicoToolbar" hidden>
-      <input type="text" id="storicoSearch" placeholder="Cerca comune…" />
-      <select id="storicoFiltroColore"><option value="">Rischio: tutti</option></select>
-      <select id="storicoFiltroProvincia"><option value="">Provincia: tutte</option></select>
-      <select id="storicoFiltroData"><option value="">Data: tutte</option></select>
-      <div class="storico-toolbar-actions">
-        <button id="storicoClearSelection" hidden>Annulla selezione</button>
-        <button id="storicoDownloadCsv">Scarica CSV</button>
-        <button id="storicoDownloadJson">Scarica JSON</button>
+<!-- ═══ PANNELLO DX: CALENDARIO BOLLETTINI + STORICO ═══ -->
+<div id="rp-wrap">
+
+  <button id="rp-toggle" title="Calendario bollettini — apri/chiudi">
+    <svg id="rp-toggle-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+
+  <div id="right-panel">
+    <div class="rp-panel-header">
+      <div class="rp-panel-title-row">
+        <div class="rp-panel-title">Bollettini rischio da caldo CNR - INAIL</div>
+        <button class="rp-close" id="rpClose" aria-label="Chiudi">&times;</button>
       </div>
     </div>
-    <div class="storico-body" id="storicoBody">
-      <div class="storico-empty">Caricamento…</div>
+
+    <div class="rp-body">
+      <div class="legend-title" id="provinciaTitle" hidden>Provincia <span class="legend-hint">(filtro)</span></div>
+      <div class="provincia-list" id="provinciaList"></div>
+      <div class="legend-divider" id="provinciaDivider" hidden></div>
+      <div class="rp-cal-scope" id="rpCalScope"></div>
+      <div class="rp-cal-wrap" id="rpCalWrap">
+        <div class="rp-cal-empty">Caricamento…</div>
+      </div>
+      <div class="rp-cal-detail" id="rpCalDetail">Clicca una cella per il dettaglio.</div>
+      <div class="rp-cal-legend">
+        <span><span class="swatch" style="background:var(--green)"></span>Nessuno</span>
+        <span><span class="swatch" style="background:var(--yellow)"></span>Basso</span>
+        <span><span class="swatch" style="background:var(--orange)"></span>Moderato</span>
+        <span><span class="swatch" style="background:var(--red)"></span>Alto</span>
+        <span class="rp-cal-legend-forecast">tratteggio = previsto</span>
+      </div>
     </div>
   </div>
-</div>
+</div><!-- /rp-wrap -->
 
 <script>
 const COLORI = { green:'#4c9a5b', yellow:'#f0c419', orange:'#e07b2b', red:'#c8402f' };
@@ -216,15 +229,23 @@ const pmtilesProtocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', pmtilesProtocol.tile);
 
 const SICILIA_BOUNDS = [[11.9, 36.5], [15.7, 38.9]];
+const SICILIA_MAX_BOUNDS = [[10.9, 35.7], [16.7, 39.7]];
 
 const map = new maplibregl.Map({
   container: 'map',
   style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
   bounds: SICILIA_BOUNDS,
   fitBoundsOptions: { padding: 24 },
+  maxBounds: SICILIA_MAX_BOUNDS,
+  pitch: 0,
+  bearing: 0,
+  dragRotate: false,
+  pitchWithRotate: false,
+  touchPitch: false,
   hash: true,
 });
-map.addControl(new maplibregl.NavigationControl(), 'top-right');
+map.touchZoomRotate.disableRotation();
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
 let currentDay = 0;
 let geojsonData = null;
@@ -402,7 +423,9 @@ map.on('load', async () => {
     updateLegendLabels(raw.features);
     populateDayDates(raw.features);
     populateProvinciaChips(raw.features);
+    allComuni = computeAllComuni(raw.features);
     render();
+    if (window.innerWidth > 760) setRightPanel(true);
   } catch (err) {
     document.getElementById('updatedAt').textContent = 'dati non disponibili';
     console.error(err);
@@ -424,6 +447,13 @@ map.on('load', async () => {
         <div class="popup-caveat">Valore riferito all'intero territorio comunale (risoluzione del dato Worklimate/CNR: comune, non indirizzo).</div>
       `)
       .addTo(map);
+    selectedComune = { codice_istat: p.codice_istat, nome: p.nome, provincia: p.provincia };
+    if (rpOpen) renderCalendar();
+  });
+
+  popup.on('close', () => {
+    selectedComune = null;
+    if (rpOpen) renderCalendar();
   });
 
   map.on('mouseenter', 'rischio-fill', (e) => {
@@ -465,196 +495,153 @@ function parseCSV(text) {
   return rows.slice(1).map((r) => Object.fromEntries(header.map((h, i) => [h, r[i] ?? ''])));
 }
 
-const STORICO_COLONNE = ['data', 'codice_istat', 'comune', 'provincia', 'colore', 'label', 'desc', 'pgrid'];
-
 let storicoLoaded = false;
-let storicoRows = [];       // tutte le righe, con _key aggiunta
-let storicoFiltered = [];   // righe visibili dopo i filtri correnti
-const storicoSelected = new Set(); // _key delle righe selezionate
-
-function storicoKey(r) { return `${r.data}|${r.codice_istat}`; }
-
-function csvEscape(value) {
-  const s = String(value ?? '');
-  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-}
-
-function rowsToCSV(rows) {
-  const header = STORICO_COLONNE.join(',');
-  const lines = rows.map((r) => STORICO_COLONNE.map((c) => csvEscape(r[c])).join(','));
-  return [header, ...lines].join('\n') + '\n';
-}
-
-function rowsToJSON(rows) {
-  return JSON.stringify(
-    rows.map((r) => Object.fromEntries(STORICO_COLONNE.map((c) => [c, r[c]]))),
-    null,
-    2
-  );
-}
-
-function triggerDownload(filename, content, mime) {
-  const blob = new Blob([content], { type: mime });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-}
-
-function rowsPerDownload() {
-  // se c'è una selezione attiva scarica solo quella, altrimenti tutte le righe filtrate
-  return storicoSelected.size
-    ? storicoRows.filter((r) => storicoSelected.has(r._key))
-    : storicoFiltered;
-}
-
-function populateStoricoFilterOptions(rows) {
-  const coloreSel = document.getElementById('storicoFiltroColore');
-  const provinciaSel = document.getElementById('storicoFiltroProvincia');
-  const dataSel = document.getElementById('storicoFiltroData');
-
-  const coloreLabel = { green: 'Nessuno', yellow: 'Basso', orange: 'Moderato', red: 'Alto' };
-  coloreSel.innerHTML = '<option value="">Rischio: tutti</option>' +
-    [...new Set(rows.map((r) => r.colore))].filter(Boolean).sort()
-      .map((c) => `<option value="${c}">${coloreLabel[c] || c}</option>`).join('');
-
-  const province = [...new Set(rows.map((r) => r.provincia))].filter(Boolean).sort();
-  provinciaSel.innerHTML = '<option value="">Provincia: tutte</option>' +
-    province.map((p) => `<option value="${p}">${p}</option>`).join('');
-
-  const date = [...new Set(rows.map((r) => r.data))].filter(Boolean).sort().reverse();
-  dataSel.innerHTML = '<option value="">Data: tutte</option>' +
-    date.map((d) => `<option value="${d}">${d}</option>`).join('');
-}
-
-function renderStoricoTable() {
-  const body = document.getElementById('storicoBody');
-  const search = document.getElementById('storicoSearch').value.trim().toLowerCase();
-  const fColore = document.getElementById('storicoFiltroColore').value;
-  const fProvincia = document.getElementById('storicoFiltroProvincia').value;
-  const fData = document.getElementById('storicoFiltroData').value;
-
-  storicoFiltered = storicoRows.filter((r) =>
-    (!search || r.comune.toLowerCase().includes(search)) &&
-    (!fColore || r.colore === fColore) &&
-    (!fProvincia || r.provincia === fProvincia) &&
-    (!fData || r.data === fData)
-  );
-
-  document.getElementById('storicoSubtitle').textContent =
-    `${storicoFiltered.length}/${storicoRows.length} righe · data/rischio_storico.csv`;
-
-  if (!storicoFiltered.length) {
-    body.innerHTML = '<div class="storico-empty">Nessuna riga corrisponde ai filtri.</div>';
-  } else {
-    const allSelected = storicoFiltered.every((r) => storicoSelected.has(r._key));
-    const trs = storicoFiltered.map((r) => {
-      const colore = COLORI[r.colore] || '#999';
-      const checked = storicoSelected.has(r._key) ? 'checked' : '';
-      return `<tr>
-        <td class="check-cell"><input type="checkbox" class="storico-row-check" data-key="${r._key}" ${checked}></td>
-        <td>${r.data}</td>
-        <td>${r.codice_istat}</td>
-        <td>${r.comune}</td>
-        <td>${r.provincia}</td>
-        <td><span class="storico-badge" style="background:${colore}">${r.label}</span></td>
-        <td class="desc-cell">${r.desc}</td>
-        <td>${r.pgrid}</td>
-      </tr>`;
-    }).join('');
-    body.innerHTML = `<table class="storico-table">
-      <thead><tr>
-        <th class="check-cell"><input type="checkbox" id="storicoSelectAll" ${allSelected ? 'checked' : ''}></th>
-        <th>Data</th><th>Cod. ISTAT</th><th>Comune</th><th>Prov.</th><th>Rischio</th><th>Descrizione</th><th>Pgrid</th>
-      </tr></thead>
-      <tbody>${trs}</tbody>
-    </table>`;
-  }
-
-  updateStoricoActions();
-}
-
-function updateStoricoActions() {
-  const n = rowsPerDownload().length;
-  document.getElementById('storicoDownloadCsv').textContent = `Scarica CSV (${n})`;
-  document.getElementById('storicoDownloadJson').textContent = `Scarica JSON (${n})`;
-  document.getElementById('storicoClearSelection').hidden = storicoSelected.size === 0;
-}
+let storicoRows = [];
 
 async function loadStorico() {
-  const body = document.getElementById('storicoBody');
   try {
     const res = await fetch('data/rischio_storico.csv');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const text = await res.text();
-    const rows = parseCSV(text);
-    rows.forEach((r) => { r._key = storicoKey(r); });
-    rows.sort((a, b) => (b.data + b.comune).localeCompare(a.data + a.comune));
-    storicoRows = rows;
-    if (!rows.length) {
-      document.getElementById('storicoToolbar').hidden = true;
-      body.innerHTML = '<div class="storico-empty">Nessun dato storico ancora disponibile.</div>';
-      return;
-    }
-    populateStoricoFilterOptions(rows);
-    document.getElementById('storicoToolbar').hidden = false;
-    renderStoricoTable();
+    storicoRows = parseCSV(text);
     storicoLoaded = true;
+    renderCalendar();
   } catch (err) {
-    body.innerHTML = '<div class="storico-empty">Storico non disponibile.</div>';
+    document.getElementById('rpCalWrap').innerHTML = '<div class="rp-cal-empty">Storico non disponibile.</div>';
     console.error(err);
   }
 }
 
-const storicoOverlay = document.getElementById('storicoOverlay');
-document.getElementById('storicoBtn').addEventListener('click', () => {
-  storicoOverlay.hidden = false;
-  if (!storicoLoaded) loadStorico();
-});
-document.getElementById('storicoClose').addEventListener('click', () => { storicoOverlay.hidden = true; });
-storicoOverlay.addEventListener('click', (e) => { if (e.target === storicoOverlay) storicoOverlay.hidden = true; });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') storicoOverlay.hidden = true; });
+// ── Pannello dx: calendario bollettini (stile ondata, righe = comuni Nord→Sud) ──
+const COLORE_LABEL = { green: 'Nessuno', yellow: 'Basso', orange: 'Moderato', red: 'Alto' };
+let selectedComune = null; // { codice_istat, nome, provincia }, impostato al click su un comune
+let allComuni = [];        // { codice_istat, nome, provincia, lat }, ordinati nord→sud
 
-['storicoSearch', 'storicoFiltroColore', 'storicoFiltroProvincia', 'storicoFiltroData'].forEach((id) => {
-  document.getElementById(id).addEventListener('input', renderStoricoTable);
-});
+function computeAllComuni(features) {
+  return features
+    .filter((f) => f.properties.codice_istat)
+    .map((f) => ({
+      codice_istat: f.properties.codice_istat,
+      nome: f.properties.nome,
+      provincia: f.properties.provincia,
+      lat: f.geometry && f.geometry.coordinates && f.geometry.coordinates[1],
+    }))
+    .sort((a, b) => (b.lat || 0) - (a.lat || 0));
+}
 
-document.getElementById('storicoBody').addEventListener('change', (e) => {
-  if (e.target.id === 'storicoSelectAll') {
-    if (e.target.checked) storicoFiltered.forEach((r) => storicoSelected.add(r._key));
-    else storicoFiltered.forEach((r) => storicoSelected.delete(r._key));
-    renderStoricoTable();
+function resetProvinciaFilter() {
+  document.querySelectorAll('.provincia-chip').forEach((c) => activeProvince.add(c.dataset.provincia));
+  applyFilters();
+  zoomToFiltered();
+}
+
+// Righe calendario: comune cliccato > provincia isolata in legenda > tutti i comuni
+function buildCalendarScope() {
+  if (selectedComune) {
+    return { comuni: allComuni.filter((c) => c.codice_istat === selectedComune.codice_istat), label: selectedComune.nome, isolated: true };
+  }
+  if (filtroProvinciaAttivo && activeProvince.size === 1) {
+    const p = [...activeProvince][0];
+    return { comuni: allComuni.filter((c) => c.provincia === p), label: p, isolated: true };
+  }
+  return { comuni: allComuni, label: `Tutti i comuni · Sicilia (${allComuni.length}, Nord → Sud)`, isolated: false };
+}
+
+function renderCalendar() {
+  const wrap = document.getElementById('rpCalWrap');
+  const scopeEl = document.getElementById('rpCalScope');
+  if (!storicoRows.length || !allComuni.length) {
+    wrap.innerHTML = '<div class="rp-cal-empty">Nessun dato storico ancora disponibile.</div>';
+    scopeEl.innerHTML = '';
     return;
   }
-  if (e.target.classList.contains('storico-row-check')) {
-    const key = e.target.dataset.key;
-    if (e.target.checked) storicoSelected.add(key); else storicoSelected.delete(key);
-    updateStoricoActions();
-    const selectAll = document.getElementById('storicoSelectAll');
-    if (selectAll) selectAll.checked = storicoFiltered.every((r) => storicoSelected.has(r._key));
+
+  const scope = buildCalendarScope();
+  scopeEl.innerHTML = scope.isolated
+    ? `${scope.label} <button class="rp-cal-reset" id="rpCalReset" title="Torna a tutti i comuni">✕ tutti i comuni</button>`
+    : scope.label;
+
+  const byComuneDate = {}; // codice_istat -> { data: colore }
+  storicoRows.forEach((r) => {
+    if (!r.codice_istat || !r.data || !r.colore) return;
+    (byComuneDate[r.codice_istat] || (byComuneDate[r.codice_istat] = {}))[r.data] = r.colore;
+  });
+
+  const allDates = [...new Set(storicoRows.map((r) => r.data))].filter(Boolean).sort();
+  const dates = allDates.slice(-21); // ultime 3 settimane, stile calendario ondata
+  const datesSet = new Set(dates);
+  // "oggi" può già essere nello storico (già loggato): non duplicarlo come colonna forecast
+  const forecastDates = (geojsonData && geojsonData.features[0] &&
+    geojsonData.features[0].properties.giorni_parsed || []).map((g) => g.data)
+    .filter((d) => d && !datesSet.has(d));
+  const cols = [...dates, ...forecastDates];
+  const featByCodice = new Map((geojsonData ? geojsonData.features : []).map((f) => [f.properties.codice_istat, f]));
+  const todayStr = new Date().toLocaleDateString('sv-SE'); // YYYY-MM-DD in ora locale
+
+  let html = `<div class="rp-cal-grid" style="grid-template-columns:190px repeat(${cols.length},40px);">`;
+  html += '<div class="rp-cal-corner"></div>';
+  cols.forEach((d, i) => {
+    const parts = d.split('-');
+    const cls = (i >= dates.length ? ' forecast' : '') + (d === todayStr ? ' today' : '');
+    html += `<div class="rp-cal-col-label${cls}">${parts[2]}/${parts[1]}</div>`;
+  });
+
+  scope.comuni.forEach((comune) => {
+    const byDate = byComuneDate[comune.codice_istat] || {};
+    html += `<div class="rp-cal-row-label" title="${comune.nome}">${comune.nome}</div>`;
+    dates.forEach((d) => {
+      const c = byDate[d];
+      const cls = 'rp-cal-cell' + (d === todayStr ? ' today' : '');
+      html += `<div class="${cls}" data-date="${d}" data-scope="${comune.nome}" data-colore="${c || ''}" style="background:${c ? COLORI[c] : 'var(--line)'}" title="${comune.nome} · ${d} · ${c ? COLORE_LABEL[c] : 'nessun dato'}"></div>`;
+    });
+    const feat = featByCodice.get(comune.codice_istat);
+    forecastDates.forEach((d, i) => {
+      const c = feat ? featureForDay(feat, i).properties.colore : null;
+      const cls = 'rp-cal-cell forecast' + (d === todayStr ? ' today' : '');
+      html += `<div class="${cls}" data-date="${d}" data-scope="${comune.nome}" data-colore="${c || ''}" style="background:${c ? COLORI[c] : 'var(--line)'}" title="${comune.nome} · ${d} (previsto) · ${c ? COLORE_LABEL[c] : 'nessun dato'}"></div>`;
+    });
+  });
+  html += '</div>';
+  wrap.innerHTML = html;
+
+  const reset = document.getElementById('rpCalReset');
+  if (reset) reset.addEventListener('click', () => {
+    selectedComune = null;
+    if (filtroProvinciaAttivo && activeProvince.size === 1) resetProvinciaFilter();
+    renderCalendar();
+  });
+}
+
+document.getElementById('rpCalWrap').addEventListener('click', (e) => {
+  const cell = e.target.closest('.rp-cal-cell');
+  if (!cell) return;
+  const c = cell.dataset.colore;
+  const detail = document.getElementById('rpCalDetail');
+  detail.innerHTML = c
+    ? `<strong>${cell.dataset.scope}</strong> · ${cell.dataset.date} — <span style="color:${COLORI[c]}">${COLORE_LABEL[c]}</span>`
+    : `<strong>${cell.dataset.scope}</strong> · ${cell.dataset.date} — nessun dato`;
+});
+
+const rpWrap = document.getElementById('rp-wrap');
+let rpOpen = false;
+
+function setRightPanel(open) {
+  rpOpen = open;
+  rpWrap.classList.toggle('open', open);
+  // il pannello copre la mappa: sposta il padding così centro/poligoni si
+  // ricentrano nell'area visibile rimasta, invece di restare coperti
+  // (larghezza letta a runtime: il pannello è responsive, min(560px, 92vw))
+  const panelWidth = open ? rpWrap.getBoundingClientRect().width : 0;
+  map.easeTo({ padding: { top: 0, bottom: 0, left: 0, right: panelWidth }, duration: 420 });
+  if (open) {
+    if (!storicoLoaded) loadStorico();
+    else renderCalendar();
   }
-});
+}
+document.getElementById('rp-toggle').addEventListener('click', () => setRightPanel(!rpOpen));
+document.getElementById('rpClose').addEventListener('click', () => setRightPanel(false));
 
-document.getElementById('storicoClearSelection').addEventListener('click', () => {
-  storicoSelected.clear();
-  renderStoricoTable();
-});
-
-document.getElementById('storicoDownloadCsv').addEventListener('click', () => {
-  const rows = rowsPerDownload();
-  if (!rows.length) return;
-  triggerDownload('rischio_storico.csv', rowsToCSV(rows), 'text/csv;charset=utf-8');
-});
-
-document.getElementById('storicoDownloadJson').addEventListener('click', () => {
-  const rows = rowsPerDownload();
-  if (!rows.length) return;
-  triggerDownload('rischio_storico.json', rowsToJSON(rows), 'application/json;charset=utf-8');
-});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && rpOpen) setRightPanel(false); });
 
 document.querySelector('.legend').addEventListener('click', (e) => {
   const row = e.target.closest('.legend-row');
@@ -670,8 +657,10 @@ document.querySelector('.legend').addEventListener('click', (e) => {
     }
     applyFilters();
     zoomToFiltered();
-    return;
   }
+});
+
+document.getElementById('right-panel').addEventListener('click', (e) => {
   const chip = e.target.closest('.provincia-chip');
   if (chip) {
     const p = chip.dataset.provincia;
@@ -685,10 +674,9 @@ document.querySelector('.legend').addEventListener('click', (e) => {
     }
     applyFilters();
     zoomToFiltered();
+    selectedComune = null;
+    if (rpOpen) renderCalendar();
   }
-
-
-
 });
 
 const infoPanel = document.getElementById('info-panel');
