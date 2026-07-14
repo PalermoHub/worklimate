@@ -1,900 +1,470 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rischio da caldo · Worklimate</title>
-<link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" integrity="sha384-p5cy4wHtKSqjnLUNjQ+8ffCwUp0vlLS+6lg1lc3qqXax2E1EmVCMCAimU+R0MOZH" crossorigin="anonymous" />
-<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js" integrity="sha384-3WUbXI7T+/GIrWP/5MDMjhzLyHQ+0utF3PnJ7ozD7UeN1/bbZ96Hk+Vvd024VYfW" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/pmtiles@3.0.7/dist/pmtiles.js" integrity="sha384-MjejsnWXHmuz93aE35YWLh5AbS/6ceRB3Vb+ukOwqFzJRTpQ8vvbkLbNV7I0QK4f" crossorigin="anonymous"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rischio da caldo — comuni di Sicilia</title>
+<meta name="description" content="Livello di rischio da caldo per il lavoro all'aperto (oggi, domani, dopodomani) per tutti i comuni della Sicilia, dati Worklimate aggiornati ogni giorno.">
+<meta property="og:title" content="Rischio da caldo — comuni di Sicilia">
+<meta property="og:description" content="Livello di rischio da caldo per il lavoro all'aperto per tutti i comuni della Sicilia, aggiornato ogni giorno.">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/favicon.png">
+<script>
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('sicilia-rischio-caldo-theme') || 'light');
+</script>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:      #fffaf1;
+    --surface-2:      #fff4e0;
+    --text-primary:   #2a1c10;
+    --text-secondary: #6b5642;
+    --muted:          #a08a6f;
+    --gridline:       #f0ddb8;
+    --border:         rgba(42,28,16,0.12);
+    --good:           #2f7a8c;
+    --warning:        #ffb84d;
+    --serious:        #e8631c;
+    --critical:       #c9622f;
+    --dusk:           #16232e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-1:      #1e2530;
+      --surface-2:      #16232e;
+      --text-primary:   #fef2de;
+      --text-secondary: #c7b8a0;
+      --muted:          #8b7d6a;
+      --gridline:       #2e3947;
+      --border:         rgba(254,242,222,0.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1:      #1e2530;
+    --surface-2:      #16232e;
+    --text-primary:   #fef2de;
+    --text-secondary: #c7b8a0;
+    --muted:          #8b7d6a;
+    --gridline:       #2e3947;
+    --border:         rgba(254,242,222,0.12);
+  }
 
-<link href="css/worklimate.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="img/favicon.ico"/> 
-    <link rel="icon" href="favicon.png" type="img/image/png"/> 
+  * { box-sizing: border-box; }
 
+  html, body {
+    background: var(--surface-2);
+    color: var(--text-primary);
+    margin: 0;
+  }
 
+  .viz-root {
+    font-family: "Trebuchet MS", "Century Gothic", Verdana, sans-serif;
+    color: var(--text-primary);
+    background: var(--surface-2);
+    padding: 20px 16px 48px;
+    max-width: 980px;
+    margin: 10px auto;
+  }
+
+  h1 { font-weight: 800; font-size: 21px; letter-spacing: -.01em; margin: 0 0 4px; }
+  .subtitle { color: var(--text-secondary); font-size: 13px; margin: 0 0 4px; line-height: 1.5; font-style: italic; }
+  .caveat {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin: 14px 0 20px;
+    line-height: 1.55;
+  }
+  .caveat b { color: var(--text-primary); }
+
+  .card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--serious);
+    margin: 0 0 12px;
+  }
+
+  /* summary bars */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .summary-day { }
+  .summary-day .daylabel { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .bar-row .lbl { font-size: 11.5px; color: var(--text-secondary); width: 66px; flex: none; display:flex; align-items:center; gap:5px;}
+  .swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  .bar-track { flex: 1; height: 10px; background: var(--gridline); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .bar-count { font-size: 11.5px; color: var(--text-primary); width: 30px; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* legend */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-secondary); margin-top: 4px;}
+  .legend .item { display: flex; align-items: center; gap: 6px; }
+
+  /* controls */
+  .controls { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  .controls input, .controls select {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 7px 10px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text-primary);
+  }
+  .controls input { flex: 1; min-width: 160px; }
+  .search-wrap { position: relative; flex: 1; min-width: 160px; display: flex; }
+  .search-wrap input { width: 100%; padding-right: 28px; }
+  .search-clear {
+    position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    width: 20px; height: 20px; border: none; background: none; cursor: pointer;
+    color: var(--muted); font-size: 15px; line-height: 1; border-radius: 50%;
+    display: none; align-items: center; justify-content: center;
+  }
+  .search-clear:hover { color: var(--text-primary); background: var(--gridline); }
+  .search-wrap.has-value .search-clear { display: flex; }
+  .count-note { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+
+  .theme-toggle {
+    font-family: inherit;
+    font-size: 12.5px;
+    padding: 6px 12px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  .theme-toggle:hover { background: var(--gridline); }
+  .header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .header-row > div { flex: 1; }
+  .logo-link { flex: none; }
+  .logo-link img { height: 60px; width: auto; display: block; }
+
+  /* table */
+  .table-wrap {
+    max-height: 560px;
+    overflow-y: auto;
+    border: 1px solid var(--gridline);
+    border-radius: 14px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    position: sticky; top: 0;
+    background: var(--surface-1);
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--gridline);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  thead th:hover { color: var(--serious); }
+  thead th[data-key]::after { content: " ⇅"; font-size: 8.5px; opacity: .45; }
+  thead th.sorted::after { content: " ▾"; font-size: 9px; opacity: 1; color: var(--serious); }
+  tbody td {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--gridline);
+    white-space: nowrap;
+    color: var(--text-primary);
+  }
+  tbody tr:hover td { background: var(--surface-2); }
+  .prov-badge {
+    font-size: 10.5px;
+    color: var(--text-secondary);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1px 7px;
+  }
+  .cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 9px 2px 7px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #1a1400;
+  }
+  .cell .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; box-shadow: 0 0 5px 0 currentColor; }
+  .cell.basso    { background: color-mix(in srgb, var(--good) 20%, transparent); color: var(--good); }
+  .cell.moderato { background: color-mix(in srgb, var(--warning) 28%, transparent); color: #8a5c00; }
+  .cell.alto     { background: color-mix(in srgb, var(--serious) 26%, transparent); color: #9c3a12; }
+  .cell.emergenza{ background: color-mix(in srgb, var(--critical) 30%, transparent); color: #7a2e0e; }
+  :root[data-theme="dark"] .cell.moderato { color: #ffcf6b; }
+  :root[data-theme="dark"] .cell.alto { color: #ffab84; }
+  :root[data-theme="dark"] .cell.emergenza { color: #ffb199; }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .cell.moderato { color: #ffcf6b; }
+    :root:where(:not([data-theme="light"])) .cell.alto { color: #ffab84; }
+    :root:where(:not([data-theme="light"])) .cell.emergenza { color: #ffb199; }
+  }
+  .cell.basso .dot { background: var(--good); }
+  .cell.moderato .dot { background: var(--warning); }
+  .cell.alto .dot { background: var(--serious); }
+  .cell.emergenza .dot { background: var(--critical); }
+
+  thead th.trend-th { cursor: default; }
+  .trend { display: inline-flex; align-items: center; }
+  .trend-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; box-shadow: 0 0 5px 0 currentColor; }
+  .trend-line { width: 16px; height: 2px; background: var(--gridline); flex: none; }
+
+  footer { font-size: 11.5px; color: var(--muted); margin-top: 18px; line-height: 1.6; }
+  footer a { color: inherit; }
+
+  .law-banner {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--serious) 14%, var(--surface-1)), var(--surface-1));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .law-banner .law-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--serious);
+    margin-bottom: 6px;
+  }
+  .law-banner a { color: var(--text-primary); font-weight: 700; text-decoration: underline; text-decoration-color: var(--serious); }
+  .law-banner a:hover { text-decoration-color: currentColor; }
+</style>
 </head>
 <body>
 
-<div id="map"></div>
-
-<div class="topbar">
-  <h1>Rischio da caldo</h1>
-  <p>dati Worklimate · CNR</p>
-  <div class="day-toggle" id="dayToggle">
-    <button data-day="0" class="active">Oggi<span class="day-date" id="date-0"></span></button>
-    <button data-day="1">Domani<span class="day-date" id="date-1"></span></button>
-    <button data-day="2">Dopodom.<span class="day-date" id="date-2"></span></button>
+<div class="viz-root">
+  <div class="header-row">
+    <a href="https://opendatasicilia.it/" title="Open Data Sicilia" target="_blank" rel="noopener" class="logo-link">
+      <img src="img/opendatasicilia.png" alt="Open Data Sicilia">
+    </a>
+    <div>
+      <h1 id="pageTitle">Rischio da stress da caldo — comuni di Sicilia</h1>
+      <p class="subtitle" id="pageSubtitle">Dati Worklimate (fascia oraria 12–16). Un valore per comune al giorno, non una superficie continua.</p>
+    </div>
+    <button class="theme-toggle" id="themeToggle" type="button"></button>
   </div>
-  <a href="https://www.worklimate.it/scelta-mappa/sole-attivita-fisica-alta/" target="_blank" rel="noopener" class="topbar-link">Worklimate.it ↗</a>
+
+  <div class="caveat">
+    <b>Perché una tabella e non una mappa.</b> Worklimate assegna il rischio alla stazione meteo-modello più vicina a un punto: non è un dato che segue i confini comunali, e nemmeno una griglia densa che giustifichi un'interpolazione spaziale continua. Colorare i poligoni dei comuni (coropletica) implicherebbe salti netti ai confini amministrativi che il fenomeno meteorologico non ha; una mappa a punti mostrerebbe solo l'ubicazione dei comuni, non aggiungerebbe informazione al colore stesso. La struttura reale del dato è <b>luogo × giorno → livello</b>: una matrice/tabella colorata la rappresenta senza inventare continuità spaziale che i dati non hanno.
+  </div>
+
+  <div class="card">
+    <h2>Distribuzione per giorno</h2>
+    <div class="summary-grid" id="summary"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="card">
+    <h2>Comuni</h2>
+    <div class="controls">
+      <div class="search-wrap" id="searchWrap">
+        <input id="search" type="text" placeholder="Cerca comune…" autocomplete="off">
+        <button class="search-clear" id="searchClear" type="button" aria-label="Cancella ricerca">×</button>
+      </div>
+      <select id="provFilter"></select>
+    </div>
+    <div class="count-note" id="countNote"></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-key="nome">Comune</th>
+            <th data-key="provincia">Prov.</th>
+            <th data-key="g1" id="thG1">Oggi</th>
+            <th class="trend-th">Andamento 3 giorni</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="law-banner">
+    <div class="law-title">⚠️ Normativa vigente</div>
+    In Sicilia è in vigore l'<a href="https://www.regione.sicilia.it/la-regione-informa/stress-termico-ordinanza-schifani-stop-ai-lavori-nelle-ore-piu-calde" target="_blank" rel="noopener">Ordinanza Schifani</a>, che dispone lo stop ai lavori all'aperto nelle ore più calde della giornata (indicativamente 12:30–16:00) nei giorni con rischio "alto" o "molto alto" secondo la mappa nazionale del rischio da stress termico, a tutela della salute e sicurezza dei lavoratori esposti al caldo. Verificare sempre il testo ufficiale dell'ordinanza e gli aggiornamenti sul sito della Regione Siciliana.
+  </div>
+
+  <footer>
+    <span id="updatedNote"></span><br>
+    Fonte: <a href="https://app.worklimate.it" target="_blank" rel="noopener">app.worklimate.it</a> via endpoint pubblico <code>osm-stazioni.php</code> (repo <a href="https://github.com/aborruso/worklimate" target="_blank" rel="noopener">aborruso/worklimate</a>, strumenti open source non ufficiali per interrogare i dati di rischio da stress termico di Worklimate/protezione civile). Coordinate comuni: centroidi da confini amministrativi ISTAT (openpolis/geojson-italy). Isole minori Pantelleria e Ustica escluse (nessuna stazione a griglia disponibile). Aggiornato automaticamente ogni giorno via GitHub Actions.
+  </footer>
 </div>
-
-<div class="legend">
-  <div class="legend-title">Livello di rischio <span class="legend-hint">(filtro)</span></div>
-  <button class="legend-row active" data-colore="green"><span class="swatch" style="background:var(--green)"></span><span class="legend-label">Nessuno</span><span class="legend-count" id="count-green"></span></button>
-  <button class="legend-row active" data-colore="yellow"><span class="swatch" style="background:var(--yellow)"></span><span class="legend-label">Basso</span><span class="legend-count" id="count-yellow"></span></button>
-  <button class="legend-row active" data-colore="orange"><span class="swatch" style="background:var(--orange)"></span><span class="legend-label">Moderato</span><span class="legend-count" id="count-orange"></span></button>
-  <button class="legend-row active" data-colore="red"><span class="swatch" style="background:var(--red)"></span><span class="legend-label">Alto</span><span class="legend-count" id="count-red"></span></button>
-</div>
-
-<div class="updated-wrap">
-  <a href="https://opendatasicilia.it/" target="_blank" rel="noopener" title="Open Data Sicilia">
-    <img src="img/opendatasicilia.png" alt="Open Data Sicilia" class="ods-logo">
-  </a>
-  <div class="updated" id="updatedAt"></div>
-</div>
-
-<!-- ═══ BOTTOM INFO PANEL ═══ -->
-<div id="info-panel">
-
-  <div id="panel-handle" onclick="panelToggle()" title="Info · Credits">
-    <svg id="panel-handle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="18 15 12 9 6 15"/>
-    </svg>
-  </div>
-
-  <div id="panel-body">
-
-    <nav id="panel-nav">
-      <button class="ptab active" data-tab="worklimate"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M4 15l4-6 4 3 6-8"/></svg> Worklimate</button>
-      <button class="ptab" data-tab="info"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Info</button>
-      <button class="ptab" data-tab="guida"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M2 12h20"/></svg> Guida</button>
-      <button class="ptab" data-tab="credits"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Credits</button>
-    </nav>
-
-    <!-- Tab: Info -->
-    <div id="tab-info" class="tab-pane">
-      <p class="analysis-intro">
-        <strong>Rischio da caldo</strong> mostra il livello di rischio da eccesso di calore
-        stimato per i comuni della Sicilia, con previsione a 3 giorni (oggi, domani, dopodomani).
-        I dati arrivano dal progetto <strong>Worklimate</strong>, sviluppato dal
-        <strong>CNR</strong> per la tutela dei lavoratori esposti al caldo.
-      </p>
-      <div class="credits-section">
-        <h3>Come si legge la mappa</h3>
-        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--green)"></span></span><div><strong>Nessuno</strong> — nessuna condizione di rischio significativa</div></div>
-        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--yellow)"></span></span><div><strong>Basso</strong> — attenzione per i lavori più gravosi</div></div>
-        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--orange)"></span></span><div><strong>Moderato</strong> — necessarie misure di prevenzione</div></div>
-        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--red)"></span></span><div><strong>Alto</strong> — rischio elevato per la salute dei lavoratori</div></div>
-        <div class="credit-item"><div>
-          Il colore riempie il <strong>territorio comunale</strong> intero: è la risoluzione a cui il CNR
-          fornisce e raccomanda di leggere questo dato (non un punto preciso, non un indirizzo).
-          Il valore proviene dalla stazione Worklimate più vicina al comune, non da una misura per ogni
-          singolo punto del territorio.
-        </div></div>
-        <div class="credit-item"><div>
-          Il livello di rischio non è una temperatura, ma una <strong>categoria discreta</strong>
-          (Nessuno/Basso/Moderato/Alto) calcolata dal CNR per la fascia oraria 12:00–16:00, sulla base
-          delle soglie previste dall'<strong>ordinanza regionale anti-caldo</strong> per i lavoratori
-          esposti al sole. Per questo non ha senso interpolare i valori tra un comune e l'altro (creando
-          sfumature o gradienti continui): la categoria è già definita a livello di stazione/comune e non
-          rappresenta un campo fisico continuo di temperatura.
-        </div></div>
-        <div class="credit-item"><div>
-          Il CNR non pubblica un'API per interrogare il raster della mappa punto per punto: piccole aree
-          (es. picchi montani disabitati) visibili sulla mappa ufficiale worklimate.it possono non comparire
-          qui, perché il dato è risolto a livello di comune, non di singolo pixel.
-        </div></div>
-        <div class="credit-item"><div>
-          Se in Sicilia vedi solo Moderato/Alto ma la mappa raster ufficiale di worklimate.it sembra
-          mostrare più giallo (Basso), controlla bene la zona: spesso è la <strong>Calabria</strong>
-          (punta dello stivale, appena oltre lo Stretto di Messina) — nell'immagine è adiacente alla
-          Sicilia e facile da confondere, ma questa mappa copre solo il territorio siciliano
-          (Regione ISTAT 19). Verificato confrontando le mappe ufficiali orarie (12:00/16:00) del giorno:
-          la Sicilia stessa risulta quasi interamente Moderato/Alto, con al più pochi pixel isolati di Basso.
-        </div></div>
-      </div>
-      <div class="credits-section">
-        <h3>Funzioni</h3>
-        <div class="credit-item"><div>Clicca un comune sulla mappa per vederne il dettaglio del rischio.</div></div>
-        <div class="credit-item"><div>Usa i pulsanti <strong>Oggi / Domani / Dopodom.</strong> per cambiare giorno di previsione.</div></div>
-        <div class="credit-item"><div>Clicca un livello o una provincia in legenda per filtrare/isolare i comuni sulla mappa.</div></div>
-      </div>
-    </div>
-
-    <!-- Tab: Guida -->
-    <div id="tab-guida" class="tab-pane">
-      <p class="analysis-intro">
-        Guida veloce: come usare e leggere questa mappa, spiegata semplice.
-      </p>
-      <div class="credits-section">
-        <h3>Cosa mostra la mappa</h3>
-        <div class="credit-item"><div>
-          Ogni comune della Sicilia è colorato in base al rischio da caldo per chi lavora
-          all'aperto. Il colore riempie tutto il territorio del comune, non un punto preciso.
-        </div></div>
-      </div>
-      <div class="credits-section">
-        <h3>I colori</h3>
-        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--green)"></span></span><div><strong>Verde</strong> — nessun rischio, si può lavorare tranquilli</div></div>
-        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--yellow)"></span></span><div><strong>Giallo</strong> — rischio basso, attenzione nei lavori più pesanti</div></div>
-        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--orange)"></span></span><div><strong>Arancione</strong> — rischio moderato, servono pause e precauzioni</div></div>
-        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--red)"></span></span><div><strong>Rosso</strong> — rischio alto, meglio evitare di lavorare nelle ore più calde</div></div>
-      </div>
-      <div class="credits-section">
-        <h3>Come si usa</h3>
-        <div class="credit-item"><div><strong>1.</strong> Clicca su un comune per vedere il dettaglio del rischio.</div></div>
-        <div class="credit-item"><div><strong>2.</strong> Usa i pulsanti <strong>Oggi / Domani / Dopodom.</strong> in alto per cambiare giorno.</div></div>
-        <div class="credit-item"><div><strong>3.</strong> Nella legenda clicca un colore o una provincia per far vedere solo quei comuni.</div></div>
-        <div class="credit-item"><div><strong>4.</strong> Apri il pannello a destra per cercare un comune per nome o vedere il calendario dei bollettini.</div></div>
-      </div>
-      <div class="credits-section">
-        <h3>Da sapere</h3>
-        <div class="credit-item"><div>
-          Il dato è preso dalla stazione meteo più vicina al comune, quindi vale per tutto il
-          territorio comunale e non per il singolo indirizzo.
-        </div></div>
-      </div>
-    </div>
-
-    <!-- Tab: Credits -->
-    <div id="tab-credits" class="tab-pane">
-      <div class="credits-grid">
-
-        <div class="credits-section">
-          <h3>Dati</h3>
-          <div class="credit-item">
-            <div>
-              <strong>Worklimate — CNR</strong>
-              Indice di rischio da caldo per i lavoratori, elaborato dal Consiglio Nazionale delle Ricerche.
-            </div>
-          </div>
-          <div class="credit-item">
-            <div>
-              <strong>Confini comunali</strong>
-              Sezioni comunali della Sicilia, distribuite come tiles vettoriali PMTiles.
-            </div>
-          </div>
-          <div class="credit-item">
-            <div>
-              <strong><a href="https://ondata.github.io/ondate-calore/" target="_blank" rel="noopener">onData — Ondate di calore</a></strong>
-              Progetto di onData da cui questa mappa prende ispirazione: monitora le ondate di calore in Italia incrociando dati e allerte ufficiali.
-            </div>
-          </div>
-        </div>
-
-        <div class="credits-section">
-          <h3>Strumenti</h3>
-          <div class="credit-item"><div><strong>MapLibre GL JS 3.x</strong> — visualizzazione web interattiva</div></div>
-          <div class="credit-item"><div><strong>PMTiles</strong> — distribuzione confini comunali</div></div>
-          <div class="credit-item"><div><strong>CARTO Positron</strong> — basemap</div></div>
-        </div>
-
-        <div class="credits-section">
-          <h3>Normativa</h3>
-          <div class="credit-item"><div><a href="https://www.regione.sicilia.it/la-regione-informa/stress-termico-ordinanza-schifani-stop-ai-lavori-nelle-ore-piu-calde" target="_blank" rel="noopener">Ordinanza Schifani — stop ai lavori nelle ore più calde</a> — legge regionale contro lo stress termico</div></div>
-        </div>
-
-        <div class="credits-section">
-          <h3>Sviluppo e distribuzione</h3>
-          <div class="credit-item">
-            <div>Dati e mappa a cura di <a href="https://opendatasicilia.it/" target="_blank" rel="noopener">Open Data Sicilia</a>.</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Tab: Worklimate CLI -->
-    <div id="tab-worklimate" class="tab-pane active">
-      <p class="analysis-intro">
-        <strong>Worklimate</strong> (<a href="https://www.worklimate.it/scelta-mappa/sole-attivita-fisica-alta/" target="_blank" rel="noopener">worklimate.it</a>)
-        è una mappa del <strong>CNR</strong>, fatta insieme all'<strong>INAIL</strong>, che dice quanto è
-        rischioso lavorare all'aperto col caldo. Copre l'Italia e mostra 4 orari al giorno
-        (8, 12, 16, 20) e 4 livelli di rischio (nessuno, basso, moderato, alto), con consigli
-        pratici tipo "bevi di più" o "fai più pause". Serve a chi lavora sotto il sole e a chi
-        deve organizzare i turni.
-      </p>
-      <div class="credits-section">
-        <h3>Cos'è worklimate-cli</h3>
-        <div class="credit-item"><div>
-          <a href="https://github.com/aborruso/worklimate" target="_blank" rel="noopener">github.com/aborruso/worklimate</a>
-          è un piccolo programma da riga di comando creato da <strong>Andrea Borruso</strong> che va a
-          leggere i dati pubblici di Worklimate al posto tuo, senza bisogno di aprire il sito ogni volta.
-          Questa mappa lo usa per prendere i dati comune per comune.
-        </div></div>
-      </div>
-      <div class="credits-section">
-        <h3>Cosa fa</h3>
-        <div class="credit-item"><div>Va a prendere, comune per comune, il rischio da caldo previsto per i lavoratori all'aperto (oggi, domani, dopodomani).</div></div>
-        <div class="credit-item"><div>Trova da solo la stazione meteo più vicina a un indirizzo o a un comune.</div></div>
-        <div class="credit-item"><div>Restituisce i dati in tabella leggibile a schermo, oppure in JSON/CSV per essere riusati da altri programmi (come questa mappa).</div></div>
-      </div>
-      <div class="credits-section">
-        <h3>Link</h3>
-        <div class="credit-item"><div><a href="https://github.com/aborruso/worklimate" target="_blank" rel="noopener">github.com/aborruso/worklimate</a> — codice sorgente del CLI</div></div>
-        <div class="credit-item"><div><a href="https://github.com/aborruso" target="_blank" rel="noopener">github.com/aborruso</a> — altri progetti di Andrea Borruso</div></div>
-      </div>
-    </div>
-
-  </div>
-</div><!-- /info-panel -->
-
-<!-- ═══ PANNELLO DX: CALENDARIO BOLLETTINI + STORICO ═══ -->
-<div id="rp-wrap">
-
-  <button id="rp-toggle" title="Calendario bollettini — apri/chiudi">
-    <svg id="rp-toggle-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="15 18 9 12 15 6"/>
-    </svg>
-  </button>
-
-  <div id="right-panel">
-    <div class="rp-panel-header">
-      <div class="rp-panel-title-row">
-        <div class="rp-panel-title">Bollettini rischio da caldo CNR - INAIL</div>
-        <button class="rp-close" id="rpClose" aria-label="Chiudi">&times;</button>
-      </div>
-    </div>
-
-    <div class="rp-body">
-      <div class="rp-search-wrap">
-        <input type="text" id="rpSearch" class="rp-search" placeholder="Cerca comune…" autocomplete="off">
-        <button id="rpSearchClear" class="rp-search-clear" title="Azzera ricerca" hidden>&times;</button>
-        <div id="rpSearchResults" class="rp-search-results" hidden></div>
-      </div>
-      <div class="legend-title" id="provinciaTitle" hidden>Provincia <span class="legend-hint">(filtro)</span></div>
-      <div class="provincia-list" id="provinciaList"></div>
-      <div class="legend-divider" id="provinciaDivider" hidden></div>
-      <div class="rp-cal-scope" id="rpCalScope"></div>
-      <div class="rp-cal-wrap" id="rpCalWrap">
-        <div class="rp-cal-empty">Caricamento…</div>
-      </div>
-      <div class="rp-cal-detail" id="rpCalDetail">Clicca una cella per il dettaglio.</div>
-      <div class="rp-cal-legend">
-        <span><span class="swatch" style="background:var(--green)"></span>Nessuno</span>
-        <span><span class="swatch" style="background:var(--yellow)"></span>Basso</span>
-        <span><span class="swatch" style="background:var(--orange)"></span>Moderato</span>
-        <span><span class="swatch" style="background:var(--red)"></span>Alto</span>
-        <span class="rp-cal-legend-forecast">tratteggio = previsto</span>
-      </div>
-      <div class="rp-cal-caveat">
-        Il colore riempie il <strong>territorio comunale</strong> intero: è la risoluzione a cui il CNR
-        fornisce e raccomanda di leggere questo dato (non un punto preciso, non un indirizzo).
-        Il valore proviene dalla stazione Worklimate più vicina al comune, non da una misura per ogni
-        singolo punto del territorio. Non è una temperatura, ma una <strong>categoria discreta</strong>
-        calcolata per la fascia oraria 12:00–16:00, in base alle soglie dell'ordinanza regionale
-        anti-caldo: non ha senso interpolarla o sfumarla tra un comune e l'altro.
-      </div>
-    </div>
-  </div>
-</div><!-- /rp-wrap -->
 
 <script>
-const COLORI = { green:'#4c9a5b', yellow:'#f0c419', orange:'#e07b2b', red:'#c8402f' };
+const GENERATED_AT = "2026-07-14"; // data della corsa che ha prodotto DATA (g1 = questo giorno)
+const DATA = [["Alcamo","TP","Alto","Alto","Alto"],["Buseto Palizzolo","TP","Alto","Alto","Alto"],["Calatafimi-Segesta","TP","Alto","Alto","Alto"],["Campobello di Mazara","TP","Alto","Alto","Alto"],["Castellammare del Golfo","TP","Alto","Alto","Alto"],["Castelvetrano","TP","Alto","Alto","Alto"],["Custonaci","TP","Alto","Alto","Alto"],["Erice","TP","Alto","Alto","Alto"],["Favignana","TP","Alto","Alto","Alto"],["Gibellina","TP","Alto","Alto","Alto"],["Marsala","TP","Alto","Alto","Alto"],["Mazara del Vallo","TP","Alto","Alto","Alto"],["Paceco","TP","Alto","Alto","Alto"],["Partanna","TP","Alto","Alto","Alto"],["Poggioreale","TP","Alto","Alto","Alto"],["Salaparuta","TP","Alto","Alto","Alto"],["Salemi","TP","Alto","Alto","Alto"],["Santa Ninfa","TP","Alto","Alto","Alto"],["San Vito Lo Capo","TP","Alto","Alto","Alto"],["Trapani","TP","Alto","Alto","Alto"],["Valderice","TP","Alto","Alto","Alto"],["Vita","TP","Alto","Alto","Alto"],["Petrosino","TP","Alto","Alto","Alto"],["Misiliscemi","TP","Alto","Alto","Alto"],["Alia","PA","Moderato","Alto","Moderato"],["Alimena","PA","Alto","Alto","Alto"],["Aliminusa","PA","Moderato","Moderato","Moderato"],["Altavilla Milicia","PA","Alto","Alto","Alto"],["Altofonte","PA","Moderato","Alto","Alto"],["Bagheria","PA","Alto","Alto","Alto"],["Balestrate","PA","Alto","Alto","Alto"],["Baucina","PA","Alto","Alto","Alto"],["Belmonte Mezzagno","PA","Moderato","Alto","Alto"],["Bisacquino","PA","Alto","Alto","Alto"],["Bolognetta","PA","Alto","Alto","Alto"],["Bompietro","PA","Moderato","Alto","Alto"],["Borgetto","PA","Moderato","Alto","Alto"],["Caccamo","PA","Alto","Alto","Alto"],["Caltavuturo","PA","Moderato","Moderato","Moderato"],["Campofelice di Fitalia","PA","Alto","Alto","Alto"],["Campofelice di Roccella","PA","Alto","Alto","Alto"],["Campofiorito","PA","Moderato","Alto","Alto"],["Camporeale","PA","Alto","Alto","Alto"],["Capaci","PA","Moderato","Alto","Alto"],["Carini","PA","Moderato","Alto","Alto"],["Castelbuono","PA","Alto","Alto","Alto"],["Casteldaccia","PA","Alto","Alto","Alto"],["Castellana Sicula","PA","Moderato","Alto","Moderato"],["Castronovo di Sicilia","PA","Alto","Alto","Alto"],["Cefalà Diana","PA","Moderato","Alto","Alto"],["Cefalù","PA","Moderato","Alto","Alto"],["Cerda","PA","Alto","Moderato","Alto"],["Chiusa Sclafani","PA","Alto","Alto","Alto"],["Ciminna","PA","Alto","Alto","Alto"],["Cinisi","PA","Alto","Alto","Alto"],["Collesano","PA","Alto","Moderato","Alto"],["Contessa Entellina","PA","Moderato","Alto","Alto"],["Corleone","PA","Moderato","Alto","Alto"],["Ficarazzi","PA","Alto","Alto","Alto"],["Gangi","PA","Moderato","Alto","Moderato"],["Geraci Siculo","PA","Moderato","Moderato","Moderato"],["Giardinello","PA","Alto","Alto","Alto"],["Giuliana","PA","Alto","Alto","Alto"],["Godrano","PA","Moderato","Alto","Moderato"],["Gratteri","PA","Moderato","Alto","Alto"],["Isnello","PA","Moderato","Moderato","Moderato"],["Isola delle Femmine","PA","Alto","Alto","Alto"],["Lascari","PA","Alto","Alto","Alto"],["Lercara Friddi","PA","Moderato","Alto","Alto"],["Marineo","PA","Moderato","Alto","Alto"],["Mezzojuso","PA","Moderato","Alto","Alto"],["Misilmeri","PA","Alto","Alto","Alto"],["Monreale","PA","Alto","Alto","Alto"],["Montelepre","PA","Moderato","Alto","Alto"],["Montemaggiore Belsito","PA","Moderato","Moderato","Moderato"],["Palazzo Adriano","PA","Moderato","Alto","Alto"],["Palermo","PA","Alto","Alto","Alto"],["Partinico","PA","Alto","Alto","Alto"],["Petralia Soprana","PA","Alto","Alto","Alto"],["Petralia Sottana","PA","Moderato","Alto","Moderato"],["Piana degli Albanesi","PA","Alto","Alto","Alto"],["Polizzi Generosa","PA","Moderato","Moderato","Moderato"],["Pollina","PA","Alto","Alto","Alto"],["Prizzi","PA","Alto","Alto","Moderato"],["Roccamena","PA","Alto","Alto","Alto"],["Roccapalumba","PA","Moderato","Alto","Alto"],["San Cipirello","PA","Alto","Alto","Alto"],["San Giuseppe Jato","PA","Alto","Alto","Alto"],["San Mauro Castelverde","PA","Moderato","Moderato","Moderato"],["Santa Cristina Gela","PA","Moderato","Alto","Alto"],["Santa Flavia","PA","Alto","Alto","Alto"],["Sciara","PA","Alto","Moderato","Alto"],["Sclafani Bagni","PA","Moderato","Alto","Moderato"],["Termini Imerese","PA","Alto","Alto","Alto"],["Terrasini","PA","Alto","Alto","Alto"],["Torretta","PA","Moderato","Alto","Alto"],["Trabia","PA","Alto","Alto","Alto"],["Trappeto","PA","Alto","Alto","Alto"],["Valledolmo","PA","Moderato","Alto","Moderato"],["Ventimiglia di Sicilia","PA","Alto","Alto","Alto"],["Vicari","PA","Alto","Alto","Alto"],["Villabate","PA","Alto","Alto","Alto"],["Villafrati","PA","Moderato","Alto","Alto"],["Scillato","PA","Moderato","Moderato","Moderato"],["Blufi","PA","Alto","Alto","Alto"],["Alcara li Fusi","ME","Moderato","Moderato","Moderato"],["Alì","ME","Alto","Alto","Alto"],["Alì Terme","ME","Alto","Alto","Alto"],["Antillo","ME","Moderato","Moderato","Moderato"],["Barcellona Pozzo di Gotto","ME","Alto","Moderato","Moderato"],["Basicò","ME","Moderato","Moderato","Moderato"],["Brolo","ME","Alto","Moderato","Alto"],["Capizzi","ME","Moderato","Moderato","Moderato"],["Capo d'Orlando","ME","Alto","Moderato","Alto"],["Capri Leone","ME","Alto","Alto","Alto"],["Caronia","ME","Moderato","Alto","Moderato"],["Casalvecchio Siculo","ME","Alto","Alto","Moderato"],["Castel di Lucio","ME","Moderato","Moderato","Moderato"],["Castell'Umberto","ME","Moderato","Moderato","Moderato"],["Castelmola","ME","Alto","Moderato","Alto"],["Castroreale","ME","Moderato","Moderato","Moderato"],["Cesarò","ME","Moderato","Moderato","Moderato"],["Condrò","ME","Alto","Alto","Alto"],["Falcone","ME","Alto","Alto","Alto"],["Ficarra","ME","Moderato","Moderato","Moderato"],["Fiumedinisi","ME","Moderato","Alto","Moderato"],["Floresta","ME","Moderato","Moderato","Moderato"],["Fondachelli-Fantina","ME","Moderato","Moderato","Moderato"],["Forza d'Agrò","ME","Alto","Moderato","Alto"],["Francavilla di Sicilia","ME","Moderato","Alto","Moderato"],["Frazzanò","ME","Moderato","Moderato","Moderato"],["Furci Siculo","ME","Alto","Alto","Alto"],["Furnari","ME","Alto","Alto","Alto"],["Gaggi","ME","Moderato","Moderato","Alto"],["Galati Mamertino","ME","Moderato","Moderato","Moderato"],["Gallodoro","ME","Alto","Moderato","Alto"],["Giardini-Naxos","ME","Alto","Alto","Alto"],["Gioiosa Marea","ME","Alto","Moderato","Alto"],["Graniti","ME","Alto","Moderato","Alto"],["Gualtieri Sicaminò","ME","Alto","Moderato","Alto"],["Itala","ME","Alto","Alto","Alto"],["Leni","ME","Alto","Moderato","Alto"],["Letojanni","ME","Alto","Moderato","Alto"],["Librizzi","ME","Alto","Moderato","Alto"],["Limina","ME","Moderato","Alto","Moderato"],["Lipari","ME","Alto","Moderato","Alto"],["Longi","ME","Moderato","Moderato","Moderato"],["Malfa","ME","Alto","Moderato","Alto"],["Malvagna","ME","Moderato","Moderato","Alto"],["Mandanici","ME","Moderato","Alto","Moderato"],["Mazzarrà Sant'Andrea","ME","Alto","Moderato","Moderato"],["Merì","ME","Alto","Alto","Alto"],["Messina","ME","Alto","Moderato","Moderato"],["Milazzo","ME","Alto","Alto","Alto"],["Militello Rosmarino","ME","Moderato","Moderato","Moderato"],["Mirto","ME","Alto","Moderato","Moderato"],["Mistretta","ME","Moderato","Moderato","Moderato"],["Moio Alcantara","ME","Moderato","Moderato","Alto"],["Monforte San Giorgio","ME","Alto","Moderato","Alto"],["Mongiuffi Melia","ME","Alto","Alto","Alto"],["Montagnareale","ME","Alto","Moderato","Alto"],["Montalbano Elicona","ME","Moderato","Moderato","Moderato"],["Motta Camastra","ME","Alto","Alto","Moderato"],["Motta d'Affermo","ME","Alto","Alto","Alto"],["Naso","ME","Alto","Moderato","Alto"],["Nizza di Sicilia","ME","Alto","Alto","Alto"],["Novara di Sicilia","ME","Moderato","Moderato","Moderato"],["Oliveri","ME","Alto","Moderato","Alto"],["Pace del Mela","ME","Alto","Alto","Alto"],["Pagliara","ME","Alto","Alto","Alto"],["Patti","ME","Alto","Alto","Alto"],["Pettineo","ME","Moderato","Alto","Alto"],["Piraino","ME","Alto","Moderato","Alto"],["Raccuja","ME","Moderato","Moderato","Moderato"],["Reitano","ME","Moderato","Alto","Alto"],["Roccafiorita","ME","Moderato","Alto","Moderato"],["Roccalumera","ME","Alto","Moderato","Alto"],["Roccavaldina","ME","Alto","Moderato","Alto"],["Roccella Valdemone","ME","Moderato","Moderato","Moderato"],["Rodì Milici","ME","Moderato","Moderato","Moderato"],["Rometta","ME","Alto","Moderato","Moderato"],["San Filippo del Mela","ME","Alto","Alto","Alto"],["San Fratello","ME","Moderato","Moderato","Moderato"],["San Marco d'Alunzio","ME","Moderato","Moderato","Moderato"],["San Pier Niceto","ME","Alto","Moderato","Alto"],["San Piero Patti","ME","Moderato","Moderato","Moderato"],["San Salvatore di Fitalia","ME","Moderato","Moderato","Moderato"],["Santa Domenica Vittoria","ME","Moderato","Moderato","Alto"],["Sant'Agata di Militello","ME","Alto","Alto","Moderato"],["Sant'Alessio Siculo","ME","Alto","Alto","Alto"],["Santa Lucia del Mela","ME","Moderato","Moderato","Moderato"],["Santa Marina Salina","ME","Alto","Moderato","Alto"],["Sant'Angelo di Brolo","ME","Moderato","Moderato","Moderato"],["Santa Teresa di Riva","ME","Alto","Alto","Alto"],["San Teodoro","ME","Moderato","Moderato","Moderato"],["Santo Stefano di Camastra","ME","Alto","Alto","Alto"],["Saponara","ME","Alto","Moderato","Moderato"],["Savoca","ME","Alto","Alto","Alto"],["Scaletta Zanclea","ME","Alto","Alto","Alto"],["Sinagra","ME","Moderato","Moderato","Moderato"],["Spadafora","ME","Alto","Moderato","Alto"],["Taormina","ME","Alto","Alto","Alto"],["Torregrotta","ME","Alto","Moderato","Alto"],["Tortorici","ME","Moderato","Moderato","Moderato"],["Tripi","ME","Moderato","Moderato","Moderato"],["Tusa","ME","Moderato","Alto","Alto"],["Ucria","ME","Moderato","Moderato","Moderato"],["Valdina","ME","Alto","Moderato","Alto"],["Venetico","ME","Alto","Moderato","Alto"],["Villafranca Tirrena","ME","Alto","Moderato","Alto"],["Terme Vigliatore","ME","Alto","Alto","Alto"],["Acquedolci","ME","Alto","Alto","Alto"],["Torrenova","ME","Alto","Alto","Alto"],["Agrigento","AG","Alto","Alto","Alto"],["Alessandria della Rocca","AG","Moderato","Alto","Alto"],["Aragona","AG","Alto","Alto","Alto"],["Bivona","AG","Moderato","Alto","Alto"],["Burgio","AG","Moderato","Alto","Alto"],["Calamonaci","AG","Moderato","Alto","Alto"],["Caltabellotta","AG","Moderato","Alto","Alto"],["Camastra","AG","Moderato","Alto","Alto"],["Cammarata","AG","Alto","Alto","Alto"],["Campobello di Licata","AG","Alto","Alto","Alto"],["Canicattì","AG","Alto","Alto","Alto"],["Casteltermini","AG","Moderato","Alto","Alto"],["Castrofilippo","AG","Moderato","Alto","Alto"],["Cattolica Eraclea","AG","Moderato","Alto","Alto"],["Cianciana","AG","Moderato","Alto","Alto"],["Comitini","AG","Alto","Alto","Alto"],["Favara","AG","Moderato","Alto","Alto"],["Grotte","AG","Alto","Alto","Alto"],["Joppolo Giancaxio","AG","Alto","Alto","Alto"],["Licata","AG","Alto","Alto","Alto"],["Lucca Sicula","AG","Moderato","Alto","Alto"],["Menfi","AG","Alto","Alto","Alto"],["Montallegro","AG","Alto","Alto","Alto"],["Montevago","AG","Moderato","Alto","Alto"],["Naro","AG","Moderato","Alto","Alto"],["Palma di Montechiaro","AG","Moderato","Alto","Alto"],["Porto Empedocle","AG","Alto","Alto","Alto"],["Racalmuto","AG","Alto","Alto","Alto"],["Raffadali","AG","Alto","Alto","Alto"],["Ravanusa","AG","Alto","Alto","Alto"],["Realmonte","AG","Moderato","Alto","Alto"],["Ribera","AG","Alto","Alto","Alto"],["Sambuca di Sicilia","AG","Moderato","Alto","Alto"],["San Biagio Platani","AG","Moderato","Alto","Alto"],["San Giovanni Gemini","AG","Alto","Alto","Alto"],["Santa Elisabetta","AG","Alto","Alto","Alto"],["Santa Margherita di Belice","AG","Moderato","Alto","Alto"],["Sant'Angelo Muxaro","AG","Alto","Alto","Alto"],["Santo Stefano Quisquina","AG","Moderato","Alto","Alto"],["Sciacca","AG","Alto","Alto","Alto"],["Siculiana","AG","Alto","Alto","Alto"],["Villafranca Sicula","AG","Moderato","Alto","Alto"],["Acquaviva Platani","CL","Moderato","Alto","Alto"],["Bompensiere","CL","Alto","Alto","Alto"],["Butera","CL","Alto","Alto","Alto"],["Caltanissetta","CL","Alto","Alto","Alto"],["Campofranco","CL","Alto","Alto","Alto"],["Delia","CL","Alto","Alto","Alto"],["Gela","CL","Moderato","Alto","Alto"],["Marianopoli","CL","Moderato","Alto","Alto"],["Mazzarino","CL","Moderato","Alto","Alto"],["Milena","CL","Alto","Alto","Alto"],["Montedoro","CL","Alto","Alto","Alto"],["Mussomeli","CL","Alto","Alto","Alto"],["Niscemi","CL","Moderato","Alto","Alto"],["Resuttano","CL","Alto","Alto","Alto"],["Riesi","CL","Alto","Alto","Alto"],["San Cataldo","CL","Alto","Alto","Alto"],["Santa Caterina Villarmosa","CL","Alto","Alto","Alto"],["Serradifalco","CL","Alto","Alto","Alto"],["Sommatino","CL","Alto","Alto","Alto"],["Sutera","CL","Alto","Alto","Alto"],["Vallelunga Pratameno","CL","Alto","Alto","Alto"],["Villalba","CL","Alto","Alto","Alto"],["Agira","EN","Alto","Alto","Alto"],["Aidone","EN","Alto","Alto","Alto"],["Assoro","EN","Alto","Alto","Alto"],["Barrafranca","EN","Alto","Alto","Alto"],["Calascibetta","EN","Alto","Alto","Alto"],["Catenanuova","EN","Alto","Alto","Alto"],["Centuripe","EN","Alto","Alto","Alto"],["Cerami","EN","Alto","Alto","Alto"],["Enna","EN","Alto","Alto","Alto"],["Gagliano Castelferrato","EN","Moderato","Alto","Alto"],["Leonforte","EN","Alto","Alto","Alto"],["Nicosia","EN","Alto","Alto","Alto"],["Nissoria","EN","Alto","Alto","Alto"],["Piazza Armerina","EN","Moderato","Alto","Alto"],["Pietraperzia","EN","Alto","Alto","Alto"],["Regalbuto","EN","Alto","Alto","Alto"],["Sperlinga","EN","Moderato","Alto","Alto"],["Troina","EN","Moderato","Moderato","Alto"],["Valguarnera Caropepe","EN","Alto","Alto","Alto"],["Villarosa","EN","Alto","Alto","Alto"],["Aci Bonaccorsi","CT","Moderato","Alto","Alto"],["Aci Castello","CT","Alto","Alto","Alto"],["Aci Catena","CT","Alto","Alto","Alto"],["Acireale","CT","Alto","Alto","Alto"],["Aci Sant'Antonio","CT","Moderato","Alto","Alto"],["Adrano","CT","Moderato","Moderato","Moderato"],["Belpasso","CT","Alto","Alto","Alto"],["Biancavilla","CT","Moderato","Moderato","Moderato"],["Bronte","CT","Moderato","Moderato","Alto"],["Calatabiano","CT","Alto","Alto","Alto"],["Caltagirone","CT","Moderato","Alto","Alto"],["Camporotondo Etneo","CT","Alto","Alto","Alto"],["Castel di Iudica","CT","Alto","Alto","Alto"],["Castiglione di Sicilia","CT","Moderato","Moderato","Alto"],["Catania","CT","Alto","Alto","Alto"],["Fiumefreddo di Sicilia","CT","Alto","Alto","Alto"],["Giarre","CT","Alto","Alto","Alto"],["Grammichele","CT","Moderato","Alto","Alto"],["Gravina di Catania","CT","Alto","Alto","Alto"],["Licodia Eubea","CT","Moderato","Alto","Alto"],["Linguaglossa","CT","Moderato","Moderato","Moderato"],["Maletto","CT","Moderato","Moderato","Moderato"],["Mascali","CT","Moderato","Moderato","Alto"],["Mascalucia","CT","Moderato","Alto","Alto"],["Militello in Val di Catania","CT","Alto","Alto","Alto"],["Milo","CT","Moderato","Moderato","Moderato"],["Mineo","CT","Alto","Alto","Alto"],["Mirabella Imbaccari","CT","Alto","Alto","Alto"],["Misterbianco","CT","Alto","Alto","Alto"],["Motta Sant'Anastasia","CT","Alto","Alto","Alto"],["Nicolosi","CT","Moderato","Moderato","Moderato"],["Palagonia","CT","Alto","Alto","Alto"],["Paternò","CT","Alto","Alto","Alto"],["Pedara","CT","Moderato","Moderato","Moderato"],["Piedimonte Etneo","CT","Moderato","Moderato","Moderato"],["Raddusa","CT","Alto","Alto","Alto"],["Ramacca","CT","Alto","Alto","Alto"],["Randazzo","CT","Moderato","Moderato","Alto"],["Riposto","CT","Alto","Alto","Alto"],["San Cono","CT","Alto","Alto","Alto"],["San Giovanni la Punta","CT","Moderato","Alto","Alto"],["San Gregorio di Catania","CT","Moderato","Alto","Alto"],["San Michele di Ganzaria","CT","Moderato","Alto","Alto"],["San Pietro Clarenza","CT","Alto","Alto","Alto"],["Sant'Agata li Battiati","CT","Alto","Alto","Alto"],["Sant'Alfio","CT","Moderato","Moderato","Moderato"],["Santa Maria di Licodia","CT","Alto","Alto","Moderato"],["Santa Venerina","CT","Moderato","Alto","Alto"],["Scordia","CT","Alto","Alto","Alto"],["Trecastagni","CT","Moderato","Moderato","Moderato"],["Tremestieri Etneo","CT","Moderato","Alto","Alto"],["Valverde","CT","Moderato","Alto","Alto"],["Viagrande","CT","Moderato","Alto","Alto"],["Vizzini","CT","Moderato","Alto","Alto"],["Zafferana Etnea","CT","Moderato","Moderato","Moderato"],["Mazzarrone","CT","Alto","Alto","Alto"],["Maniace","CT","Alto","Moderato","Moderato"],["Ragalna","CT","Moderato","Moderato","Moderato"],["Acate","RG","Alto","Alto","Alto"],["Chiaramonte Gulfi","RG","Alto","Alto","Alto"],["Comiso","RG","Moderato","Alto","Alto"],["Giarratana","RG","Moderato","Moderato","Alto"],["Ispica","RG","Alto","Alto","Alto"],["Modica","RG","Alto","Alto","Alto"],["Monterosso Almo","RG","Moderato","Moderato","Alto"],["Pozzallo","RG","Alto","Alto","Alto"],["Ragusa","RG","Moderato","Moderato","Alto"],["Santa Croce Camerina","RG","Alto","Alto","Alto"],["Scicli","RG","Alto","Alto","Alto"],["Vittoria","RG","Alto","Alto","Alto"],["Augusta","SR","Alto","Alto","Alto"],["Avola","SR","Alto","Alto","Alto"],["Buccheri","SR","Alto","Alto","Alto"],["Buscemi","SR","Alto","Alto","Alto"],["Canicattini Bagni","SR","Alto","Alto","Alto"],["Carlentini","SR","Alto","Alto","Alto"],["Cassaro","SR","Alto","Alto","Alto"],["Ferla","SR","Alto","Alto","Alto"],["Floridia","SR","Alto","Alto","Alto"],["Francofonte","SR","Alto","Alto","Alto"],["Lentini","SR","Alto","Alto","Alto"],["Melilli","SR","Alto","Alto","Alto"],["Noto","SR","Alto","Alto","Alto"],["Pachino","SR","Alto","Alto","Alto"],["Palazzolo Acreide","SR","Moderato","Alto","Alto"],["Rosolini","SR","Alto","Alto","Alto"],["Siracusa","SR","Alto","Alto","Alto"],["Solarino","SR","Alto","Alto","Alto"],["Sortino","SR","Alto","Alto","Alto"],["Portopalo di Capo Passero","SR","Alto","Alto","Alto"],["Priolo Gargallo","SR","Alto","Alto","Alto"]]; // [nome, provincia, g1, g2, g3]
 
-const pmtilesProtocol = new pmtiles.Protocol();
-maplibregl.addProtocol('pmtiles', pmtilesProtocol.tile);
+const LEVELS = ['Basso','Moderato','Alto','Emergenza'];
+const LEVEL_CLASS = { 'Basso':'basso', 'Moderato':'moderato', 'Alto':'alto', 'Emergenza':'emergenza' };
+const LEVEL_VAR = { 'Basso':'--good', 'Moderato':'--warning', 'Alto':'--serious', 'Emergenza':'--critical' };
 
-const SICILIA_BOUNDS = [[11.9, 36.5], [15.7, 38.9]];
-const SICILIA_MAX_BOUNDS = [[10.9, 35.7], [16.7, 39.7]];
-
-const map = new maplibregl.Map({
-  container: 'map',
-  style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-  bounds: SICILIA_BOUNDS,
-  fitBoundsOptions: { padding: 24 },
-  maxBounds: SICILIA_MAX_BOUNDS,
-  pitch: 0,
-  bearing: 0,
-  dragRotate: false,
-  pitchWithRotate: false,
-  touchPitch: false,
-  hash: true,
-});
-map.touchZoomRotate.disableRotation();
-map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-
-let currentDay = 0;
-let geojsonData = null;
-const popup = new maplibregl.Popup({ closeButton: true, offset: 12 });
-const hoverTooltip = new maplibregl.Popup({
-  closeButton: false,
-  closeOnClick: false,
-  offset: 8,
-  className: 'hover-tooltip',
+// ---- tema: chiaro di default, switch manuale persistito ----
+const THEME_KEY = 'sicilia-rischio-caldo-theme';
+const themeToggle = document.getElementById('themeToggle');
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  themeToggle.textContent = theme === 'dark' ? '☀️ Chiaro' : '🌙 Scuro';
+}
+applyTheme(localStorage.getItem(THEME_KEY) || 'light');
+themeToggle.addEventListener('click', () => {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  localStorage.setItem(THEME_KEY, next);
+  applyTheme(next);
 });
 
-const activeColori = new Set(['green', 'yellow', 'orange', 'red']);
-const activeProvince = new Set(); // popolato al caricamento dati, solo se ci sono >=2 province
-let filtroProvinciaAttivo = false;
+const root = document.querySelector('.viz-root');
+const rows = DATA.map(d => ({ nome: d[0], provincia: d[1], g1: d[2], g2: d[3], g3: d[4] }));
 
-function featureForDay(feature, dayIndex) {
-  const giorno = feature.properties.giorni_parsed[dayIndex] || feature.properties.giorni_parsed[0];
-  return {
-    ...feature,
-    properties: { ...feature.properties, colore: giorno.colore, label: giorno.label, desc: giorno.desc, data: giorno.data },
-  };
+// ---- date dinamiche a partire da GENERATED_AT (g1 = quel giorno) ----
+function addDays(iso, n) {
+  const d = new Date(iso + 'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate() + n);
+  return d;
+}
+function fmtDDMM(d) {
+  return String(d.getUTCDate()).padStart(2, '0') + '/' + String(d.getUTCMonth() + 1).padStart(2, '0');
+}
+function fmtLong(d) {
+  return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+}
+const D0 = addDays(GENERATED_AT, 0), D1 = addDays(GENERATED_AT, 1), D2 = addDays(GENERATED_AT, 2);
+
+document.getElementById('pageTitle').textContent = `Rischio da stress da caldo — comuni di Sicilia`;
+document.getElementById('pageSubtitle').textContent =
+  `Dati Worklimate, ${fmtDDMM(D0)}–${fmtDDMM(D2)} ${D0.getUTCFullYear()} (fascia oraria 12–16). Un valore per comune al giorno, non una superficie continua.`;
+document.getElementById('thG1').textContent = `Oggi (${fmtDDMM(D0)})`;
+document.querySelector('.trend-th').textContent = `Andamento ${fmtDDMM(D1)} → ${fmtDDMM(D2)}`;
+document.getElementById('updatedNote').textContent = `Aggiornato al ${fmtLong(D0)}.`;
+
+// ---- legend ----
+const legendEl = document.getElementById('legend');
+legendEl.innerHTML = LEVELS.map(l =>
+  `<span class="item"><span class="swatch" style="background:var(${LEVEL_VAR[l]})"></span>${l}</span>`
+).join('');
+
+// ---- summary bars per day ----
+const dayDefs = [
+  { key: 'g1', label: `Oggi · ${fmtDDMM(D0)}` },
+  { key: 'g2', label: `Domani · ${fmtDDMM(D1)}` },
+  { key: 'g3', label: `Dopodomani · ${fmtDDMM(D2)}` },
+];
+const summaryEl = document.getElementById('summary');
+summaryEl.innerHTML = dayDefs.map(d => {
+  const counts = {};
+  LEVELS.forEach(l => counts[l] = 0);
+  rows.forEach(r => { if (counts[r[d.key]] !== undefined) counts[r[d.key]]++; });
+  const max = Math.max(...LEVELS.map(l => counts[l]), 1);
+  const bars = LEVELS.map(l => `
+    <div class="bar-row">
+      <span class="lbl"><span class="swatch" style="background:var(${LEVEL_VAR[l]})"></span>${l}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${(counts[l]/max*100).toFixed(1)}%;background:var(${LEVEL_VAR[l]})"></div></div>
+      <span class="bar-count">${counts[l]}</span>
+    </div>`).join('');
+  return `<div class="summary-day"><div class="daylabel">${d.label}</div>${bars}</div>`;
+}).join('');
+
+// ---- controls ----
+const provinces = [...new Set(rows.map(r => r.provincia))].sort();
+const provSel = document.getElementById('provFilter');
+provSel.innerHTML = '<option value="">Tutte le province</option>' +
+  provinces.map(p => `<option value="${p}">${p}</option>`).join('');
+
+const searchEl = document.getElementById('search');
+const searchWrap = document.getElementById('searchWrap');
+const searchClear = document.getElementById('searchClear');
+const tbody = document.getElementById('tbody');
+const countNote = document.getElementById('countNote');
+
+let sortKey = 'nome';
+let sortDir = 1;
+
+function cellHtml(level) {
+  const cls = LEVEL_CLASS[level] || '';
+  return `<span class="cell ${cls}"><span class="dot"></span>${level}</span>`;
 }
 
-function updateLegendLabels(features) {
-  // Il "label" testuale arriva dall'API Worklimate: non assumiamo una mappatura
-  // fissa colore→etichetta (il README ufficiale la documenta, ma i dati live
-  // possono discostarsene), usiamo quella osservata nei dati.
-  const labelPerColore = {};
-  features.forEach((f) => {
-    (f.properties.giorni || []).forEach((g) => {
-      if (g.colore && g.label && !labelPerColore[g.colore]) labelPerColore[g.colore] = g.label;
-    });
-  });
-  document.querySelectorAll('.legend-row').forEach((btn) => {
-    const label = labelPerColore[btn.dataset.colore];
-    if (label) btn.querySelector('.legend-label').textContent = label;
-  });
-}
-
-function populateDayDates(features) {
-  const giorni = features[0]?.properties?.giorni;
-  if (!giorni) return;
-  giorni.forEach((g, i) => {
-    const el = document.getElementById(`date-${i}`);
-    if (!el || !g.data) return;
-    const [y, m, d] = g.data.split('-');
-    el.textContent = `${d}/${m}`;
-  });
-}
-
-function populateProvinciaChips(features) {
-  const province = [...new Set(features.map((f) => f.properties.provincia).filter(Boolean))].sort();
-  if (province.length < 2) return; // niente da filtrare con un solo valore (o dato assente)
-  filtroProvinciaAttivo = true;
-  province.forEach((p) => activeProvince.add(p));
-
-  const list = document.getElementById('provinciaList');
-  list.innerHTML = '';
-  province.forEach((p) => {
-    const chip = document.createElement('button');
-    chip.className = 'provincia-chip active';
-    chip.dataset.provincia = p;
-    chip.textContent = p;
-    list.appendChild(chip);
-  });
-  document.getElementById('provinciaDivider').hidden = false;
-  document.getElementById('provinciaTitle').hidden = false;
-}
-
-// Colora il poligono comunale vero (join su codice ISTAT, campo `pro_com_t`
-// del layer PMTiles) invece di un punto/cerchio: il dato Worklimate è
-// pensato dal CNR per essere letto a livello di comune, non più preciso
-// (vedi tab Info), quindi il territorio comunale intero è la rappresentazione
-// corretta, non un'approssimazione.
-function buildFillColorExpr(features) {
-  const expr = ['match', ['get', 'pro_com_t']];
-  features.forEach((f) => {
-    const codice = f.properties.codice_istat;
-    if (!codice) return;
-    const visibile = activeColori.has(f.properties.colore) &&
-      (!filtroProvinciaAttivo || activeProvince.has(f.properties.provincia));
-    expr.push(codice, visibile ? (COLORI[f.properties.colore] || '#999') : 'rgba(0,0,0,0)');
-  });
-  expr.push('rgba(0,0,0,0)'); // comuni senza dato (o fuori filtro): nessun riempimento
-  return expr;
-}
-
-function applyFilters() {
-  document.querySelectorAll('.legend-row').forEach((btn) => {
-    btn.classList.toggle('active', activeColori.has(btn.dataset.colore));
-  });
-  document.querySelectorAll('.provincia-chip').forEach((chip) => {
-    chip.classList.toggle('active', activeProvince.has(chip.dataset.provincia));
-  });
-
-  if (!geojsonData) return;
-  const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
-  map.setPaintProperty('rischio-fill', 'fill-color', buildFillColorExpr(features));
-
-  const visibili = filtroProvinciaAttivo
-    ? features.filter((f) => activeProvince.has(f.properties.provincia))
-    : features;
-  ['green', 'yellow', 'orange', 'red'].forEach((c) => {
-    document.getElementById(`count-${c}`).textContent =
-      visibili.filter((f) => f.properties.colore === c).length;
-  });
+function trendHtml(r) {
+  const days = [
+    { level: r.g1, label: `Oggi ${fmtDDMM(D0)}` },
+    { level: r.g2, label: `Domani ${fmtDDMM(D1)}` },
+    { level: r.g3, label: `Dopodomani ${fmtDDMM(D2)}` },
+  ];
+  const dots = days.map(d =>
+    `<span class="trend-dot" style="background:var(${LEVEL_VAR[d.level]})" title="${d.label}: ${d.level}"></span>`
+  ).join('<span class="trend-line"></span>');
+  return `<span class="trend">${dots}</span>`;
 }
 
 function render() {
-  if (!geojsonData) return;
-  applyFilters();
-}
-
-function zoomToFiltered() {
-  if (!geojsonData) return;
-  const features = geojsonData.features.map((f) => featureForDay(f, currentDay));
-  const visibili = features.filter((f) =>
-    activeColori.has(f.properties.colore) &&
-    (!filtroProvinciaAttivo || activeProvince.has(f.properties.provincia))
+  const q = searchEl.value.trim().toLowerCase();
+  const prov = provSel.value;
+  let filtered = rows.filter(r =>
+    (!q || r.nome.toLowerCase().includes(q)) &&
+    (!prov || r.provincia === prov)
   );
-  if (!visibili.length) return;
-  const bounds = new maplibregl.LngLatBounds();
-  visibili.forEach((f) => bounds.extend(f.geometry.coordinates));
-  map.fitBounds(bounds, { padding: 60, maxZoom: 11, duration: 600 });
+  filtered.sort((a, b) => {
+    const av = a[sortKey], bv = b[sortKey];
+    return av < bv ? -1 * sortDir : av > bv ? 1 * sortDir : 0;
+  });
+  countNote.textContent = `${filtered.length} di ${rows.length} comuni`;
+  tbody.innerHTML = filtered.map(r => `
+    <tr>
+      <td>${r.nome}</td>
+      <td><span class="prov-badge">${r.provincia}</span></td>
+      <td>${cellHtml(r.g1)}</td>
+      <td>${trendHtml(r)}</td>
+    </tr>`).join('');
 }
 
-function setHighlight(codiceIstat) {
-  map.setFilter('comuni-highlight', ['==', ['get', 'pro_com_t'], codiceIstat || '__none__']);
-}
-
-function openComunePopup(match, lngLat) {
-  const p = featureForDay(match, currentDay).properties;
-  const colore = COLORI[p.colore] || '#999';
-  popup
-    .setLngLat(lngLat || match.geometry.coordinates)
-    .setHTML(`
-      <div class="popup-title">${p.nome}</div>
-      <div class="popup-badge" style="background:${colore}">${p.label}</div>
-      <div class="popup-desc">${p.desc || ''}</div>
-      <div class="popup-caveat">Valore riferito all'intero territorio comunale (risoluzione del dato Worklimate/CNR: comune, non indirizzo). Categoria di rischio riferita alla fascia oraria 12:00–16:00, in base alle soglie dell'ordinanza regionale anti-caldo — non una misura di temperatura.</div>
-    `)
-    .addTo(map);
-  selectedComune = { codice_istat: p.codice_istat, nome: p.nome, provincia: p.provincia };
-  setHighlight(p.codice_istat);
-  if (rpOpen) renderCalendar();
-}
-
-map.on('load', async () => {
-  map.addSource('comuni-boundaries', {
-    type: 'vector',
-    url: 'pmtiles://https://gbvitrano.it/anncus/data/comuni.pmtiles',
-  });
-
-  map.addLayer({
-    id: 'comuni-fill',
-    type: 'fill',
-    source: 'comuni-boundaries',
-    'source-layer': 'comuni',
-    filter: ['==', ['get', 'cod_reg'], 19],
-    paint: { 'fill-color': '#1c2321', 'fill-opacity': 0.03 },
-  });
-  map.addLayer({
-    id: 'rischio-fill',
-    type: 'fill',
-    source: 'comuni-boundaries',
-    'source-layer': 'comuni',
-    filter: ['==', ['get', 'cod_reg'], 19],
-    paint: { 'fill-color': 'rgba(0,0,0,0)', 'fill-opacity': 0.75 },
-  });
-
-  map.addLayer({
-    id: 'comuni-outline',
-    type: 'line',
-    source: 'comuni-boundaries',
-    'source-layer': 'comuni',
-    filter: ['==', ['get', 'cod_reg'], 19],
-    paint: { 'line-color': '#1c2321', 'line-width': 0.6, 'line-opacity': 0.25 },
-  });
-
-  map.addLayer({
-    id: 'comuni-highlight',
-    type: 'line',
-    source: 'comuni-boundaries',
-    'source-layer': 'comuni',
-    filter: ['==', ['get', 'pro_com_t'], '__none__'],
-    paint: { 'line-color': '#1c2321', 'line-width': 3, 'line-opacity': 0.9 },
-  });
-
-  try {
-    const [resRischio, resStazioni] = await Promise.all([
-      fetch('data/rischio.geojson'),
-      fetch('data/stazioni.json'),
-    ]);
-    const raw = await resRischio.json();
-    const stazioni = await resStazioni.json();
-
-    // join rischio.geojson -> codice ISTAT via nome+provincia (chiave univoca
-    // per comune in stazioni.json; pgrid NON è univoco, più comuni possono
-    // condividere la stessa stazione più vicina) per mappare ogni feature sul
-    // poligono comunale vero (campo pro_com_t del layer PMTiles).
-    const codiceByComune = new Map(stazioni.map((s) => [`${s.nome}|${s.provincia}`, s.codice_istat]));
-    raw.features.forEach((f) => {
-      f.properties.codice_istat = codiceByComune.get(`${f.properties.nome}|${f.properties.provincia}`) || null;
-      // pre-parsa i 3 giorni (già presenti in properties.giorni dallo script)
-      f.properties.giorni_parsed = f.properties.giorni;
-    });
-
-    geojsonData = raw;
-    document.getElementById('updatedAt').textContent =
-      'aggiornato ' + new Date(raw.generated_at).toLocaleString('it-IT');
-    updateLegendLabels(raw.features);
-    populateDayDates(raw.features);
-    populateProvinciaChips(raw.features);
-    allComuni = computeAllComuni(raw.features);
-    render();
-    if (mqDesktop.matches) setRightPanel(true);
-  } catch (err) {
-    document.getElementById('updatedAt').textContent = 'dati non disponibili';
-    console.error(err);
-  }
-
-  map.on('click', 'rischio-fill', (e) => {
-    if (!geojsonData) return;
-    const codice = e.features[0].properties.pro_com_t;
-    const match = geojsonData.features.find((f) => f.properties.codice_istat === codice);
-    if (!match) return;
-    openComunePopup(match, e.lngLat);
-  });
-
-  popup.on('close', () => {
-    selectedComune = null;
-    setHighlight(null);
-    if (rpOpen) renderCalendar();
-  });
-
-  map.on('mouseenter', 'rischio-fill', (e) => {
-    map.getCanvas().style.cursor = e.features[0].properties.pro_com_t ? 'pointer' : '';
-  });
-  map.on('mouseleave', 'rischio-fill', () => {
-    map.getCanvas().style.cursor = '';
-    hoverTooltip.remove();
-  });
-
-  map.on('mousemove', 'rischio-fill', (e) => {
-    if (!geojsonData) return;
-    const codice = e.features[0].properties.pro_com_t;
-    const match = geojsonData.features.find((f) => f.properties.codice_istat === codice);
-    if (!match) { hoverTooltip.remove(); return; }
-    const p = match.properties;
-    hoverTooltip
-      .setLngLat(e.lngLat)
-      .setHTML(`<span class="tooltip-nome">${p.nome}</span> <span class="tooltip-provincia">(${p.provincia})</span>`)
-      .addTo(map);
-  });
-});
-
-document.getElementById('dayToggle').addEventListener('click', (e) => {
-  const btn = e.target.closest('button');
-  if (!btn) return;
-  document.querySelectorAll('.day-toggle button').forEach((b) => b.classList.remove('active'));
-  btn.classList.add('active');
-  currentDay = Number(btn.dataset.day);
+searchEl.addEventListener('input', () => {
+  searchWrap.classList.toggle('has-value', searchEl.value.length > 0);
   render();
 });
-
-function parseCSV(text) {
-  const rows = [];
-  let row = [], field = '', inQuotes = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (inQuotes) {
-      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
-      else if (c === '"') { inQuotes = false; }
-      else { field += c; }
-    } else if (c === '"') { inQuotes = true; }
-    else if (c === ',') { row.push(field); field = ''; }
-    else if (c === '\n' || c === '\r') {
-      if (c === '\r' && text[i + 1] === '\n') i++;
-      row.push(field); field = '';
-      if (row.length > 1 || row[0] !== '') rows.push(row);
-      row = [];
-    } else { field += c; }
-  }
-  if (field !== '' || row.length) { row.push(field); rows.push(row); }
-  if (!rows.length) return [];
-  const header = rows[0];
-  return rows.slice(1).map((r) => Object.fromEntries(header.map((h, i) => [h, r[i] ?? ''])));
-}
-
-let storicoLoaded = false;
-let storicoRows = [];
-
-async function loadStorico() {
-  try {
-    const res = await fetch('data/rischio_storico.csv');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const text = await res.text();
-    storicoRows = parseCSV(text);
-    storicoLoaded = true;
-    renderCalendar();
-  } catch (err) {
-    document.getElementById('rpCalWrap').innerHTML = '<div class="rp-cal-empty">Dati non disponibili.</div>';
-    console.error(err);
-  }
-}
-
-// ── Pannello dx: calendario bollettini (stile ondata, righe = comuni Nord→Sud) ──
-const COLORE_LABEL = { green: 'Nessuno', yellow: 'Basso', orange: 'Moderato', red: 'Alto' };
-let selectedComune = null; // { codice_istat, nome, provincia }, impostato al click su un comune
-let allComuni = [];        // { codice_istat, nome, provincia, lat }, ordinati nord→sud
-
-function computeAllComuni(features) {
-  return features
-    .filter((f) => f.properties.codice_istat)
-    .map((f) => ({
-      codice_istat: f.properties.codice_istat,
-      nome: f.properties.nome,
-      provincia: f.properties.provincia,
-      lat: f.geometry && f.geometry.coordinates && f.geometry.coordinates[1],
-      lon: f.geometry && f.geometry.coordinates && f.geometry.coordinates[0],
-    }))
-    .sort((a, b) => (b.lat || 0) - (a.lat || 0));
-}
-
-function resetProvinciaFilter() {
-  document.querySelectorAll('.provincia-chip').forEach((c) => activeProvince.add(c.dataset.provincia));
-  applyFilters();
-  zoomToFiltered();
-}
-
-// Righe calendario: comune cliccato > provincia isolata in legenda > filtro colore legenda > tutti i comuni
-function buildCalendarScope() {
-  if (selectedComune) {
-    return { comuni: allComuni.filter((c) => c.codice_istat === selectedComune.codice_istat), label: selectedComune.nome, isolated: true };
-  }
-
-  let comuni = allComuni;
-  let label = `Tutti i comuni · Sicilia (${allComuni.length}, Nord → Sud)`;
-  let isolated = false;
-
-  if (filtroProvinciaAttivo && activeProvince.size === 1) {
-    const p = [...activeProvince][0];
-    comuni = comuni.filter((c) => c.provincia === p);
-    label = p;
-    isolated = true;
-  }
-
-  if (activeColori.size < 4) {
-    const featByCodice = new Map((geojsonData ? geojsonData.features : []).map((f) => [f.properties.codice_istat, f]));
-    comuni = comuni.filter((c) => {
-      const feat = featByCodice.get(c.codice_istat);
-      return feat && activeColori.has(feat.properties.colore);
-    });
-    const colorLabel = [...activeColori].map((k) => COLORE_LABEL[k]).join(', ');
-    label = isolated ? `${label} · ${colorLabel}` : `${colorLabel} (${comuni.length})`;
-    isolated = true;
-  }
-
-  return { comuni, label, isolated };
-}
-
-function renderCalendar() {
-  const wrap = document.getElementById('rpCalWrap');
-  const scopeEl = document.getElementById('rpCalScope');
-  if (!storicoRows.length || !allComuni.length) {
-    wrap.innerHTML = '<div class="rp-cal-empty">Nessun dato ancora disponibile.</div>';
-    scopeEl.innerHTML = '';
-    return;
-  }
-
-  const scope = buildCalendarScope();
-  scopeEl.innerHTML = scope.isolated
-    ? `${scope.label} <button class="rp-cal-reset" id="rpCalReset" title="Torna a tutti i comuni">✕ tutti i comuni</button>`
-    : scope.label;
-
-  const byComuneDate = {}; // codice_istat -> { data: colore }
-  storicoRows.forEach((r) => {
-    if (!r.codice_istat || !r.data || !r.colore) return;
-    (byComuneDate[r.codice_istat] || (byComuneDate[r.codice_istat] = {}))[r.data] = r.colore;
-  });
-
-  const allDates = [...new Set(storicoRows.map((r) => r.data))].filter(Boolean).sort();
-  const dates = allDates.slice(-21); // ultime 3 settimane, stile calendario ondata
-  const datesSet = new Set(dates);
-  // "oggi" può già essere nello storico (già loggato): non duplicarlo come colonna forecast
-  const forecastDates = (geojsonData && geojsonData.features[0] &&
-    geojsonData.features[0].properties.giorni_parsed || []).map((g) => g.data)
-    .filter((d) => d && !datesSet.has(d));
-  const cols = [...dates, ...forecastDates];
-  const featByCodice = new Map((geojsonData ? geojsonData.features : []).map((f) => [f.properties.codice_istat, f]));
-  const todayStr = new Date().toLocaleDateString('sv-SE'); // YYYY-MM-DD in ora locale
-
-  let html = `<div class="rp-cal-grid" style="grid-template-columns:190px repeat(${cols.length},40px);">`;
-  html += '<div class="rp-cal-corner"></div>';
-  cols.forEach((d, i) => {
-    const parts = d.split('-');
-    const cls = (i >= dates.length ? ' forecast' : '') + (d === todayStr ? ' today' : '');
-    html += `<div class="rp-cal-col-label${cls}">${parts[2]}/${parts[1]}</div>`;
-  });
-
-  scope.comuni.forEach((comune) => {
-    const byDate = byComuneDate[comune.codice_istat] || {};
-    html += `<div class="rp-cal-row-label" title="${comune.nome}">${comune.nome}</div>`;
-    dates.forEach((d) => {
-      const c = byDate[d];
-      const cls = 'rp-cal-cell' + (d === todayStr ? ' today' : '');
-      html += `<div class="${cls}" data-date="${d}" data-scope="${comune.nome}" data-colore="${c || ''}" style="background:${c ? COLORI[c] : 'var(--line)'}" title="${comune.nome} · ${d} · ${c ? COLORE_LABEL[c] : 'nessun dato'}"></div>`;
-    });
-    const feat = featByCodice.get(comune.codice_istat);
-    forecastDates.forEach((d, i) => {
-      const c = feat ? featureForDay(feat, i).properties.colore : null;
-      const cls = 'rp-cal-cell forecast' + (d === todayStr ? ' today' : '');
-      html += `<div class="${cls}" data-date="${d}" data-scope="${comune.nome}" data-colore="${c || ''}" style="background:${c ? COLORI[c] : 'var(--line)'}" title="${comune.nome} · ${d} (previsto) · ${c ? COLORE_LABEL[c] : 'nessun dato'}"></div>`;
-    });
-  });
-  html += '</div>';
-  wrap.innerHTML = html;
-
-  const reset = document.getElementById('rpCalReset');
-  if (reset) reset.addEventListener('click', () => {
-    selectedComune = null;
-    setHighlight(null);
-    popup.remove();
-    resetRicercaComune();
-    if (filtroProvinciaAttivo && activeProvince.size === 1) resetProvinciaFilter();
-    if (activeColori.size < 4) {
-      document.querySelectorAll('.legend-row').forEach((r) => activeColori.add(r.dataset.colore));
-      applyFilters();
-      zoomToFiltered();
-    }
-    renderCalendar();
-  });
-}
-
-document.getElementById('rpCalWrap').addEventListener('click', (e) => {
-  const cell = e.target.closest('.rp-cal-cell');
-  if (!cell) return;
-  const c = cell.dataset.colore;
-  const detail = document.getElementById('rpCalDetail');
-  detail.innerHTML = c
-    ? `<strong>${cell.dataset.scope}</strong> · ${cell.dataset.date} — <span style="color:${COLORI[c]}">${COLORE_LABEL[c]}</span>`
-    : `<strong>${cell.dataset.scope}</strong> · ${cell.dataset.date} — nessun dato`;
+searchClear.addEventListener('click', () => {
+  searchEl.value = '';
+  searchWrap.classList.remove('has-value');
+  searchEl.focus();
+  render();
 });
-
-const rpWrap = document.getElementById('rp-wrap');
-let rpOpen = false;
-const mqDesktop = window.matchMedia('(min-width: 761px)');
-mqDesktop.addEventListener('change', (e) => setRightPanel(e.matches));
-
-function setRightPanel(open) {
-  rpOpen = open;
-  rpWrap.classList.toggle('open', open);
-  // il pannello copre la mappa: sposta il padding così centro/poligoni si
-  // ricentrano nell'area visibile rimasta, invece di restare coperti
-  // (larghezza letta a runtime: il pannello è responsive, min(560px, 92vw))
-  const panelWidth = open ? rpWrap.getBoundingClientRect().width : 0;
-  map.easeTo({ padding: { top: 0, bottom: 0, left: 0, right: panelWidth }, duration: 420 });
-  if (open) {
-    if (!storicoLoaded) loadStorico();
-    else renderCalendar();
-  }
-}
-document.getElementById('rp-toggle').addEventListener('click', () => setRightPanel(!rpOpen));
-document.getElementById('rpClose').addEventListener('click', () => setRightPanel(false));
-
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && rpOpen) setRightPanel(false); });
-
-document.querySelector('.legend').addEventListener('click', (e) => {
-  const row = e.target.closest('.legend-row');
-  if (row) {
-    const colore = row.dataset.colore;
-    if (activeColori.size === 1 && activeColori.has(colore)) {
-      // riclicco l'unico livello isolato: torno a mostrare tutti i livelli
-      document.querySelectorAll('.legend-row').forEach((r) => activeColori.add(r.dataset.colore));
-    } else {
-      // isola solo il livello cliccato
-      activeColori.clear();
-      activeColori.add(colore);
-    }
-    applyFilters();
-    zoomToFiltered();
-    if (rpOpen) renderCalendar();
-  }
-});
-
-document.getElementById('right-panel').addEventListener('click', (e) => {
-  const chip = e.target.closest('.provincia-chip');
-  if (chip) {
-    const p = chip.dataset.provincia;
-    if (activeProvince.size === 1 && activeProvince.has(p)) {
-      // riclicco l'unica provincia isolata: torno a mostrare tutte le province
-      document.querySelectorAll('.provincia-chip').forEach((c) => activeProvince.add(c.dataset.provincia));
-    } else {
-      // isola solo la provincia cliccata
-      activeProvince.clear();
-      activeProvince.add(p);
-    }
-    applyFilters();
-    zoomToFiltered();
-    selectedComune = null;
-    setHighlight(null);
-    popup.remove();
-    resetRicercaComune();
-    if (rpOpen) renderCalendar();
-  }
-});
-
-function normalizza(s) {
-  return (s || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-}
-
-const rpSearchInput = document.getElementById('rpSearch');
-const rpSearchResults = document.getElementById('rpSearchResults');
-const rpSearchClear = document.getElementById('rpSearchClear');
-
-function renderSearchResults(query) {
-  const q = normalizza(query.trim());
-  if (!q) { rpSearchResults.hidden = true; rpSearchResults.innerHTML = ''; return; }
-  const match = allComuni.filter((c) => normalizza(c.nome).includes(q)).slice(0, 8);
-  if (!match.length) {
-    rpSearchResults.innerHTML = '<div class="rp-search-empty">Nessun comune trovato.</div>';
-    rpSearchResults.hidden = false;
-    return;
-  }
-  rpSearchResults.innerHTML = match
-    .map((c) => `<button class="rp-search-item" data-codice="${c.codice_istat}">${c.nome} <span class="rp-search-prov">(${c.provincia})</span></button>`)
-    .join('');
-  rpSearchResults.hidden = false;
-}
-
-function selectComuneDaRicerca(codice) {
-  const c = allComuni.find((x) => x.codice_istat === codice);
-  if (!c || !geojsonData) return;
-  const match = geojsonData.features.find((f) => f.properties.codice_istat === codice);
-  rpSearchInput.value = c.nome;
-  rpSearchResults.hidden = true;
-  rpSearchResults.innerHTML = '';
-  rpSearchClear.hidden = false;
-  if (c.lon != null && c.lat != null) map.flyTo({ center: [c.lon, c.lat], zoom: 10, duration: 700 });
-  if (match) openComunePopup(match, match.geometry.coordinates);
-}
-
-function resetRicercaComune() {
-  rpSearchInput.value = '';
-  rpSearchResults.hidden = true;
-  rpSearchResults.innerHTML = '';
-  rpSearchClear.hidden = true;
-}
-
-rpSearchInput.addEventListener('input', () => {
-  renderSearchResults(rpSearchInput.value);
-  rpSearchClear.hidden = !rpSearchInput.value.trim();
-});
-rpSearchInput.addEventListener('focus', () => { if (rpSearchInput.value.trim()) renderSearchResults(rpSearchInput.value); });
-
-rpSearchResults.addEventListener('click', (e) => {
-  const item = e.target.closest('.rp-search-item');
-  if (item) selectComuneDaRicerca(item.dataset.codice);
-});
-
-rpSearchClear.addEventListener('click', () => {
-  resetRicercaComune();
-  selectedComune = null;
-  setHighlight(null);
-  popup.remove();
-  if (rpOpen) renderCalendar();
-  rpSearchInput.focus();
-});
-
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.rp-search-wrap')) { rpSearchResults.hidden = true; }
-});
-
-const infoPanel = document.getElementById('info-panel');
-let infoPanelOpen = false;
-window.panelToggle = function () {
-  infoPanelOpen = !infoPanelOpen;
-  infoPanel.classList.toggle('open', infoPanelOpen);
-};
-
-document.querySelectorAll('.ptab').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.ptab').forEach((b) => b.classList.remove('active'));
-    document.querySelectorAll('.tab-pane').forEach((p) => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+provSel.addEventListener('change', render);
+document.querySelectorAll('thead th[data-key]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    if (sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = 1; }
+    document.querySelectorAll('thead th').forEach(t => t.classList.remove('sorted'));
+    th.classList.add('sorted');
+    render();
   });
 });
+document.querySelector(`thead th[data-key="${sortKey}"]`).classList.add('sorted');
+
+render();
 </script>
-
 </body>
 </html>

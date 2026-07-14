@@ -1,70 +1,63 @@
-# Mappa dinamica del rischio da caldo (Worklimate)
+# Rischio da caldo — comuni di Sicilia
 
-Mappa dei livelli di rischio da stress da caldo per un elenco di punti,
-costruita sopra la CLI [worklimate](https://github.com/aborruso/worklimate)
-di [@aborruso](https://github.com/aborruso) - Andrea Borruso
+Pagina statica che mostra il livello di rischio da caldo per il lavoro all'aperto (basso / moderato / alto / emergenza) per tutti i **391 comuni siciliani**, per oggi, domani e dopodomani. Dato pubblico via [Worklimate](https://github.com/aborruso/worklimate), aggiornato automaticamente ogni giorno.
+
+👉 **Pagina live:** `index.html` (pubblicata come GitHub Pages).
+
+## Cosa fa
+
+- Tabella comune × giorno con il livello di rischio da caldo per fascia lavorativa 12–16.
+- Ricerca/filtro per nome comune, ordinamento per comune o provincia.
+- Tema chiaro/scuro con toggle (preferenza salvata in `localStorage`).
+- Nessun backend: è un unico file HTML con dati incorporati, dati e viste generati staticamente.
+
 ## Come funziona
 
 ```
-scripts/prepara-comuni.mjs    → una tantum: scarica l'elenco comuni ISTAT (via opendatasicilia) e genera config/punti.json
-config/punti.json     → elenco dei comuni da mappare (nome, provincia, codice ISTAT, coordinate Municipio)
-scripts/geocode-stazioni.mjs  → una tantum: comune → pgrid stazione (usa Nominatim)
-data/stazioni.json    → output dello script sopra (pgrid + coordinate, statico)
-scripts/fetch-risk.mjs → schedulato: pgrid → rischio oggi/domani/dopodomani
-data/rischio.geojson  → GeoJSON pronto per la mappa (aggiornato ogni giorno)
-index.html             → viewer MapLibre che legge data/rischio.geojson
-.github/workflows/update-map.yml → Action che rilancia fetch-risk.mjs ogni giorno
+scripts/fetch-comuni.mjs   → genera data/comuni-sicilia.json (elenco comuni + centroide)
+scripts/update-data.mjs    → interroga Worklimate e scrive i dati dentro index.html
+.github/workflows/         → esegue update-data.mjs ogni giorno e fa commit/push
 ```
 
-I comuni (nome, codice ISTAT, coordinate del Municipio, provincia, regione)
-vengono da [opendatasicilia/comuni-italiani](https://github.com/opendatasicilia/comuni-italiani),
-che a sua volta deriva questi campi dai file ufficiali ISTAT (Codici
-statistici delle unità amministrative territoriali). Così le coordinate
-mostrate in mappa sono il centroide ufficiale del Municipio, non un punto
-qualsiasi restituito da un geocoder.
+- **`data/comuni-sicilia.json`** — elenco statico dei comuni siciliani (nome, provincia, sigla, codice ISTAT, coordinate del centroide), ricavato dai confini amministrativi ISTAT ([openpolis/geojson-italy](https://github.com/openpolis/geojson-italy)). Va rigenerato **a mano** con `node scripts/fetch-comuni.mjs` solo in caso di fusioni/istituzioni di nuovi comuni — evento raro, non è nel workflow giornaliero.
+- **`index.html`** — contiene due marcatori che lo script aggiorna via regex, senza toccare il resto della pagina (HTML/CSS/JS):
+  - `const GENERATED_AT = "YYYY-MM-DD"` — data della corsa che ha prodotto i dati (il giorno "oggi" della tabella).
+  - `const DATA = [...]` — array `[nome, sigla_provincia, rischio_oggi, rischio_domani, rischio_dopodomani]` per ogni comune.
 
-Il geocoding via Nominatim (necessario solo per risolvere il `pgrid` della
-stazione più vicina a ogni comune) viene fatto **una sola volta**, non a
-ogni run: così il workflow schedulato interroga solo Worklimate via
-`pgrid` e non tocca mai Nominatim, restando ben dentro la sua usage
-policy.
+## Come vengono ricavati i dati
 
-## Setup
+I dati arrivano dagli endpoint pubblici dell'app [Worklimate](https://app.worklimate.it/ordinanza-caldo-lavoro) (nessuna autenticazione richiesta), interrogati da `scripts/update-data.mjs`:
 
-1. **Genera l'elenco comuni** — scarica i dati ISTAT/opendatasicilia e
-   filtra per regione o provincia:
-   ```
-   node scripts/prepara-comuni.mjs --regione 19     # tutta la Sicilia
-   node scripts/prepara-comuni.mjs --provincia PA    # solo provincia di Palermo
-   ```
-   Genera `config/punti.json`. Puoi anche editarlo a mano dopo, per
-   togliere/aggiungere comuni specifici.
+1. **Stazione più vicina** — per ogni comune (nome + centroide lat/lon) si chiama `osm-stazioni.php?osmod=true&place=...&latx=...&lonx=...`, che restituisce l'id della cella griglia meteo (`pgrid`) più vicina.
+2. **Rischio per cella** — le celle griglia sono deduplicate (molti comuni condividono la stessa cella) e per ognuna si chiama `osm-stazioni.php?pgrid=...&sys=regular`, che restituisce il livello di rischio (`g1`/`g2`/`g3` = oggi/domani/dopodomani).
+3. **Join finale** — ogni comune eredita il rischio della sua cella griglia, producendo le righe `[nome, sigla, g1, g2, g3]`.
+4. **Scrittura** — se i comuni con dato completo sono meno dell'80% del totale, lo script si ferma con errore senza scrivere l'HTML (protezione contro API non disponibile/risposte parziali). Altrimenti sostituisce i marcatori `GENERATED_AT` e `DATA` in `index.html`.
 
-2. **Geocodifica una volta sola**, in locale:
-   ```
-   npm install   # non necessario, usiamo npx; utile solo per testare
-   node scripts/geocode-stazioni.mjs
-   ```
-   Genera `data/stazioni.json`. Fai commit di questo file: è statico e
-   non serve rigenerarlo finché non cambi l'elenco dei punti.
+Le chiamate sono throttled (100ms tra una richiesta e l'altra) e usano header realistici (`User-Agent`, `Referer`) per comportarsi come il client browser dell'app originale.
 
-3. **Pubblica su GitHub Pages** — attiva Pages sul branch `main` (root),
-   così `index.html` sarà raggiungibile pubblicamente.
+### Automazione
 
-4. **Abilita il workflow** — è già pianificato alle 05:00 UTC ogni giorno
-   (`workflow_dispatch` per lanciarlo anche a mano da Actions). Aggiorna
-   `data/rischio.geojson` e fa commit automatico se cambia qualcosa.
+Il workflow [`update-sicilia-data.yml`](.github/workflows/update-sicilia-data.yml) esegue `scripts/update-data.mjs` ogni giorno alle **05:30 UTC (07:30 CEST)**, prima della fascia di rischio 12–16, e fa commit/push di `index.html` se i dati sono cambiati. È anche lanciabile a mano da GitHub Actions (`workflow_dispatch`).
 
-5. **Apri `index.html`** — mostra i punti colorati per livello di rischio
-   (verde/giallo/arancione/rosso), con selettore oggi/domani/dopodomani e
-   popup col dettaglio al click su ogni punto.
+## Sviluppo locale
 
-## Attenzioni
+```bash
+# rigenerare i dati di rischio (richiede rete, interroga Worklimate)
+node scripts/update-data.mjs
 
-- I valori sono a livello di comune/provincia, non di indirizzo puntuale
-  (limite dei dati Worklimate stessi, non di questa pipeline).
-- Se aggiungi molti punti, la prima geocodifica richiede tempo (pausa di
-  ~1,2s tra un punto e l'altro per rispettare Nominatim): è normale,
-  succede una volta sola.
-- Licenza dati: Worklimate/CNR. Licenza geocoding: OpenStreetMap (ODbL),
-  attribuzione già gestita dalla CLI.
+# rigenerare l'elenco comuni (solo se cambiano i confini amministrativi)
+node scripts/fetch-comuni.mjs
+```
+
+Nessuna dipendenza da installare: gli script usano solo `fetch`/`fs` nativi di Node ≥ 18.
+
+## Struttura repo
+
+```
+index.html                  pagina pubblicata (dati + UI)
+data/comuni-sicilia.json     elenco comuni siciliani (statico)
+scripts/update-data.mjs      job giornaliero: rischio da Worklimate → index.html
+scripts/fetch-comuni.mjs     job manuale: confini ISTAT → data/comuni-sicilia.json
+.github/workflows/           automazione GitHub Actions
+varianti/                    prototipi di design alternativi (non pubblicati)
+```
