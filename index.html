@@ -60,6 +60,7 @@
     <nav id="panel-nav">
       <button class="ptab active" data-tab="worklimate"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M4 15l4-6 4 3 6-8"/></svg> Worklimate</button>
       <button class="ptab" data-tab="info"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Info</button>
+      <button class="ptab" data-tab="guida"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M2 12h20"/></svg> Guida</button>
       <button class="ptab" data-tab="credits"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Credits</button>
     </nav>
 
@@ -84,6 +85,14 @@
           singolo punto del territorio.
         </div></div>
         <div class="credit-item"><div>
+          Il livello di rischio non è una temperatura, ma una <strong>categoria discreta</strong>
+          (Nessuno/Basso/Moderato/Alto) calcolata dal CNR per la fascia oraria 12:00–16:00, sulla base
+          delle soglie previste dall'<strong>ordinanza regionale anti-caldo</strong> per i lavoratori
+          esposti al sole. Per questo non ha senso interpolare i valori tra un comune e l'altro (creando
+          sfumature o gradienti continui): la categoria è già definita a livello di stazione/comune e non
+          rappresenta un campo fisico continuo di temperatura.
+        </div></div>
+        <div class="credit-item"><div>
           Il CNR non pubblica un'API per interrogare il raster della mappa punto per punto: piccole aree
           (es. picchi montani disabitati) visibili sulla mappa ufficiale worklimate.it possono non comparire
           qui, perché il dato è risolto a livello di comune, non di singolo pixel.
@@ -102,7 +111,41 @@
         <div class="credit-item"><div>Clicca un comune sulla mappa per vederne il dettaglio del rischio.</div></div>
         <div class="credit-item"><div>Usa i pulsanti <strong>Oggi / Domani / Dopodom.</strong> per cambiare giorno di previsione.</div></div>
         <div class="credit-item"><div>Clicca un livello o una provincia in legenda per filtrare/isolare i comuni sulla mappa.</div></div>
-        <div class="credit-item"><div>Apri <strong>Storico rischio</strong> dalla legenda per consultare ed esportare lo storico giornaliero (CSV/JSON).</div></div>
+      </div>
+    </div>
+
+    <!-- Tab: Guida -->
+    <div id="tab-guida" class="tab-pane">
+      <p class="analysis-intro">
+        Guida veloce: come usare e leggere questa mappa, spiegata semplice.
+      </p>
+      <div class="credits-section">
+        <h3>Cosa mostra la mappa</h3>
+        <div class="credit-item"><div>
+          Ogni comune della Sicilia è colorato in base al rischio da caldo per chi lavora
+          all'aperto. Il colore riempie tutto il territorio del comune, non un punto preciso.
+        </div></div>
+      </div>
+      <div class="credits-section">
+        <h3>I colori</h3>
+        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--green)"></span></span><div><strong>Verde</strong> — nessun rischio, si può lavorare tranquilli</div></div>
+        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--yellow)"></span></span><div><strong>Giallo</strong> — rischio basso, attenzione nei lavori più pesanti</div></div>
+        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--orange)"></span></span><div><strong>Arancione</strong> — rischio moderato, servono pause e precauzioni</div></div>
+        <div class="credit-item"><span class="ci-icon"><span class="swatch" style="background:var(--red)"></span></span><div><strong>Rosso</strong> — rischio alto, meglio evitare di lavorare nelle ore più calde</div></div>
+      </div>
+      <div class="credits-section">
+        <h3>Come si usa</h3>
+        <div class="credit-item"><div><strong>1.</strong> Clicca su un comune per vedere il dettaglio del rischio.</div></div>
+        <div class="credit-item"><div><strong>2.</strong> Usa i pulsanti <strong>Oggi / Domani / Dopodom.</strong> in alto per cambiare giorno.</div></div>
+        <div class="credit-item"><div><strong>3.</strong> Nella legenda clicca un colore o una provincia per far vedere solo quei comuni.</div></div>
+        <div class="credit-item"><div><strong>4.</strong> Apri il pannello a destra per cercare un comune per nome o vedere il calendario dei bollettini.</div></div>
+      </div>
+      <div class="credits-section">
+        <h3>Da sapere</h3>
+        <div class="credit-item"><div>
+          Il dato è preso dalla stazione meteo più vicina al comune, quindi vale per tutto il
+          territorio comunale e non per il singolo indirizzo.
+        </div></div>
       </div>
     </div>
 
@@ -177,7 +220,6 @@
         <h3>Cosa fa</h3>
         <div class="credit-item"><div>Va a prendere, comune per comune, il rischio da caldo previsto per i lavoratori all'aperto (oggi, domani, dopodomani).</div></div>
         <div class="credit-item"><div>Trova da solo la stazione meteo più vicina a un indirizzo o a un comune.</div></div>
-        <div class="credit-item"><div>Recupera anche lo storico stagionale delle rilevazioni.</div></div>
         <div class="credit-item"><div>Restituisce i dati in tabella leggibile a schermo, oppure in JSON/CSV per essere riusati da altri programmi (come questa mappa).</div></div>
       </div>
       <div class="credits-section">
@@ -401,7 +443,7 @@ function openComunePopup(match, lngLat) {
       <div class="popup-title">${p.nome}</div>
       <div class="popup-badge" style="background:${colore}">${p.label}</div>
       <div class="popup-desc">${p.desc || ''}</div>
-      <div class="popup-caveat">Valore riferito all'intero territorio comunale (risoluzione del dato Worklimate/CNR: comune, non indirizzo).</div>
+      <div class="popup-caveat">Valore riferito all'intero territorio comunale (risoluzione del dato Worklimate/CNR: comune, non indirizzo). Categoria di rischio riferita alla fascia oraria 12:00–16:00, in base alle soglie dell'ordinanza regionale anti-caldo — non una misura di temperatura.</div>
     `)
     .addTo(map);
   selectedComune = { codice_istat: p.codice_istat, nome: p.nome, provincia: p.provincia };
@@ -563,7 +605,7 @@ async function loadStorico() {
     storicoLoaded = true;
     renderCalendar();
   } catch (err) {
-    document.getElementById('rpCalWrap').innerHTML = '<div class="rp-cal-empty">Storico non disponibile.</div>';
+    document.getElementById('rpCalWrap').innerHTML = '<div class="rp-cal-empty">Dati non disponibili.</div>';
     console.error(err);
   }
 }
@@ -608,7 +650,7 @@ function renderCalendar() {
   const wrap = document.getElementById('rpCalWrap');
   const scopeEl = document.getElementById('rpCalScope');
   if (!storicoRows.length || !allComuni.length) {
-    wrap.innerHTML = '<div class="rp-cal-empty">Nessun dato storico ancora disponibile.</div>';
+    wrap.innerHTML = '<div class="rp-cal-empty">Nessun dato ancora disponibile.</div>';
     scopeEl.innerHTML = '';
     return;
   }
