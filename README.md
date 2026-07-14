@@ -2,7 +2,7 @@
 
 Mappa dei livelli di rischio da stress da caldo per un elenco di punti,
 costruita sopra la CLI [worklimate](https://github.com/aborruso/worklimate)
-di @aborruso
+di [@aborruso](https://github.com/aborruso) - Andrea Borruso
 ## Come funziona
 
 ```
