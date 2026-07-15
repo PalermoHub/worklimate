@@ -469,6 +469,15 @@ main().catch((e) => {
   root.insertAdjacentHTML('afterbegin', '<p style="color:var(--serious)">Errore nel caricamento dei dati.</p>');
 });
 
+// ---- disclaimer metodologia: stesso meccanismo apri/chiudi dei gruppi provincia ----
+document.querySelectorAll('.methodology-disclaimer .methodology-header').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.closest('.methodology-disclaimer').classList.toggle('collapsed', expanded);
+  });
+});
+
 // ---- torna in cima ----
 const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {

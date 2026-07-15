@@ -2,8 +2,10 @@ name: Aggiorna rischio da caldo Sicilia
 
 on:
   schedule:
-    # 05:30 UTC = 07:30 CEST — prima della fascia di rischio 12-16
+    # 05:30 UTC = 07:30 CEST (ora legale, mar-ott) — prima della fascia di rischio 12-16
     - cron: '30 5 * * *'
+    # 06:30 UTC = 07:30 CET (ora solare, nov-mar)
+    - cron: '30 6 * * *'
   workflow_dispatch: {}
 
 permissions:
@@ -19,14 +21,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Verifica orario italiano previsto (7:30, gestisce CET/CEST)
+        id: check-ora
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          ora=$(TZ=Europe/Rome date +%H)
+          if [ "$ora" = "07" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Ora locale Italia: $ora, non 07. Skip run." >&2
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-node@v4
+        if: steps.check-ora.outputs.run == 'true'
         with:
           node-version: 20
 
       - name: Aggiorna dati rischio (data/rischio-oggi.json)
+        if: steps.check-ora.outputs.run == 'true'
         run: node scripts/update-data.mjs
 
       - name: Commit e push se cambiato
+        if: steps.check-ora.outputs.run == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

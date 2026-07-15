@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -109,6 +106,40 @@
   <div class="law-banner">
     <div class="law-title">⚠️ Normativa vigente</div>
     In Sicilia è in vigore l'<a href="https://www.regione.sicilia.it/la-regione-informa/stress-termico-ordinanza-schifani-stop-ai-lavori-nelle-ore-piu-calde" target="_blank" rel="noopener">Ordinanza Schifani</a>, che dispone lo stop ai lavori all'aperto nelle ore più calde della giornata (indicativamente 12:30–16:00) nei giorni con rischio "alto" o "molto alto" secondo la mappa nazionale del rischio da stress termico, a tutela della salute e sicurezza dei lavoratori esposti al caldo. Verificare sempre il testo ufficiale dell'ordinanza e gli aggiornamenti sul sito della Regione Siciliana.
+  </div>
+
+  <div class="prov-group methodology-disclaimer collapsed">
+    <button type="button" class="prov-group-header methodology-header" aria-expanded="false">
+      <span>ℹ️ Disclaimer</span>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="prov-group-body methodology-body">
+      <h3>Il punto di partenza</h3>
+      <p>Worklimate non pubblica un WMS con la mappa, nemmeno a bassa risoluzione. Il motivo è tecnico: i loro modelli sono generalisti, con un grigliato molto largo — pubblicare il raster vero mostrerebbe quanto è grossolana la cella, e forse preferiscono non farlo vedere così esplicitamente.</p>
+      <p>Quello che espongono invece è un servizio diverso: tu dai un indirizzo (geocoding), loro ti restituiscono il punto del grigliato più vicino a quell'indirizzo, e per quel punto ti dicono alto/medio/basso.</p>
+
+      <h3>CLI @aborruso/worklimate</h3>
+      <p>È una CLI Node.js <a href="https://github.com/aborruso/worklimate" target="_blank" rel="noopener">@aborruso/worklimate</a> che legge i dati di stress da caldo pubblicati da Worklimate, senza bisogno di autenticazione, usando gli endpoint pubblici di app.worklimate.it e archivio.worklimate.it. È pensata sia per uso interattivo da terminale sia per essere orchestrata da un LLM o da uno script, con output JSON/CSV stabili e comandi componibili.</p>
+
+      <h3>Note raccolte dal dialogo email da @aborruso con il CNR</h3>
+      <ul>
+        <li>l'endpoint interrogato dalla CLI (<code>osm-stazioni.php</code>, con referer <code>.../ordinanza-caldo-lavoro</code>) è lo stesso usato dall'app ufficiale app.worklimate.it/ordinanza-caldo-lavoro, cioè proprio quella indicata come fonte di riferimento ufficiale;</li>
+        <li>il valore per singolo giorno corrisponde alla fascia 12:00-16:00, la stessa fascia/categoria richiamata dall'ordinanza;</li>
+        <li>attenzione importante: va sempre indicato il comune e la provincia, non un indirizzo più preciso (via, civico), perché la previsione non è pensata per essere risolta a quel livello di dettaglio — quindi il geocoding va tenuto a livello comunale, non puntuale;</li>
+        <li>e la frase chiave che conferma quello che dicevi: non risulta esistere un servizio geografico standard (WMS/WMTS/WCS) né un'API REST dedicata per interrogare il raster della mappa punto per punto — l'endpoint usato è, ad oggi, l'unica fonte utilizzabile in modo automatico.</li>
+      </ul>
+
+      <h3>Cosa fa worklimate di @opendatasicilia</h3>
+      <p>Con lo stesso principio della CLI di @aborruso, worklimate di @opendatasicilia è una pagina statica che mostra il rischio caldo lavoro all'aperto (basso/moderato/alto/emergenza) per 391 comuni della Sicilia, fascia 12-16, oggi/domani/dopodomani. Tabella con filtro nome comune, ordinamento comune/provincia.</p>
+      <p>Chiama gli endpoint pubblici app.worklimate.it (<code>osm-stazioni.php</code>): trova la cella della griglia meteo più vicina a ogni comune (via centroide lat/lon), fa dedup delle celle, interroga il rischio per cella (g1/g2/g3 = oggi/domani/dopodomani) e fa il join comune → cella → rischio.</p>
+
+      <h3>Possibili rischi</h3>
+      <p>Se un utente legge "Ragusa: alto" senza capire come è stato calcolato, può fare un ragionamento sbagliato tipo "quindi oggi a Ragusa nessuno può lavorare all'aperto". Ma non è così semplice.</p>
+      <p>La norma regionale non fa riferimento al sito Worklimate in generale, fa riferimento a una sezione specifica: quella per i lavoratori, quella sulle ore centrali (le 12-16 diciamo), quella che genera divieto di lavoro all'aperto. E l'output ufficiale di quella sezione sono mappe PNG statiche.</p>
+      <p>I dati usati per costruire la tabella non arrivano dalla fonte normativa, ma da un'altra via — le chiamate API — che porta a un'informazione comparabile, ma che tecnicamente parlando "non fa legge". Chi fa legge è la mappa PNG di quella sezione specifica: <a href="https://www.worklimate.it/scelta-mappa/sole-attivita-fisica-alta/" target="_blank" rel="noopener">worklimate.it/scelta-mappa/sole-attivita-fisica-alta</a>.</p>
+      <p>@aborruso ha chiesto conferma al CNR se il risultato delle chiamate API (alto/medio/basso via geocoding sul punto più vicino) fosse paragonabile al risultato della sezione ufficiale con le PNG. Loro hanno confermato: sì, è comparabile, quando l'API dice "alto" corrisponde al giorno in cui scatta il divieto secondo la sezione ufficiale.</p>
+      <p>La tabella di @opendatasicilia fornisce un'informazione utile e comparabile a quella ufficiale.<br>Per l'applicazione del divieto normativo fa fede esclusivamente la sezione ufficiale di Worklimate (le mappe PNG), non questa tabella.</p>
+    </div>
   </div>
 
   <footer>
