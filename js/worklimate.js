@@ -493,6 +493,16 @@ document.querySelectorAll('.methodology-disclaimer .methodology-header').forEach
   });
 });
 
+// ---- link "Normativa vigente" -> apri e scorri al disclaimer ----
+document.getElementById('lawDisclaimerLink')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  const disclaimer = document.getElementById('methodologyDisclaimer');
+  if (!disclaimer) return;
+  disclaimer.classList.remove('collapsed');
+  disclaimer.querySelector('.methodology-header')?.setAttribute('aria-expanded', 'true');
+  disclaimer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
 // ---- torna in cima ----
 const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {

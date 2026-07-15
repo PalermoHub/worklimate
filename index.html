@@ -74,6 +74,11 @@
     <b>Perché una tabella e non una mappa.</b> Worklimate assegna il rischio alla stazione meteo-modello più vicina a un punto: non è un dato che segue i confini comunali, e nemmeno una griglia densa che giustifichi un'interpolazione spaziale continua. Colorare i poligoni dei comuni (coropletica) implicherebbe salti netti ai confini amministrativi che il fenomeno meteorologico non ha; una mappa a punti mostrerebbe solo l'ubicazione dei comuni, non aggiungerebbe informazione al colore stesso. La struttura reale del dato è <b>luogo × giorno → livello</b>: una matrice/tabella colorata la rappresenta senza inventare continuità spaziale che i dati non hanno.
   </div>
 
+  <div class="law-banner">
+    <div class="law-title">⚠️ Normativa vigente</div>
+    In Sicilia è in vigore l'<a href="https://www.regione.sicilia.it/la-regione-informa/stress-termico-ordinanza-schifani-stop-ai-lavori-nelle-ore-piu-calde" target="_blank" rel="noopener">Ordinanza Schifani</a>, che dispone lo stop ai lavori all'aperto nelle ore più calde della giornata (indicativamente 12:30–16:00) nei giorni con rischio "alto" o "molto alto" secondo la mappa nazionale del rischio da stress termico, a tutela della salute e sicurezza dei lavoratori esposti al caldo. La tabella fornisce un'informazione utile e comparabile a quella ufficiale. Per l'applicazione del divieto normativo fa fede esclusivamente la <a href="https://www.worklimate.it/scelta-mappa/sole-attivita-fisica-alta/" target="_blank" rel="noopener">sezione ufficiale di Worklimate</a> (le mappe PNG), non questa tabella. <a href="#methodologyDisclaimer" id="lawDisclaimerLink">Maggiori dettagli nel disclaimer, clicca qui</a>.
+  </div>
+
   <div class="kpi-top-row">
     <div class="card kpi-mini">
       <h2>Oggi in sintesi</h2>
@@ -129,12 +134,7 @@
     <div class="grouped-view" id="groupedView" hidden></div>
   </div>
 
-  <div class="law-banner">
-    <div class="law-title">⚠️ Normativa vigente</div>
-    In Sicilia è in vigore l'<a href="https://www.regione.sicilia.it/la-regione-informa/stress-termico-ordinanza-schifani-stop-ai-lavori-nelle-ore-piu-calde" target="_blank" rel="noopener">Ordinanza Schifani</a>, che dispone lo stop ai lavori all'aperto nelle ore più calde della giornata (indicativamente 12:30–16:00) nei giorni con rischio "alto" o "molto alto" secondo la mappa nazionale del rischio da stress termico, a tutela della salute e sicurezza dei lavoratori esposti al caldo. Verificare sempre il testo ufficiale dell'ordinanza e gli aggiornamenti sul sito della Regione Siciliana.
-  </div>
-
-  <div class="prov-group methodology-disclaimer collapsed">
+  <div class="prov-group methodology-disclaimer collapsed" id="methodologyDisclaimer">
     <button type="button" class="prov-group-header methodology-header" aria-expanded="false">
       <span>ℹ️ Disclaimer</span>
       <span class="chevron">▾</span>

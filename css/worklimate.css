@@ -526,15 +526,17 @@
     border-radius: 16px;
     padding: 14px 16px;
     margin-top: 18px;
-    font-size: 12.5px;
+    font-size: 14px;
     color: var(--text-secondary);
     line-height: 1.6;
+	margin-bottom: 20px;
+	
   }
   .law-banner .law-title {
     display: flex;
     align-items: center;
     gap: 7px;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 800;
     color: var(--serious);
     margin-bottom: 6px;
