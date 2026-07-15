@@ -340,6 +340,9 @@
   .locate-btn:disabled { opacity: .6; cursor: wait; }
   .locate-status { font-size: 12.5px; color: var(--text-secondary); }
 
+  .my-comune-card { margin-bottom: 14px; }
+  .my-comune-card[hidden] { display: none; }
+
   @keyframes row-highlight-pulse {
     0%   { background: color-mix(in srgb, var(--serious) 35%, transparent); }
     100% { background: transparent; }

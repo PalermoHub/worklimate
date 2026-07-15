@@ -353,6 +353,20 @@ function haversineKm(lat1, lon1, lat2, lon2) {
   return 2 * R * Math.asin(Math.sqrt(a));
 }
 
+const myComuneCard = document.getElementById('myComuneCard');
+function showMyComuneCard(r) {
+  myComuneCard.innerHTML = `
+    <div class="prov-group-body">
+      <div class="table-wrap">
+        <table>
+          <thead>${theadRowHtml()}</thead>
+          <tbody>${rowHtml(r)}</tbody>
+        </table>
+      </div>
+    </div>`;
+  myComuneCard.hidden = false;
+}
+
 function goToComune(nome) {
   searchEl.value = '';
   searchWrap.classList.remove('has-value');
@@ -435,7 +449,8 @@ locateBtn.addEventListener('click', () => {
         return;
       }
       locateStatus.textContent = `Comune più vicino: ${nearest.nome} (~${minDist.toFixed(0)} km)`;
-      goToComune(nearest.nome);
+      const r = rowsByNome.get(nearest.nome);
+      if (r) showMyComuneCard(r);
     },
     (err) => {
       locateBtn.disabled = false;
