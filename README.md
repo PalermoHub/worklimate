@@ -2,7 +2,7 @@
 
 Pagina statica che mostra il livello di rischio da caldo per il lavoro all'aperto (basso / moderato / alto / emergenza) per tutti i **391 comuni siciliani**, per oggi, domani e dopodomani. Dato pubblico via [Worklimate](https://github.com/aborruso/worklimate), aggiornato automaticamente ogni giorno.
 
-👉 **Pagina live:** `[index.html](https://palermohub.github.io/worklimate/)` (pubblicata come GitHub Pages).
+👉 **Pagina live:**  [index.html](https://palermohub.github.io/worklimate/) (pubblicata come GitHub Pages).
 
 ## Cosa fa
 
