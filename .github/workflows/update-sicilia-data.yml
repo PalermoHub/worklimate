@@ -3,7 +3,7 @@ name: Aggiorna rischio da caldo Sicilia
 on:
   schedule:
     # 05:30 UTC = 07:30 CEST (ora legale, mar-ott) — prima della fascia di rischio 12-16
-    - cron: '30 5 * * *'
+    - cron: '30 4 * * *'
     # 06:30 UTC = 07:30 CET (ora solare, nov-mar)
     - cron: '30 6 * * *'
   workflow_dispatch: {}
