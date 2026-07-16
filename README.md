@@ -61,3 +61,5 @@ scripts/fetch-comuni.mjs     job manuale: confini ISTAT → data/comuni-sicilia.
 .github/workflows/           automazione GitHub Actions
 varianti/                    prototipi di design alternativi (non pubblicati)
 ```
+## Licenza
+[CC BY 4.0 Attribuzione 4.0 Internazionale](https://creativecommons.org/licenses/by/4.0/deed.it)
