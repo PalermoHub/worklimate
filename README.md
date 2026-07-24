@@ -11,7 +11,7 @@ Pagina statica che mostra il livello di rischio da caldo per il lavoro all'apert
 - Tema chiaro/scuro con toggle (preferenza salvata in `localStorage`).
 - Nessun backend: è un unico file HTML con dati incorporati, dati e viste generati staticamente.
 
-## Come funziona
+## Come funziona 
 
 ```
 scripts/fetch-comuni.mjs   → genera data/comuni-sicilia.json (elenco comuni + centroide)
@@ -63,3 +63,4 @@ varianti/                    prototipi di design alternativi (non pubblicati)
 ```
 ## Licenza
 [CC BY 4.0 Attribuzione 4.0 Internazionale](https://creativecommons.org/licenses/by/4.0/deed.it)
+
