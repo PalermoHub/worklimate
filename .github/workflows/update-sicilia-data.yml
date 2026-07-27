@@ -61,4 +61,11 @@ jobs:
           fi
           git add data/rischio-oggi.json data/storico-rischio.csv
           git commit -m "Aggiorna rischio da caldo Sicilia $(date -u +%Y-%m-%d)"
+          # Lo script impiega diversi minuti: se nel frattempo main e' avanzato
+          # (altro push), il push va rifatto dopo un rebase, non abbandonato.
+          for i in 1 2 3; do
+            git push && exit 0
+            git fetch origin main
+            git rebase origin/main
+          done
           git push
