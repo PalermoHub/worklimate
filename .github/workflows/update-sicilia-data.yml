@@ -21,18 +21,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verifica orario italiano previsto (7:30, gestisce CET/CEST)
+      - name: Verifica quale cron (CET/CEST) e' quello attivo in stagione
         id: check-ora
         run: |
           if [ "${{ github.event_name }}" != "schedule" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          ora=$(TZ=Europe/Rome date +%H)
-          if [ "$ora" = "07" ]; then
+          # GitHub Actions puo' ritardare i cron di ore: non affidarsi all'ora
+          # corrente al momento dell'esecuzione, ma allo schedule che ha
+          # innescato la run, incrociato con l'offset reale (stagione).
+          offset=$(TZ=Europe/Rome date +%z)
+          schedule="${{ github.event.schedule }}"
+          if { [ "$schedule" = "30 4 * * *" ] && [ "$offset" = "+0200" ]; } || \
+             { [ "$schedule" = "30 6 * * *" ] && [ "$offset" = "+0100" ]; }; then
             echo "run=true" >> "$GITHUB_OUTPUT"
           else
-            echo "Ora locale Italia: $ora, non 07. Skip run." >&2
+            echo "Cron '$schedule' non corrisponde alla stagione attiva (offset $offset). Skip run." >&2
             echo "run=false" >> "$GITHUB_OUTPUT"
           fi
 
