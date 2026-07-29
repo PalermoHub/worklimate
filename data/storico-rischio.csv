@@ -6207,3 +6207,391 @@ data,comune,provincia,rischio
 2026-07-28,Sortino,SR,Alto
 2026-07-28,Portopalo di Capo Passero,SR,Alto
 2026-07-28,Priolo Gargallo,SR,Alto
+2026-07-29,Alcamo,TP,Alto
+2026-07-29,Buseto Palizzolo,TP,Alto
+2026-07-29,Calatafimi-Segesta,TP,Alto
+2026-07-29,Campobello di Mazara,TP,Alto
+2026-07-29,Castellammare del Golfo,TP,Alto
+2026-07-29,Castelvetrano,TP,Alto
+2026-07-29,Custonaci,TP,Alto
+2026-07-29,Erice,TP,Alto
+2026-07-29,Favignana,TP,Alto
+2026-07-29,Gibellina,TP,Alto
+2026-07-29,Marsala,TP,Alto
+2026-07-29,Mazara del Vallo,TP,Alto
+2026-07-29,Paceco,TP,Alto
+2026-07-29,Partanna,TP,Alto
+2026-07-29,Poggioreale,TP,Alto
+2026-07-29,Salaparuta,TP,Alto
+2026-07-29,Salemi,TP,Alto
+2026-07-29,Santa Ninfa,TP,Alto
+2026-07-29,San Vito Lo Capo,TP,Alto
+2026-07-29,Trapani,TP,Alto
+2026-07-29,Valderice,TP,Alto
+2026-07-29,Vita,TP,Alto
+2026-07-29,Petrosino,TP,Alto
+2026-07-29,Misiliscemi,TP,Alto
+2026-07-29,Alia,PA,Moderato
+2026-07-29,Alimena,PA,Moderato
+2026-07-29,Aliminusa,PA,Moderato
+2026-07-29,Altavilla Milicia,PA,Alto
+2026-07-29,Altofonte,PA,Alto
+2026-07-29,Bagheria,PA,Alto
+2026-07-29,Balestrate,PA,Alto
+2026-07-29,Baucina,PA,Alto
+2026-07-29,Belmonte Mezzagno,PA,Alto
+2026-07-29,Bisacquino,PA,Alto
+2026-07-29,Bolognetta,PA,Alto
+2026-07-29,Bompietro,PA,Moderato
+2026-07-29,Borgetto,PA,Alto
+2026-07-29,Caccamo,PA,Alto
+2026-07-29,Caltavuturo,PA,Moderato
+2026-07-29,Campofelice di Fitalia,PA,Alto
+2026-07-29,Campofelice di Roccella,PA,Alto
+2026-07-29,Campofiorito,PA,Moderato
+2026-07-29,Camporeale,PA,Alto
+2026-07-29,Capaci,PA,Alto
+2026-07-29,Carini,PA,Alto
+2026-07-29,Castelbuono,PA,Alto
+2026-07-29,Casteldaccia,PA,Alto
+2026-07-29,Castellana Sicula,PA,Moderato
+2026-07-29,Castronovo di Sicilia,PA,Alto
+2026-07-29,Cefalà Diana,PA,Alto
+2026-07-29,Cefalù,PA,Alto
+2026-07-29,Cerda,PA,Alto
+2026-07-29,Chiusa Sclafani,PA,Moderato
+2026-07-29,Ciminna,PA,Alto
+2026-07-29,Cinisi,PA,Alto
+2026-07-29,Collesano,PA,Alto
+2026-07-29,Contessa Entellina,PA,Alto
+2026-07-29,Corleone,PA,Moderato
+2026-07-29,Ficarazzi,PA,Alto
+2026-07-29,Gangi,PA,Moderato
+2026-07-29,Geraci Siculo,PA,Moderato
+2026-07-29,Giardinello,PA,Alto
+2026-07-29,Giuliana,PA,Alto
+2026-07-29,Godrano,PA,Moderato
+2026-07-29,Gratteri,PA,Alto
+2026-07-29,Isnello,PA,Moderato
+2026-07-29,Isola delle Femmine,PA,Alto
+2026-07-29,Lascari,PA,Alto
+2026-07-29,Lercara Friddi,PA,Moderato
+2026-07-29,Marineo,PA,Alto
+2026-07-29,Mezzojuso,PA,Alto
+2026-07-29,Misilmeri,PA,Alto
+2026-07-29,Monreale,PA,Alto
+2026-07-29,Montelepre,PA,Alto
+2026-07-29,Montemaggiore Belsito,PA,Alto
+2026-07-29,Palazzo Adriano,PA,Moderato
+2026-07-29,Palermo,PA,Alto
+2026-07-29,Partinico,PA,Alto
+2026-07-29,Petralia Soprana,PA,Moderato
+2026-07-29,Petralia Sottana,PA,Moderato
+2026-07-29,Piana degli Albanesi,PA,Alto
+2026-07-29,Polizzi Generosa,PA,Moderato
+2026-07-29,Pollina,PA,Alto
+2026-07-29,Prizzi,PA,Moderato
+2026-07-29,Roccamena,PA,Alto
+2026-07-29,Roccapalumba,PA,Alto
+2026-07-29,San Cipirello,PA,Alto
+2026-07-29,San Giuseppe Jato,PA,Alto
+2026-07-29,San Mauro Castelverde,PA,Alto
+2026-07-29,Santa Cristina Gela,PA,Alto
+2026-07-29,Santa Flavia,PA,Alto
+2026-07-29,Sciara,PA,Alto
+2026-07-29,Sclafani Bagni,PA,Moderato
+2026-07-29,Termini Imerese,PA,Alto
+2026-07-29,Terrasini,PA,Alto
+2026-07-29,Torretta,PA,Alto
+2026-07-29,Trabia,PA,Alto
+2026-07-29,Trappeto,PA,Alto
+2026-07-29,Valledolmo,PA,Moderato
+2026-07-29,Ventimiglia di Sicilia,PA,Alto
+2026-07-29,Vicari,PA,Moderato
+2026-07-29,Villabate,PA,Alto
+2026-07-29,Villafrati,PA,Alto
+2026-07-29,Scillato,PA,Alto
+2026-07-29,Blufi,PA,Moderato
+2026-07-29,Alcara li Fusi,ME,Moderato
+2026-07-29,Alì,ME,Moderato
+2026-07-29,Alì Terme,ME,Moderato
+2026-07-29,Antillo,ME,Moderato
+2026-07-29,Barcellona Pozzo di Gotto,ME,Alto
+2026-07-29,Basicò,ME,Alto
+2026-07-29,Brolo,ME,Alto
+2026-07-29,Capizzi,ME,Moderato
+2026-07-29,Capo d'Orlando,ME,Alto
+2026-07-29,Capri Leone,ME,Alto
+2026-07-29,Caronia,ME,Moderato
+2026-07-29,Casalvecchio Siculo,ME,Moderato
+2026-07-29,Castel di Lucio,ME,Moderato
+2026-07-29,Castell'Umberto,ME,Alto
+2026-07-29,Castelmola,ME,Moderato
+2026-07-29,Castroreale,ME,Moderato
+2026-07-29,Cesarò,ME,Moderato
+2026-07-29,Condrò,ME,Alto
+2026-07-29,Falcone,ME,Alto
+2026-07-29,Ficarra,ME,Alto
+2026-07-29,Fiumedinisi,ME,Moderato
+2026-07-29,Floresta,ME,Basso
+2026-07-29,Fondachelli-Fantina,ME,Moderato
+2026-07-29,Forza d'Agrò,ME,Moderato
+2026-07-29,Francavilla di Sicilia,ME,Moderato
+2026-07-29,Frazzanò,ME,Alto
+2026-07-29,Furci Siculo,ME,Moderato
+2026-07-29,Furnari,ME,Alto
+2026-07-29,Gaggi,ME,Moderato
+2026-07-29,Galati Mamertino,ME,Moderato
+2026-07-29,Gallodoro,ME,Moderato
+2026-07-29,Giardini-Naxos,ME,Alto
+2026-07-29,Gioiosa Marea,ME,Alto
+2026-07-29,Graniti,ME,Moderato
+2026-07-29,Gualtieri Sicaminò,ME,Alto
+2026-07-29,Itala,ME,Moderato
+2026-07-29,Leni,ME,Alto
+2026-07-29,Letojanni,ME,Moderato
+2026-07-29,Librizzi,ME,Alto
+2026-07-29,Limina,ME,Moderato
+2026-07-29,Lipari,ME,Alto
+2026-07-29,Longi,ME,Moderato
+2026-07-29,Malfa,ME,Alto
+2026-07-29,Malvagna,ME,Moderato
+2026-07-29,Mandanici,ME,Moderato
+2026-07-29,Mazzarrà Sant'Andrea,ME,Alto
+2026-07-29,Merì,ME,Alto
+2026-07-29,Messina,ME,Moderato
+2026-07-29,Milazzo,ME,Alto
+2026-07-29,Militello Rosmarino,ME,Moderato
+2026-07-29,Mirto,ME,Alto
+2026-07-29,Mistretta,ME,Alto
+2026-07-29,Moio Alcantara,ME,Moderato
+2026-07-29,Monforte San Giorgio,ME,Moderato
+2026-07-29,Mongiuffi Melia,ME,Moderato
+2026-07-29,Montagnareale,ME,Alto
+2026-07-29,Montalbano Elicona,ME,Moderato
+2026-07-29,Motta Camastra,ME,Moderato
+2026-07-29,Motta d'Affermo,ME,Alto
+2026-07-29,Naso,ME,Alto
+2026-07-29,Nizza di Sicilia,ME,Moderato
+2026-07-29,Novara di Sicilia,ME,Moderato
+2026-07-29,Oliveri,ME,Alto
+2026-07-29,Pace del Mela,ME,Alto
+2026-07-29,Pagliara,ME,Moderato
+2026-07-29,Patti,ME,Alto
+2026-07-29,Pettineo,ME,Alto
+2026-07-29,Piraino,ME,Alto
+2026-07-29,Raccuja,ME,Moderato
+2026-07-29,Reitano,ME,Alto
+2026-07-29,Roccafiorita,ME,Moderato
+2026-07-29,Roccalumera,ME,Moderato
+2026-07-29,Roccavaldina,ME,Alto
+2026-07-29,Roccella Valdemone,ME,Basso
+2026-07-29,Rodì Milici,ME,Moderato
+2026-07-29,Rometta,ME,Alto
+2026-07-29,San Filippo del Mela,ME,Alto
+2026-07-29,San Fratello,ME,Moderato
+2026-07-29,San Marco d'Alunzio,ME,Alto
+2026-07-29,San Pier Niceto,ME,Alto
+2026-07-29,San Piero Patti,ME,Moderato
+2026-07-29,San Salvatore di Fitalia,ME,Alto
+2026-07-29,Santa Domenica Vittoria,ME,Basso
+2026-07-29,Sant'Agata di Militello,ME,Alto
+2026-07-29,Sant'Alessio Siculo,ME,Alto
+2026-07-29,Santa Lucia del Mela,ME,Moderato
+2026-07-29,Santa Marina Salina,ME,Alto
+2026-07-29,Sant'Angelo di Brolo,ME,Moderato
+2026-07-29,Santa Teresa di Riva,ME,Moderato
+2026-07-29,San Teodoro,ME,Moderato
+2026-07-29,Santo Stefano di Camastra,ME,Alto
+2026-07-29,Saponara,ME,Alto
+2026-07-29,Savoca,ME,Moderato
+2026-07-29,Scaletta Zanclea,ME,Moderato
+2026-07-29,Sinagra,ME,Alto
+2026-07-29,Spadafora,ME,Alto
+2026-07-29,Taormina,ME,Alto
+2026-07-29,Torregrotta,ME,Alto
+2026-07-29,Tortorici,ME,Moderato
+2026-07-29,Tripi,ME,Alto
+2026-07-29,Tusa,ME,Alto
+2026-07-29,Ucria,ME,Moderato
+2026-07-29,Valdina,ME,Alto
+2026-07-29,Venetico,ME,Alto
+2026-07-29,Villafranca Tirrena,ME,Alto
+2026-07-29,Terme Vigliatore,ME,Alto
+2026-07-29,Acquedolci,ME,Alto
+2026-07-29,Torrenova,ME,Alto
+2026-07-29,Agrigento,AG,Alto
+2026-07-29,Alessandria della Rocca,AG,Alto
+2026-07-29,Aragona,AG,Alto
+2026-07-29,Bivona,AG,Alto
+2026-07-29,Burgio,AG,Moderato
+2026-07-29,Calamonaci,AG,Alto
+2026-07-29,Caltabellotta,AG,Moderato
+2026-07-29,Camastra,AG,Alto
+2026-07-29,Cammarata,AG,Alto
+2026-07-29,Campobello di Licata,AG,Alto
+2026-07-29,Canicattì,AG,Alto
+2026-07-29,Casteltermini,AG,Alto
+2026-07-29,Castrofilippo,AG,Alto
+2026-07-29,Cattolica Eraclea,AG,Alto
+2026-07-29,Cianciana,AG,Alto
+2026-07-29,Comitini,AG,Alto
+2026-07-29,Favara,AG,Alto
+2026-07-29,Grotte,AG,Alto
+2026-07-29,Joppolo Giancaxio,AG,Alto
+2026-07-29,Licata,AG,Alto
+2026-07-29,Lucca Sicula,AG,Alto
+2026-07-29,Menfi,AG,Alto
+2026-07-29,Montallegro,AG,Alto
+2026-07-29,Montevago,AG,Alto
+2026-07-29,Naro,AG,Alto
+2026-07-29,Palma di Montechiaro,AG,Alto
+2026-07-29,Porto Empedocle,AG,Alto
+2026-07-29,Racalmuto,AG,Alto
+2026-07-29,Raffadali,AG,Alto
+2026-07-29,Ravanusa,AG,Alto
+2026-07-29,Realmonte,AG,Alto
+2026-07-29,Ribera,AG,Alto
+2026-07-29,Sambuca di Sicilia,AG,Alto
+2026-07-29,San Biagio Platani,AG,Alto
+2026-07-29,San Giovanni Gemini,AG,Moderato
+2026-07-29,Santa Elisabetta,AG,Alto
+2026-07-29,Santa Margherita di Belice,AG,Alto
+2026-07-29,Sant'Angelo Muxaro,AG,Alto
+2026-07-29,Santo Stefano Quisquina,AG,Moderato
+2026-07-29,Sciacca,AG,Alto
+2026-07-29,Siculiana,AG,Alto
+2026-07-29,Villafranca Sicula,AG,Alto
+2026-07-29,Acquaviva Platani,CL,Alto
+2026-07-29,Bompensiere,CL,Alto
+2026-07-29,Butera,CL,Alto
+2026-07-29,Caltanissetta,CL,Alto
+2026-07-29,Campofranco,CL,Alto
+2026-07-29,Delia,CL,Alto
+2026-07-29,Gela,CL,Alto
+2026-07-29,Marianopoli,CL,Moderato
+2026-07-29,Mazzarino,CL,Alto
+2026-07-29,Milena,CL,Alto
+2026-07-29,Montedoro,CL,Alto
+2026-07-29,Mussomeli,CL,Moderato
+2026-07-29,Niscemi,CL,Alto
+2026-07-29,Resuttano,CL,Moderato
+2026-07-29,Riesi,CL,Alto
+2026-07-29,San Cataldo,CL,Alto
+2026-07-29,Santa Caterina Villarmosa,CL,Moderato
+2026-07-29,Serradifalco,CL,Alto
+2026-07-29,Sommatino,CL,Alto
+2026-07-29,Sutera,CL,Alto
+2026-07-29,Vallelunga Pratameno,CL,Moderato
+2026-07-29,Villalba,CL,Moderato
+2026-07-29,Agira,EN,Moderato
+2026-07-29,Aidone,EN,Alto
+2026-07-29,Assoro,EN,Alto
+2026-07-29,Barrafranca,EN,Alto
+2026-07-29,Calascibetta,EN,Moderato
+2026-07-29,Catenanuova,EN,Moderato
+2026-07-29,Centuripe,EN,Moderato
+2026-07-29,Cerami,EN,Moderato
+2026-07-29,Enna,EN,Moderato
+2026-07-29,Gagliano Castelferrato,EN,Moderato
+2026-07-29,Leonforte,EN,Moderato
+2026-07-29,Nicosia,EN,Moderato
+2026-07-29,Nissoria,EN,Moderato
+2026-07-29,Piazza Armerina,EN,Moderato
+2026-07-29,Pietraperzia,EN,Alto
+2026-07-29,Regalbuto,EN,Moderato
+2026-07-29,Sperlinga,EN,Moderato
+2026-07-29,Troina,EN,Moderato
+2026-07-29,Valguarnera Caropepe,EN,Moderato
+2026-07-29,Villarosa,EN,Moderato
+2026-07-29,Aci Bonaccorsi,CT,Moderato
+2026-07-29,Aci Castello,CT,Alto
+2026-07-29,Aci Catena,CT,Moderato
+2026-07-29,Acireale,CT,Alto
+2026-07-29,Aci Sant'Antonio,CT,Moderato
+2026-07-29,Adrano,CT,Moderato
+2026-07-29,Belpasso,CT,Moderato
+2026-07-29,Biancavilla,CT,Moderato
+2026-07-29,Bronte,CT,Moderato
+2026-07-29,Calatabiano,CT,Alto
+2026-07-29,Caltagirone,CT,Alto
+2026-07-29,Camporotondo Etneo,CT,Moderato
+2026-07-29,Castel di Iudica,CT,Moderato
+2026-07-29,Castiglione di Sicilia,CT,Moderato
+2026-07-29,Catania,CT,Alto
+2026-07-29,Fiumefreddo di Sicilia,CT,Alto
+2026-07-29,Giarre,CT,Moderato
+2026-07-29,Grammichele,CT,Alto
+2026-07-29,Gravina di Catania,CT,Moderato
+2026-07-29,Licodia Eubea,CT,Alto
+2026-07-29,Linguaglossa,CT,Basso
+2026-07-29,Maletto,CT,Moderato
+2026-07-29,Mascali,CT,Moderato
+2026-07-29,Mascalucia,CT,Moderato
+2026-07-29,Militello in Val di Catania,CT,Moderato
+2026-07-29,Milo,CT,Moderato
+2026-07-29,Mineo,CT,Alto
+2026-07-29,Mirabella Imbaccari,CT,Alto
+2026-07-29,Misterbianco,CT,Alto
+2026-07-29,Motta Sant'Anastasia,CT,Alto
+2026-07-29,Nicolosi,CT,Basso
+2026-07-29,Palagonia,CT,Alto
+2026-07-29,Paternò,CT,Alto
+2026-07-29,Pedara,CT,Moderato
+2026-07-29,Piedimonte Etneo,CT,Moderato
+2026-07-29,Raddusa,CT,Alto
+2026-07-29,Ramacca,CT,Alto
+2026-07-29,Randazzo,CT,Moderato
+2026-07-29,Riposto,CT,Alto
+2026-07-29,San Cono,CT,Alto
+2026-07-29,San Giovanni la Punta,CT,Moderato
+2026-07-29,San Gregorio di Catania,CT,Moderato
+2026-07-29,San Michele di Ganzaria,CT,Alto
+2026-07-29,San Pietro Clarenza,CT,Moderato
+2026-07-29,Sant'Agata li Battiati,CT,Alto
+2026-07-29,Sant'Alfio,CT,Basso
+2026-07-29,Santa Maria di Licodia,CT,Moderato
+2026-07-29,Santa Venerina,CT,Moderato
+2026-07-29,Scordia,CT,Alto
+2026-07-29,Trecastagni,CT,Moderato
+2026-07-29,Tremestieri Etneo,CT,Moderato
+2026-07-29,Valverde,CT,Moderato
+2026-07-29,Viagrande,CT,Moderato
+2026-07-29,Vizzini,CT,Moderato
+2026-07-29,Zafferana Etnea,CT,Basso
+2026-07-29,Mazzarrone,CT,Alto
+2026-07-29,Maniace,CT,Moderato
+2026-07-29,Ragalna,CT,Basso
+2026-07-29,Acate,RG,Alto
+2026-07-29,Chiaramonte Gulfi,RG,Alto
+2026-07-29,Comiso,RG,Alto
+2026-07-29,Giarratana,RG,Moderato
+2026-07-29,Ispica,RG,Alto
+2026-07-29,Modica,RG,Moderato
+2026-07-29,Monterosso Almo,RG,Moderato
+2026-07-29,Pozzallo,RG,Alto
+2026-07-29,Ragusa,RG,Moderato
+2026-07-29,Santa Croce Camerina,RG,Alto
+2026-07-29,Scicli,RG,Alto
+2026-07-29,Vittoria,RG,Alto
+2026-07-29,Augusta,SR,Alto
+2026-07-29,Avola,SR,Alto
+2026-07-29,Buccheri,SR,Moderato
+2026-07-29,Buscemi,SR,Moderato
+2026-07-29,Canicattini Bagni,SR,Alto
+2026-07-29,Carlentini,SR,Alto
+2026-07-29,Cassaro,SR,Moderato
+2026-07-29,Ferla,SR,Moderato
+2026-07-29,Floridia,SR,Alto
+2026-07-29,Francofonte,SR,Alto
+2026-07-29,Lentini,SR,Alto
+2026-07-29,Melilli,SR,Alto
+2026-07-29,Noto,SR,Alto
+2026-07-29,Pachino,SR,Alto
+2026-07-29,Palazzolo Acreide,SR,Alto
+2026-07-29,Rosolini,SR,Alto
+2026-07-29,Siracusa,SR,Alto
+2026-07-29,Solarino,SR,Alto
+2026-07-29,Sortino,SR,Alto
+2026-07-29,Portopalo di Capo Passero,SR,Alto
+2026-07-29,Priolo Gargallo,SR,Alto
