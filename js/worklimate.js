@@ -223,20 +223,23 @@ function trendHtml(r) {
 function rowHtml(r) {
   const isEmergenza = r.g1 === 'Emergenza';
   return `<tr data-nome="${r.nome}"${isEmergenza ? ' class="row-emergenza"' : ''}>
-      <td>${r.nome} ${isEmergenza ? '<span class="emergenza-badge" title="Rischio massimo oggi">⚠ Emergenza</span> ' : ''}<button type="button" class="share-btn" data-nome="${r.nome}" title="Copia link a questo comune" aria-label="Copia link a questo comune">🔗</button></td>
+      <td><div class="comune-cell"><span class="comune-name">${r.nome}</span>${isEmergenza ? '<span class="emergenza-badge" title="Rischio massimo oggi">⚠ Emergenza</span>' : ''}<button type="button" class="share-btn" data-nome="${r.nome}" title="Copia link a questo comune" aria-label="Copia link a questo comune">🔗</button></div></td>
       <td><span class="prov-badge">${r.provincia}</span></td>
-      <td>${cellHtml(r.g1)}${tempHtml(r.temp)}</td>
+      <td>${cellHtml(r.g1)}</td>
+      <td class="temp-cell">${tempHtml(r.temp) || '<span class="temp-missing">—</span>'}</td>
       <td>${trendHtml(r)}</td>
     </tr>`;
 }
 
 const thG1Label = document.getElementById('thG1').textContent;
+const tempLabel = document.getElementById('thTemp').textContent;
 const trendLabel = document.querySelector('.trend-th').textContent;
 function theadRowHtml() {
   return `<tr>
       <th data-key="nome" class="${sortKey === 'nome' ? 'sorted' : ''}">Comune</th>
       <th data-key="provincia" class="${sortKey === 'provincia' ? 'sorted' : ''}">Prov.</th>
       <th data-key="g1" class="${sortKey === 'g1' ? 'sorted' : ''}">${thG1Label}</th>
+      <th class="temp-th">${tempLabel}</th>
       <th class="trend-th">${trendLabel}</th>
     </tr>`;
 }

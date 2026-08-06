@@ -3,7 +3,7 @@ name: Aggiorna rischio da caldo Sicilia
 on:
   schedule:
     # 05:30 UTC = 07:30 CEST (ora legale, mar-ott) — prima della fascia di rischio 12-16
-    - cron: '30 4 * * *'
+    - cron: '30 5 * * *'
     # 06:30 UTC = 07:30 CET (ora solare, nov-mar)
     - cron: '30 6 * * *'
   workflow_dispatch: {}
@@ -21,19 +21,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verifica orario italiano previsto (7:30, gestisce CET/CEST)
+      - name: Verifica orario italiano previsto (mattina, gestisce CET/CEST + delay scheduler)
         id: check-ora
         run: |
           if [ "${{ github.event_name }}" != "schedule" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          ora=$(TZ=Europe/Rome date +%H)
-          if [ "$ora" = "07" ]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "Ora locale Italia: $ora, non 07. Skip run." >&2
+          # GitHub Actions puo' ritardare i cron scheduled anche di 1h+; l'unico
+          # vincolo reale e' arrivare prima della fascia di rischio 12-16, non
+          # centrare le 7:30 esatte (che faceva saltare il run in silenzio nei
+          # giorni di ritardo). Il guard "gia_fatto" sotto evita i doppi run nei
+          # giorni in cui entrambi i cron (CET/CEST) cadono entro mezzogiorno.
+          ora=$(TZ=Europe/Rome date +%-H)
+          oggi=$(TZ=Europe/Rome date +%F)
+          if [ "$ora" -ge 12 ]; then
+            echo "Ora locale Italia: $ora, dopo mezzogiorno. Skip run." >&2
             echo "run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          gia_fatto=$(node -e "try{const d=require('./data/rischio-oggi.json');process.stdout.write(d.generatedAt==='$oggi'?'1':'0')}catch{process.stdout.write('0')}")
+          if [ "$gia_fatto" = "1" ]; then
+            echo "Dato di oggi ($oggi) gia' presente, skip run duplicato." >&2
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
           fi
 
       - uses: actions/setup-node@v4
