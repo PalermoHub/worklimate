@@ -72,17 +72,29 @@ function csvField(v) {
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
+const TZ = 'Europe/Rome';
+
+function dataOraLocale(date) {
+  const data = date.toLocaleDateString('en-CA', { timeZone: TZ }); // YYYY-MM-DD
+  const giorno = date.toLocaleDateString('it-IT', { timeZone: TZ, weekday: 'long' });
+  const ora = date.toLocaleTimeString('it-IT', { timeZone: TZ, hour: '2-digit', hour12: false }).slice(0, 2);
+  return { data, giorno, ora };
+}
+
 async function appendCsvStorico(timestamp, rows) {
-  const header = 'timestamp,comune,provincia,temperatura\n';
+  const header = 'timestamp,data,giorno_settimana,ora,comune,provincia,temperatura\n';
   let existing = '';
   try {
     existing = await readFile(CSV_PATH, 'utf8');
   } catch {
     // file non esiste ancora: verrà creato con l'header
   }
+  const { data, giorno, ora } = dataOraLocale(new Date(timestamp));
   const righe = rows
     .filter(([, , temp]) => temp !== null)
-    .map(([nome, sigla, temp]) => [timestamp, nome, sigla, temp].map(csvField).join(','))
+    .map(([nome, sigla, temp]) =>
+      [timestamp, data, giorno, ora, nome, sigla, temp].map(csvField).join(','),
+    )
     .join('\n');
   const out = existing ? `${existing}${righe}\n` : `${header}${righe}\n`;
   await writeFile(CSV_PATH, out, 'utf8');

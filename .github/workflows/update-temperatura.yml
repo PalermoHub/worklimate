@@ -2,9 +2,9 @@ name: Aggiorna temperatura reale Sicilia
 
 on:
   schedule:
-    # ogni 2 ore, in continuo (osservazione in tempo reale, fonte indipendente
+    # ogni ora, in continuo (osservazione in tempo reale, fonte indipendente
     # dal rischio da caldo che invece resta un unico run giornaliero alle 7:30)
-    - cron: '0 */2 * * *'
+    - cron: '0 * * * *'
   workflow_dispatch: {}
 
 permissions:
