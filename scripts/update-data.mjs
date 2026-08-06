@@ -65,6 +65,10 @@ async function appendCsvStorico(today, compact) {
   } catch {
     // file non esiste ancora: verrà creato con l'header
   }
+  if (existing.includes(`\n${today},`)) {
+    console.log(`${CSV_PATH} ha già righe per ${today}, skip append (run duplicato).`);
+    return;
+  }
   const righe = compact
     .map(([nome, sigla, g1]) => [today, nome, sigla, g1].map(csvField).join(','))
     .join('\n');
