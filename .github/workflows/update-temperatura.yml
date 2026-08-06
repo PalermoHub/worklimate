@@ -1,0 +1,40 @@
+name: Aggiorna temperatura reale Sicilia
+
+on:
+  schedule:
+    # ogni 2 ore, in continuo (osservazione in tempo reale, fonte indipendente
+    # dal rischio da caldo che invece resta un unico run giornaliero alle 7:30)
+    - cron: '0 */2 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-temperatura
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Aggiorna temperatura (data/temperatura-oggi.json)
+        run: node scripts/update-temperatura.mjs
+
+      - name: Commit e push se cambiato
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/temperatura-oggi.json data/storico-temperatura.csv; then
+            echo "Nessuna modifica, skip commit."
+            exit 0
+          fi
+          git add data/temperatura-oggi.json data/storico-temperatura.csv
+          git commit -m "Aggiorna temperatura reale Sicilia $(date -u +%Y-%m-%dT%H:%M)"
+          git push

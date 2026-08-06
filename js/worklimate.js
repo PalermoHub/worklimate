@@ -40,13 +40,28 @@ function fmtFreshness(ts) {
 }
 
 async function main() {
-  const [res, resComuni] = await Promise.all([
+  const [res, resComuni, resTemp] = await Promise.all([
     fetch('data/rischio-oggi.json'),
     fetch('data/comuni-sicilia.json'),
+    fetch('data/temperatura-oggi.json').catch(() => null),
   ]);
   const { generatedAt: GENERATED_AT, generatedAtTimestamp: GENERATED_TS, data: DATA } = await res.json();
   const comuniList = await resComuni.json();
-  const rows = DATA.map(d => ({ nome: d[0], provincia: d[1], g1: d[2], g2: d[3], g3: d[4] }));
+
+  // temperatura reale: fonte separata (MeteoHub, aggiornata ogni 2h), non
+  // legata al run giornaliero del rischio — può mancare o essere assente.
+  let tempByNome = new Map();
+  let tempGeneratedTs = null;
+  if (resTemp && resTemp.ok) {
+    const tempJson = await resTemp.json();
+    tempByNome = new Map(tempJson.data.map(([nome, , temp]) => [nome, temp]));
+    tempGeneratedTs = tempJson.generatedAtTimestamp;
+  }
+
+  const rows = DATA.map(d => ({
+    nome: d[0], provincia: d[1], g1: d[2], g2: d[3], g3: d[4],
+    temp: tempByNome.get(d[0]) ?? null,
+  }));
 
   const rowsByNome = new Map(rows.map(r => [r.nome, r]));
   const geoComuni = comuniList.filter(c => rowsByNome.has(c.nome));
@@ -57,6 +72,7 @@ document.getElementById('pageTitle').textContent = `Rischio da stress da caldo �
 document.getElementById('pageSubtitle').textContent =
   `Dati Worklimate, ${fmtDDMM(D0)}–${fmtDDMM(D2)} ${D0.getUTCFullYear()} (fascia oraria 12–16). Un valore per comune al giorno, non una superficie continua.`;
 document.getElementById('thG1').textContent = `Oggi (${fmtDDMM(D0)})`;
+document.getElementById('thG1').title = 'Rischio previsto (Worklimate, 1 volta/giorno) + temperatura reale osservata (rete DPC Sicilia, aggiornata ogni 2h)';
 document.querySelector('.trend-th').textContent = `Andamento ${fmtDDMM(D1)} → ${fmtDDMM(D2)}`;
 document.getElementById('updatedNote').textContent = `Aggiornato al ${fmtLong(D0)}.`;
 if (GENERATED_TS) {
@@ -156,6 +172,42 @@ function cellHtml(level) {
   return `<span class="cell ${cls}"><span class="dot"></span>${level}</span>`;
 }
 
+const tempFreshnessLabel = tempGeneratedTs
+  ? `ultima osservazione ${new Date(tempGeneratedTs).toLocaleString('it-IT', { hour: '2-digit', minute: '2-digit' })}`
+  : 'orario non disponibile';
+
+// scala colore continua per la temperatura reale, ancorata alla stessa
+// semantica basso/moderato/alto/emergenza usata per il rischio previsto
+const TEMP_STOPS = [
+  [26, [47, 122, 140]],   // --good
+  [30, [255, 184, 77]],   // --warning
+  [34, [232, 99, 28]],    // --serious
+  [38, [179, 38, 30]],    // rosso acceso, oltre l'emergenza
+];
+const TEMP_MIN = 20, TEMP_MAX = 40;
+
+function tempColor(t) {
+  if (t <= TEMP_STOPS[0][0]) return `rgb(${TEMP_STOPS[0][1].join(',')})`;
+  const last = TEMP_STOPS[TEMP_STOPS.length - 1];
+  if (t >= last[0]) return `rgb(${last[1].join(',')})`;
+  for (let i = 0; i < TEMP_STOPS.length - 1; i++) {
+    const [t0, c0] = TEMP_STOPS[i], [t1, c1] = TEMP_STOPS[i + 1];
+    if (t >= t0 && t <= t1) {
+      const f = (t - t0) / (t1 - t0);
+      const c = c0.map((v, i2) => Math.round(v + (c1[i2] - v) * f));
+      return `rgb(${c.join(',')})`;
+    }
+  }
+  return `rgb(${last[1].join(',')})`;
+}
+
+function tempHtml(temp) {
+  if (temp === null || temp === undefined) return '';
+  const color = tempColor(temp);
+  const pct = Math.round(Math.min(1, Math.max(0, (temp - TEMP_MIN) / (TEMP_MAX - TEMP_MIN))) * 100);
+  return `<span class="temp-badge" style="--temp-color:${color};--temp-pct:${pct}%" title="Temperatura reale osservata (rete DPC Sicilia), ${tempFreshnessLabel}"><span class="therm-dot"></span>${temp.toFixed(1)}°C</span>`;
+}
+
 function trendHtml(r) {
   const days = [
     { level: r.g1, label: `Oggi ${fmtDDMM(D0)}` },
@@ -173,7 +225,7 @@ function rowHtml(r) {
   return `<tr data-nome="${r.nome}"${isEmergenza ? ' class="row-emergenza"' : ''}>
       <td>${r.nome} ${isEmergenza ? '<span class="emergenza-badge" title="Rischio massimo oggi">⚠ Emergenza</span> ' : ''}<button type="button" class="share-btn" data-nome="${r.nome}" title="Copia link a questo comune" aria-label="Copia link a questo comune">🔗</button></td>
       <td><span class="prov-badge">${r.provincia}</span></td>
-      <td>${cellHtml(r.g1)}</td>
+      <td>${cellHtml(r.g1)}${tempHtml(r.temp)}</td>
       <td>${trendHtml(r)}</td>
     </tr>`;
 }

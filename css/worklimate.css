@@ -475,6 +475,39 @@
     :root:where(:not([data-theme="light"])) .cell.alto { color: #ffab84; }
     :root:where(:not([data-theme="light"])) .cell.emergenza { color: #ffb199; }
   }
+  .temp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+    padding: 1px 8px 1px 6px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--temp-color);
+    background: color-mix(in srgb, var(--temp-color) 15%, transparent);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+  }
+  .temp-badge .therm-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex: none;
+    background: var(--temp-color);
+    box-shadow: 0 0 4px 0 var(--temp-color);
+  }
+  .temp-badge::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: var(--temp-pct);
+    background: var(--temp-color);
+    opacity: .65;
+  }
   .cell.basso .dot { background: var(--good); }
   .cell.moderato .dot { background: var(--warning); }
   .cell.alto .dot { background: var(--serious); }
