@@ -23279,3 +23279,391 @@ data,comune,provincia,rischio
 2026-09-12,Sortino,SR,Alto
 2026-09-12,Portopalo di Capo Passero,SR,Alto
 2026-09-12,Priolo Gargallo,SR,Alto
+2026-09-13,Alcamo,TP,Moderato
+2026-09-13,Buseto Palizzolo,TP,Moderato
+2026-09-13,Calatafimi-Segesta,TP,Moderato
+2026-09-13,Campobello di Mazara,TP,Moderato
+2026-09-13,Castellammare del Golfo,TP,Moderato
+2026-09-13,Castelvetrano,TP,Moderato
+2026-09-13,Custonaci,TP,Moderato
+2026-09-13,Erice,TP,Moderato
+2026-09-13,Favignana,TP,Moderato
+2026-09-13,Gibellina,TP,Moderato
+2026-09-13,Marsala,TP,Moderato
+2026-09-13,Mazara del Vallo,TP,Moderato
+2026-09-13,Paceco,TP,Moderato
+2026-09-13,Partanna,TP,Moderato
+2026-09-13,Poggioreale,TP,Moderato
+2026-09-13,Salaparuta,TP,Moderato
+2026-09-13,Salemi,TP,Moderato
+2026-09-13,Santa Ninfa,TP,Moderato
+2026-09-13,San Vito Lo Capo,TP,Moderato
+2026-09-13,Trapani,TP,Moderato
+2026-09-13,Valderice,TP,Moderato
+2026-09-13,Vita,TP,Moderato
+2026-09-13,Petrosino,TP,Moderato
+2026-09-13,Misiliscemi,TP,Moderato
+2026-09-13,Alia,PA,Moderato
+2026-09-13,Alimena,PA,Moderato
+2026-09-13,Aliminusa,PA,Moderato
+2026-09-13,Altavilla Milicia,PA,Moderato
+2026-09-13,Altofonte,PA,Basso
+2026-09-13,Bagheria,PA,Moderato
+2026-09-13,Balestrate,PA,Moderato
+2026-09-13,Baucina,PA,Moderato
+2026-09-13,Belmonte Mezzagno,PA,Moderato
+2026-09-13,Bisacquino,PA,Basso
+2026-09-13,Bolognetta,PA,Moderato
+2026-09-13,Bompietro,PA,Moderato
+2026-09-13,Borgetto,PA,Basso
+2026-09-13,Caccamo,PA,Moderato
+2026-09-13,Caltavuturo,PA,Moderato
+2026-09-13,Campofelice di Fitalia,PA,Moderato
+2026-09-13,Campofelice di Roccella,PA,Moderato
+2026-09-13,Campofiorito,PA,Basso
+2026-09-13,Camporeale,PA,Moderato
+2026-09-13,Capaci,PA,Moderato
+2026-09-13,Carini,PA,Moderato
+2026-09-13,Castelbuono,PA,Moderato
+2026-09-13,Casteldaccia,PA,Moderato
+2026-09-13,Castellana Sicula,PA,Moderato
+2026-09-13,Castronovo di Sicilia,PA,Moderato
+2026-09-13,Cefalà Diana,PA,Moderato
+2026-09-13,Cefalù,PA,Moderato
+2026-09-13,Cerda,PA,Moderato
+2026-09-13,Chiusa Sclafani,PA,Moderato
+2026-09-13,Ciminna,PA,Moderato
+2026-09-13,Cinisi,PA,Moderato
+2026-09-13,Collesano,PA,Moderato
+2026-09-13,Contessa Entellina,PA,Moderato
+2026-09-13,Corleone,PA,Basso
+2026-09-13,Ficarazzi,PA,Moderato
+2026-09-13,Gangi,PA,Moderato
+2026-09-13,Geraci Siculo,PA,Moderato
+2026-09-13,Giardinello,PA,Moderato
+2026-09-13,Giuliana,PA,Moderato
+2026-09-13,Godrano,PA,Basso
+2026-09-13,Gratteri,PA,Moderato
+2026-09-13,Isnello,PA,Basso
+2026-09-13,Isola delle Femmine,PA,Moderato
+2026-09-13,Lascari,PA,Moderato
+2026-09-13,Lercara Friddi,PA,Moderato
+2026-09-13,Marineo,PA,Moderato
+2026-09-13,Mezzojuso,PA,Basso
+2026-09-13,Misilmeri,PA,Moderato
+2026-09-13,Monreale,PA,Moderato
+2026-09-13,Montelepre,PA,Basso
+2026-09-13,Montemaggiore Belsito,PA,Moderato
+2026-09-13,Palazzo Adriano,PA,Basso
+2026-09-13,Palermo,PA,Moderato
+2026-09-13,Partinico,PA,Moderato
+2026-09-13,Petralia Soprana,PA,Basso
+2026-09-13,Petralia Sottana,PA,Moderato
+2026-09-13,Piana degli Albanesi,PA,Moderato
+2026-09-13,Polizzi Generosa,PA,Moderato
+2026-09-13,Pollina,PA,Moderato
+2026-09-13,Prizzi,PA,Moderato
+2026-09-13,Roccamena,PA,Moderato
+2026-09-13,Roccapalumba,PA,Moderato
+2026-09-13,San Cipirello,PA,Moderato
+2026-09-13,San Giuseppe Jato,PA,Moderato
+2026-09-13,San Mauro Castelverde,PA,Basso
+2026-09-13,Santa Cristina Gela,PA,Moderato
+2026-09-13,Santa Flavia,PA,Moderato
+2026-09-13,Sciara,PA,Moderato
+2026-09-13,Sclafani Bagni,PA,Moderato
+2026-09-13,Termini Imerese,PA,Moderato
+2026-09-13,Terrasini,PA,Moderato
+2026-09-13,Torretta,PA,Moderato
+2026-09-13,Trabia,PA,Moderato
+2026-09-13,Trappeto,PA,Moderato
+2026-09-13,Valledolmo,PA,Moderato
+2026-09-13,Ventimiglia di Sicilia,PA,Moderato
+2026-09-13,Vicari,PA,Moderato
+2026-09-13,Villabate,PA,Moderato
+2026-09-13,Villafrati,PA,Moderato
+2026-09-13,Scillato,PA,Moderato
+2026-09-13,Blufi,PA,Moderato
+2026-09-13,Alcara li Fusi,ME,Basso
+2026-09-13,Alì,ME,Moderato
+2026-09-13,Alì Terme,ME,Basso
+2026-09-13,Antillo,ME,Basso
+2026-09-13,Barcellona Pozzo di Gotto,ME,Moderato
+2026-09-13,Basicò,ME,Moderato
+2026-09-13,Brolo,ME,Moderato
+2026-09-13,Capizzi,ME,Basso
+2026-09-13,Capo d'Orlando,ME,Moderato
+2026-09-13,Capri Leone,ME,Moderato
+2026-09-13,Caronia,ME,Basso
+2026-09-13,Casalvecchio Siculo,ME,Basso
+2026-09-13,Castel di Lucio,ME,Basso
+2026-09-13,Castell'Umberto,ME,Moderato
+2026-09-13,Castelmola,ME,Moderato
+2026-09-13,Castroreale,ME,Moderato
+2026-09-13,Cesarò,ME,Basso
+2026-09-13,Condrò,ME,Moderato
+2026-09-13,Falcone,ME,Moderato
+2026-09-13,Ficarra,ME,Moderato
+2026-09-13,Fiumedinisi,ME,Moderato
+2026-09-13,Floresta,ME,Basso
+2026-09-13,Fondachelli-Fantina,ME,Basso
+2026-09-13,Forza d'Agrò,ME,Moderato
+2026-09-13,Francavilla di Sicilia,ME,Moderato
+2026-09-13,Frazzanò,ME,Moderato
+2026-09-13,Furci Siculo,ME,Basso
+2026-09-13,Furnari,ME,Moderato
+2026-09-13,Gaggi,ME,Moderato
+2026-09-13,Galati Mamertino,ME,Basso
+2026-09-13,Gallodoro,ME,Moderato
+2026-09-13,Giardini-Naxos,ME,Moderato
+2026-09-13,Gioiosa Marea,ME,Moderato
+2026-09-13,Graniti,ME,Basso
+2026-09-13,Gualtieri Sicaminò,ME,Moderato
+2026-09-13,Itala,ME,Moderato
+2026-09-13,Leni,ME,Moderato
+2026-09-13,Letojanni,ME,Moderato
+2026-09-13,Librizzi,ME,Moderato
+2026-09-13,Limina,ME,Basso
+2026-09-13,Lipari,ME,Moderato
+2026-09-13,Longi,ME,Basso
+2026-09-13,Malfa,ME,Moderato
+2026-09-13,Malvagna,ME,Moderato
+2026-09-13,Mandanici,ME,Basso
+2026-09-13,Mazzarrà Sant'Andrea,ME,Moderato
+2026-09-13,Merì,ME,Moderato
+2026-09-13,Messina,ME,Moderato
+2026-09-13,Milazzo,ME,Moderato
+2026-09-13,Militello Rosmarino,ME,Moderato
+2026-09-13,Mirto,ME,Moderato
+2026-09-13,Mistretta,ME,Basso
+2026-09-13,Moio Alcantara,ME,Moderato
+2026-09-13,Monforte San Giorgio,ME,Moderato
+2026-09-13,Mongiuffi Melia,ME,Moderato
+2026-09-13,Montagnareale,ME,Moderato
+2026-09-13,Montalbano Elicona,ME,Basso
+2026-09-13,Motta Camastra,ME,Moderato
+2026-09-13,Motta d'Affermo,ME,Moderato
+2026-09-13,Naso,ME,Moderato
+2026-09-13,Nizza di Sicilia,ME,Basso
+2026-09-13,Novara di Sicilia,ME,Basso
+2026-09-13,Oliveri,ME,Moderato
+2026-09-13,Pace del Mela,ME,Moderato
+2026-09-13,Pagliara,ME,Basso
+2026-09-13,Patti,ME,Moderato
+2026-09-13,Pettineo,ME,Moderato
+2026-09-13,Piraino,ME,Moderato
+2026-09-13,Raccuja,ME,Basso
+2026-09-13,Reitano,ME,Moderato
+2026-09-13,Roccafiorita,ME,Basso
+2026-09-13,Roccalumera,ME,Basso
+2026-09-13,Roccavaldina,ME,Moderato
+2026-09-13,Roccella Valdemone,ME,Basso
+2026-09-13,Rodì Milici,ME,Moderato
+2026-09-13,Rometta,ME,Moderato
+2026-09-13,San Filippo del Mela,ME,Moderato
+2026-09-13,San Fratello,ME,Basso
+2026-09-13,San Marco d'Alunzio,ME,Moderato
+2026-09-13,San Pier Niceto,ME,Moderato
+2026-09-13,San Piero Patti,ME,Moderato
+2026-09-13,San Salvatore di Fitalia,ME,Moderato
+2026-09-13,Santa Domenica Vittoria,ME,Basso
+2026-09-13,Sant'Agata di Militello,ME,Moderato
+2026-09-13,Sant'Alessio Siculo,ME,Moderato
+2026-09-13,Santa Lucia del Mela,ME,Moderato
+2026-09-13,Santa Marina Salina,ME,Moderato
+2026-09-13,Sant'Angelo di Brolo,ME,Moderato
+2026-09-13,Santa Teresa di Riva,ME,Moderato
+2026-09-13,San Teodoro,ME,Basso
+2026-09-13,Santo Stefano di Camastra,ME,Moderato
+2026-09-13,Saponara,ME,Moderato
+2026-09-13,Savoca,ME,Moderato
+2026-09-13,Scaletta Zanclea,ME,Moderato
+2026-09-13,Sinagra,ME,Moderato
+2026-09-13,Spadafora,ME,Moderato
+2026-09-13,Taormina,ME,Moderato
+2026-09-13,Torregrotta,ME,Moderato
+2026-09-13,Tortorici,ME,Basso
+2026-09-13,Tripi,ME,Moderato
+2026-09-13,Tusa,ME,Moderato
+2026-09-13,Ucria,ME,Basso
+2026-09-13,Valdina,ME,Moderato
+2026-09-13,Venetico,ME,Moderato
+2026-09-13,Villafranca Tirrena,ME,Moderato
+2026-09-13,Terme Vigliatore,ME,Moderato
+2026-09-13,Acquedolci,ME,Moderato
+2026-09-13,Torrenova,ME,Moderato
+2026-09-13,Agrigento,AG,Moderato
+2026-09-13,Alessandria della Rocca,AG,Moderato
+2026-09-13,Aragona,AG,Moderato
+2026-09-13,Bivona,AG,Moderato
+2026-09-13,Burgio,AG,Moderato
+2026-09-13,Calamonaci,AG,Moderato
+2026-09-13,Caltabellotta,AG,Moderato
+2026-09-13,Camastra,AG,Moderato
+2026-09-13,Cammarata,AG,Moderato
+2026-09-13,Campobello di Licata,AG,Moderato
+2026-09-13,Canicattì,AG,Moderato
+2026-09-13,Casteltermini,AG,Moderato
+2026-09-13,Castrofilippo,AG,Moderato
+2026-09-13,Cattolica Eraclea,AG,Moderato
+2026-09-13,Cianciana,AG,Moderato
+2026-09-13,Comitini,AG,Moderato
+2026-09-13,Favara,AG,Moderato
+2026-09-13,Grotte,AG,Moderato
+2026-09-13,Joppolo Giancaxio,AG,Moderato
+2026-09-13,Licata,AG,Moderato
+2026-09-13,Lucca Sicula,AG,Moderato
+2026-09-13,Menfi,AG,Moderato
+2026-09-13,Montallegro,AG,Moderato
+2026-09-13,Montevago,AG,Moderato
+2026-09-13,Naro,AG,Moderato
+2026-09-13,Palma di Montechiaro,AG,Moderato
+2026-09-13,Porto Empedocle,AG,Moderato
+2026-09-13,Racalmuto,AG,Moderato
+2026-09-13,Raffadali,AG,Moderato
+2026-09-13,Ravanusa,AG,Moderato
+2026-09-13,Realmonte,AG,Moderato
+2026-09-13,Ribera,AG,Moderato
+2026-09-13,Sambuca di Sicilia,AG,Moderato
+2026-09-13,San Biagio Platani,AG,Moderato
+2026-09-13,San Giovanni Gemini,AG,Moderato
+2026-09-13,Santa Elisabetta,AG,Moderato
+2026-09-13,Santa Margherita di Belice,AG,Moderato
+2026-09-13,Sant'Angelo Muxaro,AG,Moderato
+2026-09-13,Santo Stefano Quisquina,AG,Basso
+2026-09-13,Sciacca,AG,Moderato
+2026-09-13,Siculiana,AG,Moderato
+2026-09-13,Villafranca Sicula,AG,Moderato
+2026-09-13,Acquaviva Platani,CL,Moderato
+2026-09-13,Bompensiere,CL,Moderato
+2026-09-13,Butera,CL,Moderato
+2026-09-13,Caltanissetta,CL,Moderato
+2026-09-13,Campofranco,CL,Moderato
+2026-09-13,Delia,CL,Moderato
+2026-09-13,Gela,CL,Moderato
+2026-09-13,Marianopoli,CL,Moderato
+2026-09-13,Mazzarino,CL,Moderato
+2026-09-13,Milena,CL,Moderato
+2026-09-13,Montedoro,CL,Moderato
+2026-09-13,Mussomeli,CL,Moderato
+2026-09-13,Niscemi,CL,Moderato
+2026-09-13,Resuttano,CL,Moderato
+2026-09-13,Riesi,CL,Moderato
+2026-09-13,San Cataldo,CL,Moderato
+2026-09-13,Santa Caterina Villarmosa,CL,Moderato
+2026-09-13,Serradifalco,CL,Moderato
+2026-09-13,Sommatino,CL,Moderato
+2026-09-13,Sutera,CL,Moderato
+2026-09-13,Vallelunga Pratameno,CL,Moderato
+2026-09-13,Villalba,CL,Moderato
+2026-09-13,Agira,EN,Moderato
+2026-09-13,Aidone,EN,Moderato
+2026-09-13,Assoro,EN,Alto
+2026-09-13,Barrafranca,EN,Moderato
+2026-09-13,Calascibetta,EN,Moderato
+2026-09-13,Catenanuova,EN,Moderato
+2026-09-13,Centuripe,EN,Moderato
+2026-09-13,Cerami,EN,Basso
+2026-09-13,Enna,EN,Moderato
+2026-09-13,Gagliano Castelferrato,EN,Moderato
+2026-09-13,Leonforte,EN,Moderato
+2026-09-13,Nicosia,EN,Moderato
+2026-09-13,Nissoria,EN,Moderato
+2026-09-13,Piazza Armerina,EN,Moderato
+2026-09-13,Pietraperzia,EN,Moderato
+2026-09-13,Regalbuto,EN,Moderato
+2026-09-13,Sperlinga,EN,Moderato
+2026-09-13,Troina,EN,Moderato
+2026-09-13,Valguarnera Caropepe,EN,Moderato
+2026-09-13,Villarosa,EN,Moderato
+2026-09-13,Aci Bonaccorsi,CT,Moderato
+2026-09-13,Aci Castello,CT,Moderato
+2026-09-13,Aci Catena,CT,Moderato
+2026-09-13,Acireale,CT,Moderato
+2026-09-13,Aci Sant'Antonio,CT,Moderato
+2026-09-13,Adrano,CT,Moderato
+2026-09-13,Belpasso,CT,Moderato
+2026-09-13,Biancavilla,CT,Moderato
+2026-09-13,Bronte,CT,Moderato
+2026-09-13,Calatabiano,CT,Moderato
+2026-09-13,Caltagirone,CT,Moderato
+2026-09-13,Camporotondo Etneo,CT,Moderato
+2026-09-13,Castel di Iudica,CT,Moderato
+2026-09-13,Castiglione di Sicilia,CT,Moderato
+2026-09-13,Catania,CT,Moderato
+2026-09-13,Fiumefreddo di Sicilia,CT,Moderato
+2026-09-13,Giarre,CT,Moderato
+2026-09-13,Grammichele,CT,Moderato
+2026-09-13,Gravina di Catania,CT,Moderato
+2026-09-13,Licodia Eubea,CT,Moderato
+2026-09-13,Linguaglossa,CT,Basso
+2026-09-13,Maletto,CT,Basso
+2026-09-13,Mascali,CT,Moderato
+2026-09-13,Mascalucia,CT,Moderato
+2026-09-13,Militello in Val di Catania,CT,Moderato
+2026-09-13,Milo,CT,Nessuno
+2026-09-13,Mineo,CT,Moderato
+2026-09-13,Mirabella Imbaccari,CT,Moderato
+2026-09-13,Misterbianco,CT,Moderato
+2026-09-13,Motta Sant'Anastasia,CT,Moderato
+2026-09-13,Nicolosi,CT,Basso
+2026-09-13,Palagonia,CT,Moderato
+2026-09-13,Paternò,CT,Moderato
+2026-09-13,Pedara,CT,Moderato
+2026-09-13,Piedimonte Etneo,CT,Basso
+2026-09-13,Raddusa,CT,Moderato
+2026-09-13,Ramacca,CT,Moderato
+2026-09-13,Randazzo,CT,Basso
+2026-09-13,Riposto,CT,Moderato
+2026-09-13,San Cono,CT,Moderato
+2026-09-13,San Giovanni la Punta,CT,Moderato
+2026-09-13,San Gregorio di Catania,CT,Moderato
+2026-09-13,San Michele di Ganzaria,CT,Moderato
+2026-09-13,San Pietro Clarenza,CT,Moderato
+2026-09-13,Sant'Agata li Battiati,CT,Moderato
+2026-09-13,Sant'Alfio,CT,Nessuno
+2026-09-13,Santa Maria di Licodia,CT,Moderato
+2026-09-13,Santa Venerina,CT,Moderato
+2026-09-13,Scordia,CT,Moderato
+2026-09-13,Trecastagni,CT,Moderato
+2026-09-13,Tremestieri Etneo,CT,Moderato
+2026-09-13,Valverde,CT,Moderato
+2026-09-13,Viagrande,CT,Moderato
+2026-09-13,Vizzini,CT,Moderato
+2026-09-13,Zafferana Etnea,CT,Basso
+2026-09-13,Mazzarrone,CT,Moderato
+2026-09-13,Maniace,CT,Basso
+2026-09-13,Ragalna,CT,Basso
+2026-09-13,Acate,RG,Moderato
+2026-09-13,Chiaramonte Gulfi,RG,Moderato
+2026-09-13,Comiso,RG,Moderato
+2026-09-13,Giarratana,RG,Moderato
+2026-09-13,Ispica,RG,Alto
+2026-09-13,Modica,RG,Moderato
+2026-09-13,Monterosso Almo,RG,Moderato
+2026-09-13,Pozzallo,RG,Alto
+2026-09-13,Ragusa,RG,Moderato
+2026-09-13,Santa Croce Camerina,RG,Moderato
+2026-09-13,Scicli,RG,Moderato
+2026-09-13,Vittoria,RG,Moderato
+2026-09-13,Augusta,SR,Moderato
+2026-09-13,Avola,SR,Moderato
+2026-09-13,Buccheri,SR,Moderato
+2026-09-13,Buscemi,SR,Moderato
+2026-09-13,Canicattini Bagni,SR,Moderato
+2026-09-13,Carlentini,SR,Moderato
+2026-09-13,Cassaro,SR,Moderato
+2026-09-13,Ferla,SR,Moderato
+2026-09-13,Floridia,SR,Moderato
+2026-09-13,Francofonte,SR,Moderato
+2026-09-13,Lentini,SR,Moderato
+2026-09-13,Melilli,SR,Moderato
+2026-09-13,Noto,SR,Moderato
+2026-09-13,Pachino,SR,Moderato
+2026-09-13,Palazzolo Acreide,SR,Moderato
+2026-09-13,Rosolini,SR,Moderato
+2026-09-13,Siracusa,SR,Moderato
+2026-09-13,Solarino,SR,Moderato
+2026-09-13,Sortino,SR,Moderato
+2026-09-13,Portopalo di Capo Passero,SR,Moderato
+2026-09-13,Priolo Gargallo,SR,Moderato
