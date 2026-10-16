@@ -29099,3 +29099,391 @@ data,comune,provincia,rischio
 2026-10-15,Sortino,SR,Basso
 2026-10-15,Portopalo di Capo Passero,SR,Basso
 2026-10-15,Priolo Gargallo,SR,Basso
+2026-10-16,Alcamo,TP,Basso
+2026-10-16,Buseto Palizzolo,TP,Basso
+2026-10-16,Calatafimi-Segesta,TP,Basso
+2026-10-16,Campobello di Mazara,TP,Moderato
+2026-10-16,Castellammare del Golfo,TP,Moderato
+2026-10-16,Castelvetrano,TP,Moderato
+2026-10-16,Custonaci,TP,Basso
+2026-10-16,Erice,TP,Moderato
+2026-10-16,Favignana,TP,Basso
+2026-10-16,Gibellina,TP,Basso
+2026-10-16,Marsala,TP,Moderato
+2026-10-16,Mazara del Vallo,TP,Moderato
+2026-10-16,Paceco,TP,Moderato
+2026-10-16,Partanna,TP,Moderato
+2026-10-16,Poggioreale,TP,Basso
+2026-10-16,Salaparuta,TP,Basso
+2026-10-16,Salemi,TP,Basso
+2026-10-16,Santa Ninfa,TP,Moderato
+2026-10-16,San Vito Lo Capo,TP,Moderato
+2026-10-16,Trapani,TP,Moderato
+2026-10-16,Valderice,TP,Moderato
+2026-10-16,Vita,TP,Basso
+2026-10-16,Petrosino,TP,Moderato
+2026-10-16,Misiliscemi,TP,Moderato
+2026-10-16,Alia,PA,Basso
+2026-10-16,Alimena,PA,Basso
+2026-10-16,Aliminusa,PA,Basso
+2026-10-16,Altavilla Milicia,PA,Basso
+2026-10-16,Altofonte,PA,Basso
+2026-10-16,Bagheria,PA,Moderato
+2026-10-16,Balestrate,PA,Moderato
+2026-10-16,Baucina,PA,Basso
+2026-10-16,Belmonte Mezzagno,PA,Basso
+2026-10-16,Bisacquino,PA,Basso
+2026-10-16,Bolognetta,PA,Basso
+2026-10-16,Bompietro,PA,Basso
+2026-10-16,Borgetto,PA,Basso
+2026-10-16,Caccamo,PA,Basso
+2026-10-16,Caltavuturo,PA,Basso
+2026-10-16,Campofelice di Fitalia,PA,Basso
+2026-10-16,Campofelice di Roccella,PA,Moderato
+2026-10-16,Campofiorito,PA,Basso
+2026-10-16,Camporeale,PA,Basso
+2026-10-16,Capaci,PA,Basso
+2026-10-16,Carini,PA,Basso
+2026-10-16,Castelbuono,PA,Basso
+2026-10-16,Casteldaccia,PA,Basso
+2026-10-16,Castellana Sicula,PA,Nessuno
+2026-10-16,Castronovo di Sicilia,PA,Basso
+2026-10-16,Cefalà Diana,PA,Basso
+2026-10-16,Cefalù,PA,Basso
+2026-10-16,Cerda,PA,Basso
+2026-10-16,Chiusa Sclafani,PA,Basso
+2026-10-16,Ciminna,PA,Basso
+2026-10-16,Cinisi,PA,Basso
+2026-10-16,Collesano,PA,Basso
+2026-10-16,Contessa Entellina,PA,Basso
+2026-10-16,Corleone,PA,Basso
+2026-10-16,Ficarazzi,PA,Moderato
+2026-10-16,Gangi,PA,Nessuno
+2026-10-16,Geraci Siculo,PA,Nessuno
+2026-10-16,Giardinello,PA,Basso
+2026-10-16,Giuliana,PA,Basso
+2026-10-16,Godrano,PA,Basso
+2026-10-16,Gratteri,PA,Basso
+2026-10-16,Isnello,PA,Nessuno
+2026-10-16,Isola delle Femmine,PA,Moderato
+2026-10-16,Lascari,PA,Moderato
+2026-10-16,Lercara Friddi,PA,Basso
+2026-10-16,Marineo,PA,Basso
+2026-10-16,Mezzojuso,PA,Basso
+2026-10-16,Misilmeri,PA,Basso
+2026-10-16,Monreale,PA,Basso
+2026-10-16,Montelepre,PA,Basso
+2026-10-16,Montemaggiore Belsito,PA,Basso
+2026-10-16,Palazzo Adriano,PA,Basso
+2026-10-16,Palermo,PA,Moderato
+2026-10-16,Partinico,PA,Moderato
+2026-10-16,Petralia Soprana,PA,Basso
+2026-10-16,Petralia Sottana,PA,Basso
+2026-10-16,Piana degli Albanesi,PA,Basso
+2026-10-16,Polizzi Generosa,PA,Basso
+2026-10-16,Pollina,PA,Basso
+2026-10-16,Prizzi,PA,Basso
+2026-10-16,Roccamena,PA,Basso
+2026-10-16,Roccapalumba,PA,Basso
+2026-10-16,San Cipirello,PA,Basso
+2026-10-16,San Giuseppe Jato,PA,Basso
+2026-10-16,San Mauro Castelverde,PA,Nessuno
+2026-10-16,Santa Cristina Gela,PA,Basso
+2026-10-16,Santa Flavia,PA,Moderato
+2026-10-16,Sciara,PA,Basso
+2026-10-16,Sclafani Bagni,PA,Basso
+2026-10-16,Termini Imerese,PA,Basso
+2026-10-16,Terrasini,PA,Basso
+2026-10-16,Torretta,PA,Basso
+2026-10-16,Trabia,PA,Basso
+2026-10-16,Trappeto,PA,Moderato
+2026-10-16,Valledolmo,PA,Basso
+2026-10-16,Ventimiglia di Sicilia,PA,Basso
+2026-10-16,Vicari,PA,Basso
+2026-10-16,Villabate,PA,Moderato
+2026-10-16,Villafrati,PA,Basso
+2026-10-16,Scillato,PA,Basso
+2026-10-16,Blufi,PA,Basso
+2026-10-16,Alcara li Fusi,ME,Nessuno
+2026-10-16,Alì,ME,Basso
+2026-10-16,Alì Terme,ME,Moderato
+2026-10-16,Antillo,ME,Basso
+2026-10-16,Barcellona Pozzo di Gotto,ME,Basso
+2026-10-16,Basicò,ME,Basso
+2026-10-16,Brolo,ME,Basso
+2026-10-16,Capizzi,ME,Nessuno
+2026-10-16,Capo d'Orlando,ME,Basso
+2026-10-16,Capri Leone,ME,Basso
+2026-10-16,Caronia,ME,Basso
+2026-10-16,Casalvecchio Siculo,ME,Basso
+2026-10-16,Castel di Lucio,ME,Nessuno
+2026-10-16,Castell'Umberto,ME,Basso
+2026-10-16,Castelmola,ME,Basso
+2026-10-16,Castroreale,ME,Basso
+2026-10-16,Cesarò,ME,Nessuno
+2026-10-16,Condrò,ME,Basso
+2026-10-16,Falcone,ME,Basso
+2026-10-16,Ficarra,ME,Basso
+2026-10-16,Fiumedinisi,ME,Basso
+2026-10-16,Floresta,ME,Nessuno
+2026-10-16,Fondachelli-Fantina,ME,Basso
+2026-10-16,Forza d'Agrò,ME,Moderato
+2026-10-16,Francavilla di Sicilia,ME,Basso
+2026-10-16,Frazzanò,ME,Basso
+2026-10-16,Furci Siculo,ME,Basso
+2026-10-16,Furnari,ME,Basso
+2026-10-16,Gaggi,ME,Basso
+2026-10-16,Galati Mamertino,ME,Nessuno
+2026-10-16,Gallodoro,ME,Basso
+2026-10-16,Giardini-Naxos,ME,Basso
+2026-10-16,Gioiosa Marea,ME,Basso
+2026-10-16,Graniti,ME,Basso
+2026-10-16,Gualtieri Sicaminò,ME,Basso
+2026-10-16,Itala,ME,Basso
+2026-10-16,Leni,ME,Basso
+2026-10-16,Letojanni,ME,Basso
+2026-10-16,Librizzi,ME,Basso
+2026-10-16,Limina,ME,Basso
+2026-10-16,Lipari,ME,Basso
+2026-10-16,Longi,ME,Nessuno
+2026-10-16,Malfa,ME,Basso
+2026-10-16,Malvagna,ME,Basso
+2026-10-16,Mandanici,ME,Nessuno
+2026-10-16,Mazzarrà Sant'Andrea,ME,Basso
+2026-10-16,Merì,ME,Basso
+2026-10-16,Messina,ME,Basso
+2026-10-16,Milazzo,ME,Basso
+2026-10-16,Militello Rosmarino,ME,Basso
+2026-10-16,Mirto,ME,Basso
+2026-10-16,Mistretta,ME,Nessuno
+2026-10-16,Moio Alcantara,ME,Basso
+2026-10-16,Monforte San Giorgio,ME,Basso
+2026-10-16,Mongiuffi Melia,ME,Basso
+2026-10-16,Montagnareale,ME,Basso
+2026-10-16,Montalbano Elicona,ME,Nessuno
+2026-10-16,Motta Camastra,ME,Basso
+2026-10-16,Motta d'Affermo,ME,Basso
+2026-10-16,Naso,ME,Basso
+2026-10-16,Nizza di Sicilia,ME,Basso
+2026-10-16,Novara di Sicilia,ME,Basso
+2026-10-16,Oliveri,ME,Basso
+2026-10-16,Pace del Mela,ME,Basso
+2026-10-16,Pagliara,ME,Basso
+2026-10-16,Patti,ME,Basso
+2026-10-16,Pettineo,ME,Basso
+2026-10-16,Piraino,ME,Basso
+2026-10-16,Raccuja,ME,Nessuno
+2026-10-16,Reitano,ME,Basso
+2026-10-16,Roccafiorita,ME,Basso
+2026-10-16,Roccalumera,ME,Moderato
+2026-10-16,Roccavaldina,ME,Basso
+2026-10-16,Roccella Valdemone,ME,Nessuno
+2026-10-16,Rodì Milici,ME,Basso
+2026-10-16,Rometta,ME,Basso
+2026-10-16,San Filippo del Mela,ME,Basso
+2026-10-16,San Fratello,ME,Nessuno
+2026-10-16,San Marco d'Alunzio,ME,Basso
+2026-10-16,San Pier Niceto,ME,Basso
+2026-10-16,San Piero Patti,ME,Basso
+2026-10-16,San Salvatore di Fitalia,ME,Basso
+2026-10-16,Santa Domenica Vittoria,ME,Nessuno
+2026-10-16,Sant'Agata di Militello,ME,Basso
+2026-10-16,Sant'Alessio Siculo,ME,Basso
+2026-10-16,Santa Lucia del Mela,ME,Basso
+2026-10-16,Santa Marina Salina,ME,Basso
+2026-10-16,Sant'Angelo di Brolo,ME,Basso
+2026-10-16,Santa Teresa di Riva,ME,Moderato
+2026-10-16,San Teodoro,ME,Basso
+2026-10-16,Santo Stefano di Camastra,ME,Basso
+2026-10-16,Saponara,ME,Basso
+2026-10-16,Savoca,ME,Moderato
+2026-10-16,Scaletta Zanclea,ME,Basso
+2026-10-16,Sinagra,ME,Basso
+2026-10-16,Spadafora,ME,Basso
+2026-10-16,Taormina,ME,Basso
+2026-10-16,Torregrotta,ME,Basso
+2026-10-16,Tortorici,ME,Nessuno
+2026-10-16,Tripi,ME,Basso
+2026-10-16,Tusa,ME,Basso
+2026-10-16,Ucria,ME,Nessuno
+2026-10-16,Valdina,ME,Basso
+2026-10-16,Venetico,ME,Basso
+2026-10-16,Villafranca Tirrena,ME,Basso
+2026-10-16,Terme Vigliatore,ME,Basso
+2026-10-16,Acquedolci,ME,Moderato
+2026-10-16,Torrenova,ME,Basso
+2026-10-16,Agrigento,AG,Moderato
+2026-10-16,Alessandria della Rocca,AG,Moderato
+2026-10-16,Aragona,AG,Moderato
+2026-10-16,Bivona,AG,Moderato
+2026-10-16,Burgio,AG,Basso
+2026-10-16,Calamonaci,AG,Moderato
+2026-10-16,Caltabellotta,AG,Basso
+2026-10-16,Camastra,AG,Basso
+2026-10-16,Cammarata,AG,Basso
+2026-10-16,Campobello di Licata,AG,Basso
+2026-10-16,Canicattì,AG,Basso
+2026-10-16,Casteltermini,AG,Moderato
+2026-10-16,Castrofilippo,AG,Moderato
+2026-10-16,Cattolica Eraclea,AG,Moderato
+2026-10-16,Cianciana,AG,Moderato
+2026-10-16,Comitini,AG,Moderato
+2026-10-16,Favara,AG,Moderato
+2026-10-16,Grotte,AG,Moderato
+2026-10-16,Joppolo Giancaxio,AG,Moderato
+2026-10-16,Licata,AG,Moderato
+2026-10-16,Lucca Sicula,AG,Basso
+2026-10-16,Menfi,AG,Moderato
+2026-10-16,Montallegro,AG,Moderato
+2026-10-16,Montevago,AG,Basso
+2026-10-16,Naro,AG,Basso
+2026-10-16,Palma di Montechiaro,AG,Moderato
+2026-10-16,Porto Empedocle,AG,Moderato
+2026-10-16,Racalmuto,AG,Basso
+2026-10-16,Raffadali,AG,Moderato
+2026-10-16,Ravanusa,AG,Moderato
+2026-10-16,Realmonte,AG,Moderato
+2026-10-16,Ribera,AG,Moderato
+2026-10-16,Sambuca di Sicilia,AG,Basso
+2026-10-16,San Biagio Platani,AG,Moderato
+2026-10-16,San Giovanni Gemini,AG,Basso
+2026-10-16,Santa Elisabetta,AG,Moderato
+2026-10-16,Santa Margherita di Belice,AG,Basso
+2026-10-16,Sant'Angelo Muxaro,AG,Moderato
+2026-10-16,Santo Stefano Quisquina,AG,Basso
+2026-10-16,Sciacca,AG,Moderato
+2026-10-16,Siculiana,AG,Moderato
+2026-10-16,Villafranca Sicula,AG,Basso
+2026-10-16,Acquaviva Platani,CL,Basso
+2026-10-16,Bompensiere,CL,Basso
+2026-10-16,Butera,CL,Basso
+2026-10-16,Caltanissetta,CL,Basso
+2026-10-16,Campofranco,CL,Basso
+2026-10-16,Delia,CL,Basso
+2026-10-16,Gela,CL,Basso
+2026-10-16,Marianopoli,CL,Basso
+2026-10-16,Mazzarino,CL,Basso
+2026-10-16,Milena,CL,Basso
+2026-10-16,Montedoro,CL,Basso
+2026-10-16,Mussomeli,CL,Basso
+2026-10-16,Niscemi,CL,Basso
+2026-10-16,Resuttano,CL,Basso
+2026-10-16,Riesi,CL,Basso
+2026-10-16,San Cataldo,CL,Basso
+2026-10-16,Santa Caterina Villarmosa,CL,Basso
+2026-10-16,Serradifalco,CL,Basso
+2026-10-16,Sommatino,CL,Basso
+2026-10-16,Sutera,CL,Basso
+2026-10-16,Vallelunga Pratameno,CL,Basso
+2026-10-16,Villalba,CL,Basso
+2026-10-16,Agira,EN,Basso
+2026-10-16,Aidone,EN,Basso
+2026-10-16,Assoro,EN,Basso
+2026-10-16,Barrafranca,EN,Basso
+2026-10-16,Calascibetta,EN,Basso
+2026-10-16,Catenanuova,EN,Moderato
+2026-10-16,Centuripe,EN,Moderato
+2026-10-16,Cerami,EN,Nessuno
+2026-10-16,Enna,EN,Basso
+2026-10-16,Gagliano Castelferrato,EN,Basso
+2026-10-16,Leonforte,EN,Basso
+2026-10-16,Nicosia,EN,Basso
+2026-10-16,Nissoria,EN,Basso
+2026-10-16,Piazza Armerina,EN,Basso
+2026-10-16,Pietraperzia,EN,Basso
+2026-10-16,Regalbuto,EN,Basso
+2026-10-16,Sperlinga,EN,Nessuno
+2026-10-16,Troina,EN,Basso
+2026-10-16,Valguarnera Caropepe,EN,Basso
+2026-10-16,Villarosa,EN,Basso
+2026-10-16,Aci Bonaccorsi,CT,Basso
+2026-10-16,Aci Castello,CT,Basso
+2026-10-16,Aci Catena,CT,Basso
+2026-10-16,Acireale,CT,Basso
+2026-10-16,Aci Sant'Antonio,CT,Basso
+2026-10-16,Adrano,CT,Basso
+2026-10-16,Belpasso,CT,Basso
+2026-10-16,Biancavilla,CT,Basso
+2026-10-16,Bronte,CT,Basso
+2026-10-16,Calatabiano,CT,Basso
+2026-10-16,Caltagirone,CT,Moderato
+2026-10-16,Camporotondo Etneo,CT,Basso
+2026-10-16,Castel di Iudica,CT,Basso
+2026-10-16,Castiglione di Sicilia,CT,Basso
+2026-10-16,Catania,CT,Basso
+2026-10-16,Fiumefreddo di Sicilia,CT,Basso
+2026-10-16,Giarre,CT,Basso
+2026-10-16,Grammichele,CT,Basso
+2026-10-16,Gravina di Catania,CT,Basso
+2026-10-16,Licodia Eubea,CT,Basso
+2026-10-16,Linguaglossa,CT,Basso
+2026-10-16,Maletto,CT,Nessuno
+2026-10-16,Mascali,CT,Basso
+2026-10-16,Mascalucia,CT,Basso
+2026-10-16,Militello in Val di Catania,CT,Basso
+2026-10-16,Milo,CT,Nessuno
+2026-10-16,Mineo,CT,Basso
+2026-10-16,Mirabella Imbaccari,CT,Basso
+2026-10-16,Misterbianco,CT,Basso
+2026-10-16,Motta Sant'Anastasia,CT,Basso
+2026-10-16,Nicolosi,CT,Nessuno
+2026-10-16,Palagonia,CT,Alto
+2026-10-16,Paternò,CT,Basso
+2026-10-16,Pedara,CT,Basso
+2026-10-16,Piedimonte Etneo,CT,Basso
+2026-10-16,Raddusa,CT,Basso
+2026-10-16,Ramacca,CT,Moderato
+2026-10-16,Randazzo,CT,Basso
+2026-10-16,Riposto,CT,Basso
+2026-10-16,San Cono,CT,Basso
+2026-10-16,San Giovanni la Punta,CT,Basso
+2026-10-16,San Gregorio di Catania,CT,Basso
+2026-10-16,San Michele di Ganzaria,CT,Basso
+2026-10-16,San Pietro Clarenza,CT,Basso
+2026-10-16,Sant'Agata li Battiati,CT,Basso
+2026-10-16,Sant'Alfio,CT,Nessuno
+2026-10-16,Santa Maria di Licodia,CT,Basso
+2026-10-16,Santa Venerina,CT,Basso
+2026-10-16,Scordia,CT,Moderato
+2026-10-16,Trecastagni,CT,Basso
+2026-10-16,Tremestieri Etneo,CT,Basso
+2026-10-16,Valverde,CT,Basso
+2026-10-16,Viagrande,CT,Basso
+2026-10-16,Vizzini,CT,Basso
+2026-10-16,Zafferana Etnea,CT,Nessuno
+2026-10-16,Mazzarrone,CT,Basso
+2026-10-16,Maniace,CT,Nessuno
+2026-10-16,Ragalna,CT,Nessuno
+2026-10-16,Acate,RG,Basso
+2026-10-16,Chiaramonte Gulfi,RG,Basso
+2026-10-16,Comiso,RG,Basso
+2026-10-16,Giarratana,RG,Basso
+2026-10-16,Ispica,RG,Basso
+2026-10-16,Modica,RG,Basso
+2026-10-16,Monterosso Almo,RG,Basso
+2026-10-16,Pozzallo,RG,Basso
+2026-10-16,Ragusa,RG,Basso
+2026-10-16,Santa Croce Camerina,RG,Basso
+2026-10-16,Scicli,RG,Basso
+2026-10-16,Vittoria,RG,Basso
+2026-10-16,Augusta,SR,Basso
+2026-10-16,Avola,SR,Basso
+2026-10-16,Buccheri,SR,Basso
+2026-10-16,Buscemi,SR,Basso
+2026-10-16,Canicattini Bagni,SR,Basso
+2026-10-16,Carlentini,SR,Moderato
+2026-10-16,Cassaro,SR,Basso
+2026-10-16,Ferla,SR,Basso
+2026-10-16,Floridia,SR,Basso
+2026-10-16,Francofonte,SR,Moderato
+2026-10-16,Lentini,SR,Moderato
+2026-10-16,Melilli,SR,Basso
+2026-10-16,Noto,SR,Basso
+2026-10-16,Pachino,SR,Basso
+2026-10-16,Palazzolo Acreide,SR,Basso
+2026-10-16,Rosolini,SR,Basso
+2026-10-16,Siracusa,SR,Basso
+2026-10-16,Solarino,SR,Basso
+2026-10-16,Sortino,SR,Moderato
+2026-10-16,Portopalo di Capo Passero,SR,Basso
+2026-10-16,Priolo Gargallo,SR,Basso
