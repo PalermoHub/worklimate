@@ -32591,3 +32591,391 @@ data,comune,provincia,rischio
 2026-10-25,Sortino,SR,Nessuno
 2026-10-25,Portopalo di Capo Passero,SR,Basso
 2026-10-25,Priolo Gargallo,SR,Nessuno
+2026-10-26,Alcamo,TP,Basso
+2026-10-26,Buseto Palizzolo,TP,Basso
+2026-10-26,Calatafimi-Segesta,TP,Basso
+2026-10-26,Campobello di Mazara,TP,Basso
+2026-10-26,Castellammare del Golfo,TP,Basso
+2026-10-26,Castelvetrano,TP,Basso
+2026-10-26,Custonaci,TP,Nessuno
+2026-10-26,Erice,TP,Basso
+2026-10-26,Favignana,TP,Basso
+2026-10-26,Gibellina,TP,Basso
+2026-10-26,Marsala,TP,Basso
+2026-10-26,Mazara del Vallo,TP,Basso
+2026-10-26,Paceco,TP,Basso
+2026-10-26,Partanna,TP,Basso
+2026-10-26,Poggioreale,TP,Basso
+2026-10-26,Salaparuta,TP,Basso
+2026-10-26,Salemi,TP,Basso
+2026-10-26,Santa Ninfa,TP,Basso
+2026-10-26,San Vito Lo Capo,TP,Basso
+2026-10-26,Trapani,TP,Basso
+2026-10-26,Valderice,TP,Basso
+2026-10-26,Vita,TP,Basso
+2026-10-26,Petrosino,TP,Basso
+2026-10-26,Misiliscemi,TP,Basso
+2026-10-26,Alia,PA,Nessuno
+2026-10-26,Alimena,PA,Nessuno
+2026-10-26,Aliminusa,PA,Nessuno
+2026-10-26,Altavilla Milicia,PA,Basso
+2026-10-26,Altofonte,PA,Basso
+2026-10-26,Bagheria,PA,Basso
+2026-10-26,Balestrate,PA,Basso
+2026-10-26,Baucina,PA,Nessuno
+2026-10-26,Belmonte Mezzagno,PA,Basso
+2026-10-26,Bisacquino,PA,Nessuno
+2026-10-26,Bolognetta,PA,Basso
+2026-10-26,Bompietro,PA,Basso
+2026-10-26,Borgetto,PA,Nessuno
+2026-10-26,Caccamo,PA,Basso
+2026-10-26,Caltavuturo,PA,Nessuno
+2026-10-26,Campofelice di Fitalia,PA,Basso
+2026-10-26,Campofelice di Roccella,PA,Basso
+2026-10-26,Campofiorito,PA,Nessuno
+2026-10-26,Camporeale,PA,Basso
+2026-10-26,Capaci,PA,Basso
+2026-10-26,Carini,PA,Basso
+2026-10-26,Castelbuono,PA,Basso
+2026-10-26,Casteldaccia,PA,Basso
+2026-10-26,Castellana Sicula,PA,Nessuno
+2026-10-26,Castronovo di Sicilia,PA,Nessuno
+2026-10-26,Cefalà Diana,PA,Basso
+2026-10-26,Cefalù,PA,Nessuno
+2026-10-26,Cerda,PA,Basso
+2026-10-26,Chiusa Sclafani,PA,Nessuno
+2026-10-26,Ciminna,PA,Basso
+2026-10-26,Cinisi,PA,Basso
+2026-10-26,Collesano,PA,Basso
+2026-10-26,Contessa Entellina,PA,Basso
+2026-10-26,Corleone,PA,Nessuno
+2026-10-26,Ficarazzi,PA,Basso
+2026-10-26,Gangi,PA,Nessuno
+2026-10-26,Geraci Siculo,PA,Nessuno
+2026-10-26,Giardinello,PA,Nessuno
+2026-10-26,Giuliana,PA,Nessuno
+2026-10-26,Godrano,PA,Nessuno
+2026-10-26,Gratteri,PA,Nessuno
+2026-10-26,Isnello,PA,Nessuno
+2026-10-26,Isola delle Femmine,PA,Basso
+2026-10-26,Lascari,PA,Basso
+2026-10-26,Lercara Friddi,PA,Nessuno
+2026-10-26,Marineo,PA,Basso
+2026-10-26,Mezzojuso,PA,Basso
+2026-10-26,Misilmeri,PA,Basso
+2026-10-26,Monreale,PA,Basso
+2026-10-26,Montelepre,PA,Nessuno
+2026-10-26,Montemaggiore Belsito,PA,Nessuno
+2026-10-26,Palazzo Adriano,PA,Nessuno
+2026-10-26,Palermo,PA,Basso
+2026-10-26,Partinico,PA,Basso
+2026-10-26,Petralia Soprana,PA,Nessuno
+2026-10-26,Petralia Sottana,PA,Nessuno
+2026-10-26,Piana degli Albanesi,PA,Nessuno
+2026-10-26,Polizzi Generosa,PA,Nessuno
+2026-10-26,Pollina,PA,Basso
+2026-10-26,Prizzi,PA,Nessuno
+2026-10-26,Roccamena,PA,Basso
+2026-10-26,Roccapalumba,PA,Basso
+2026-10-26,San Cipirello,PA,Basso
+2026-10-26,San Giuseppe Jato,PA,Basso
+2026-10-26,San Mauro Castelverde,PA,Nessuno
+2026-10-26,Santa Cristina Gela,PA,Nessuno
+2026-10-26,Santa Flavia,PA,Basso
+2026-10-26,Sciara,PA,Basso
+2026-10-26,Sclafani Bagni,PA,Nessuno
+2026-10-26,Termini Imerese,PA,Basso
+2026-10-26,Terrasini,PA,Basso
+2026-10-26,Torretta,PA,Nessuno
+2026-10-26,Trabia,PA,Basso
+2026-10-26,Trappeto,PA,Basso
+2026-10-26,Valledolmo,PA,Nessuno
+2026-10-26,Ventimiglia di Sicilia,PA,Nessuno
+2026-10-26,Vicari,PA,Basso
+2026-10-26,Villabate,PA,Basso
+2026-10-26,Villafrati,PA,Basso
+2026-10-26,Scillato,PA,Nessuno
+2026-10-26,Blufi,PA,Nessuno
+2026-10-26,Alcara li Fusi,ME,Nessuno
+2026-10-26,Alì,ME,Basso
+2026-10-26,Alì Terme,ME,Basso
+2026-10-26,Antillo,ME,Nessuno
+2026-10-26,Barcellona Pozzo di Gotto,ME,Basso
+2026-10-26,Basicò,ME,Nessuno
+2026-10-26,Brolo,ME,Basso
+2026-10-26,Capizzi,ME,Nessuno
+2026-10-26,Capo d'Orlando,ME,Basso
+2026-10-26,Capri Leone,ME,Basso
+2026-10-26,Caronia,ME,Nessuno
+2026-10-26,Casalvecchio Siculo,ME,Basso
+2026-10-26,Castel di Lucio,ME,Nessuno
+2026-10-26,Castell'Umberto,ME,Nessuno
+2026-10-26,Castelmola,ME,Nessuno
+2026-10-26,Castroreale,ME,Nessuno
+2026-10-26,Cesarò,ME,Nessuno
+2026-10-26,Condrò,ME,Basso
+2026-10-26,Falcone,ME,Basso
+2026-10-26,Ficarra,ME,Nessuno
+2026-10-26,Fiumedinisi,ME,Basso
+2026-10-26,Floresta,ME,Nessuno
+2026-10-26,Fondachelli-Fantina,ME,Nessuno
+2026-10-26,Forza d'Agrò,ME,Basso
+2026-10-26,Francavilla di Sicilia,ME,Basso
+2026-10-26,Frazzanò,ME,Nessuno
+2026-10-26,Furci Siculo,ME,Basso
+2026-10-26,Furnari,ME,Basso
+2026-10-26,Gaggi,ME,Basso
+2026-10-26,Galati Mamertino,ME,Nessuno
+2026-10-26,Gallodoro,ME,Basso
+2026-10-26,Giardini-Naxos,ME,Basso
+2026-10-26,Gioiosa Marea,ME,Basso
+2026-10-26,Graniti,ME,Nessuno
+2026-10-26,Gualtieri Sicaminò,ME,Basso
+2026-10-26,Itala,ME,Basso
+2026-10-26,Leni,ME,Basso
+2026-10-26,Letojanni,ME,Basso
+2026-10-26,Librizzi,ME,Nessuno
+2026-10-26,Limina,ME,Nessuno
+2026-10-26,Lipari,ME,Basso
+2026-10-26,Longi,ME,Nessuno
+2026-10-26,Malfa,ME,Basso
+2026-10-26,Malvagna,ME,Basso
+2026-10-26,Mandanici,ME,Nessuno
+2026-10-26,Mazzarrà Sant'Andrea,ME,Basso
+2026-10-26,Merì,ME,Basso
+2026-10-26,Messina,ME,Basso
+2026-10-26,Milazzo,ME,Basso
+2026-10-26,Militello Rosmarino,ME,Nessuno
+2026-10-26,Mirto,ME,Basso
+2026-10-26,Mistretta,ME,Nessuno
+2026-10-26,Moio Alcantara,ME,Nessuno
+2026-10-26,Monforte San Giorgio,ME,Basso
+2026-10-26,Mongiuffi Melia,ME,Nessuno
+2026-10-26,Montagnareale,ME,Nessuno
+2026-10-26,Montalbano Elicona,ME,Nessuno
+2026-10-26,Motta Camastra,ME,Nessuno
+2026-10-26,Motta d'Affermo,ME,Nessuno
+2026-10-26,Naso,ME,Basso
+2026-10-26,Nizza di Sicilia,ME,Basso
+2026-10-26,Novara di Sicilia,ME,Nessuno
+2026-10-26,Oliveri,ME,Basso
+2026-10-26,Pace del Mela,ME,Basso
+2026-10-26,Pagliara,ME,Basso
+2026-10-26,Patti,ME,Basso
+2026-10-26,Pettineo,ME,Nessuno
+2026-10-26,Piraino,ME,Basso
+2026-10-26,Raccuja,ME,Nessuno
+2026-10-26,Reitano,ME,Nessuno
+2026-10-26,Roccafiorita,ME,Nessuno
+2026-10-26,Roccalumera,ME,Basso
+2026-10-26,Roccavaldina,ME,Basso
+2026-10-26,Roccella Valdemone,ME,Nessuno
+2026-10-26,Rodì Milici,ME,Nessuno
+2026-10-26,Rometta,ME,Basso
+2026-10-26,San Filippo del Mela,ME,Basso
+2026-10-26,San Fratello,ME,Nessuno
+2026-10-26,San Marco d'Alunzio,ME,Nessuno
+2026-10-26,San Pier Niceto,ME,Basso
+2026-10-26,San Piero Patti,ME,Nessuno
+2026-10-26,San Salvatore di Fitalia,ME,Nessuno
+2026-10-26,Santa Domenica Vittoria,ME,Nessuno
+2026-10-26,Sant'Agata di Militello,ME,Nessuno
+2026-10-26,Sant'Alessio Siculo,ME,Basso
+2026-10-26,Santa Lucia del Mela,ME,Nessuno
+2026-10-26,Santa Marina Salina,ME,Basso
+2026-10-26,Sant'Angelo di Brolo,ME,Nessuno
+2026-10-26,Santa Teresa di Riva,ME,Basso
+2026-10-26,San Teodoro,ME,Nessuno
+2026-10-26,Santo Stefano di Camastra,ME,Nessuno
+2026-10-26,Saponara,ME,Basso
+2026-10-26,Savoca,ME,Basso
+2026-10-26,Scaletta Zanclea,ME,Basso
+2026-10-26,Sinagra,ME,Nessuno
+2026-10-26,Spadafora,ME,Basso
+2026-10-26,Taormina,ME,Basso
+2026-10-26,Torregrotta,ME,Basso
+2026-10-26,Tortorici,ME,Nessuno
+2026-10-26,Tripi,ME,Nessuno
+2026-10-26,Tusa,ME,Nessuno
+2026-10-26,Ucria,ME,Nessuno
+2026-10-26,Valdina,ME,Basso
+2026-10-26,Venetico,ME,Basso
+2026-10-26,Villafranca Tirrena,ME,Basso
+2026-10-26,Terme Vigliatore,ME,Basso
+2026-10-26,Acquedolci,ME,Basso
+2026-10-26,Torrenova,ME,Basso
+2026-10-26,Agrigento,AG,Basso
+2026-10-26,Alessandria della Rocca,AG,Basso
+2026-10-26,Aragona,AG,Basso
+2026-10-26,Bivona,AG,Basso
+2026-10-26,Burgio,AG,Nessuno
+2026-10-26,Calamonaci,AG,Basso
+2026-10-26,Caltabellotta,AG,Nessuno
+2026-10-26,Camastra,AG,Basso
+2026-10-26,Cammarata,AG,Basso
+2026-10-26,Campobello di Licata,AG,Basso
+2026-10-26,Canicattì,AG,Basso
+2026-10-26,Casteltermini,AG,Basso
+2026-10-26,Castrofilippo,AG,Basso
+2026-10-26,Cattolica Eraclea,AG,Basso
+2026-10-26,Cianciana,AG,Basso
+2026-10-26,Comitini,AG,Basso
+2026-10-26,Favara,AG,Basso
+2026-10-26,Grotte,AG,Basso
+2026-10-26,Joppolo Giancaxio,AG,Basso
+2026-10-26,Licata,AG,Basso
+2026-10-26,Lucca Sicula,AG,Basso
+2026-10-26,Menfi,AG,Basso
+2026-10-26,Montallegro,AG,Basso
+2026-10-26,Montevago,AG,Basso
+2026-10-26,Naro,AG,Basso
+2026-10-26,Palma di Montechiaro,AG,Basso
+2026-10-26,Porto Empedocle,AG,Basso
+2026-10-26,Racalmuto,AG,Basso
+2026-10-26,Raffadali,AG,Basso
+2026-10-26,Ravanusa,AG,Basso
+2026-10-26,Realmonte,AG,Basso
+2026-10-26,Ribera,AG,Basso
+2026-10-26,Sambuca di Sicilia,AG,Basso
+2026-10-26,San Biagio Platani,AG,Basso
+2026-10-26,San Giovanni Gemini,AG,Nessuno
+2026-10-26,Santa Elisabetta,AG,Basso
+2026-10-26,Santa Margherita di Belice,AG,Basso
+2026-10-26,Sant'Angelo Muxaro,AG,Basso
+2026-10-26,Santo Stefano Quisquina,AG,Nessuno
+2026-10-26,Sciacca,AG,Basso
+2026-10-26,Siculiana,AG,Basso
+2026-10-26,Villafranca Sicula,AG,Basso
+2026-10-26,Acquaviva Platani,CL,Basso
+2026-10-26,Bompensiere,CL,Basso
+2026-10-26,Butera,CL,Basso
+2026-10-26,Caltanissetta,CL,Basso
+2026-10-26,Campofranco,CL,Basso
+2026-10-26,Delia,CL,Basso
+2026-10-26,Gela,CL,Basso
+2026-10-26,Marianopoli,CL,Basso
+2026-10-26,Mazzarino,CL,Basso
+2026-10-26,Milena,CL,Basso
+2026-10-26,Montedoro,CL,Basso
+2026-10-26,Mussomeli,CL,Basso
+2026-10-26,Niscemi,CL,Basso
+2026-10-26,Resuttano,CL,Nessuno
+2026-10-26,Riesi,CL,Basso
+2026-10-26,San Cataldo,CL,Basso
+2026-10-26,Santa Caterina Villarmosa,CL,Basso
+2026-10-26,Serradifalco,CL,Basso
+2026-10-26,Sommatino,CL,Basso
+2026-10-26,Sutera,CL,Basso
+2026-10-26,Vallelunga Pratameno,CL,Basso
+2026-10-26,Villalba,CL,Basso
+2026-10-26,Agira,EN,Basso
+2026-10-26,Aidone,EN,Basso
+2026-10-26,Assoro,EN,Basso
+2026-10-26,Barrafranca,EN,Basso
+2026-10-26,Calascibetta,EN,Nessuno
+2026-10-26,Catenanuova,EN,Basso
+2026-10-26,Centuripe,EN,Basso
+2026-10-26,Cerami,EN,Nessuno
+2026-10-26,Enna,EN,Nessuno
+2026-10-26,Gagliano Castelferrato,EN,Basso
+2026-10-26,Leonforte,EN,Basso
+2026-10-26,Nicosia,EN,Nessuno
+2026-10-26,Nissoria,EN,Basso
+2026-10-26,Piazza Armerina,EN,Basso
+2026-10-26,Pietraperzia,EN,Basso
+2026-10-26,Regalbuto,EN,Basso
+2026-10-26,Sperlinga,EN,Nessuno
+2026-10-26,Troina,EN,Basso
+2026-10-26,Valguarnera Caropepe,EN,Basso
+2026-10-26,Villarosa,EN,Basso
+2026-10-26,Aci Bonaccorsi,CT,Basso
+2026-10-26,Aci Castello,CT,Basso
+2026-10-26,Aci Catena,CT,Basso
+2026-10-26,Acireale,CT,Basso
+2026-10-26,Aci Sant'Antonio,CT,Basso
+2026-10-26,Adrano,CT,Nessuno
+2026-10-26,Belpasso,CT,Basso
+2026-10-26,Biancavilla,CT,Nessuno
+2026-10-26,Bronte,CT,Nessuno
+2026-10-26,Calatabiano,CT,Basso
+2026-10-26,Caltagirone,CT,Basso
+2026-10-26,Camporotondo Etneo,CT,Basso
+2026-10-26,Castel di Iudica,CT,Basso
+2026-10-26,Castiglione di Sicilia,CT,Nessuno
+2026-10-26,Catania,CT,Basso
+2026-10-26,Fiumefreddo di Sicilia,CT,Basso
+2026-10-26,Giarre,CT,Basso
+2026-10-26,Grammichele,CT,Basso
+2026-10-26,Gravina di Catania,CT,Basso
+2026-10-26,Licodia Eubea,CT,Basso
+2026-10-26,Linguaglossa,CT,Nessuno
+2026-10-26,Maletto,CT,Nessuno
+2026-10-26,Mascali,CT,Nessuno
+2026-10-26,Mascalucia,CT,Nessuno
+2026-10-26,Militello in Val di Catania,CT,Basso
+2026-10-26,Milo,CT,Nessuno
+2026-10-26,Mineo,CT,Basso
+2026-10-26,Mirabella Imbaccari,CT,Basso
+2026-10-26,Misterbianco,CT,Basso
+2026-10-26,Motta Sant'Anastasia,CT,Basso
+2026-10-26,Nicolosi,CT,Nessuno
+2026-10-26,Palagonia,CT,Basso
+2026-10-26,Paternò,CT,Basso
+2026-10-26,Pedara,CT,Nessuno
+2026-10-26,Piedimonte Etneo,CT,Nessuno
+2026-10-26,Raddusa,CT,Basso
+2026-10-26,Ramacca,CT,Basso
+2026-10-26,Randazzo,CT,Nessuno
+2026-10-26,Riposto,CT,Basso
+2026-10-26,San Cono,CT,Basso
+2026-10-26,San Giovanni la Punta,CT,Basso
+2026-10-26,San Gregorio di Catania,CT,Basso
+2026-10-26,San Michele di Ganzaria,CT,Basso
+2026-10-26,San Pietro Clarenza,CT,Nessuno
+2026-10-26,Sant'Agata li Battiati,CT,Basso
+2026-10-26,Sant'Alfio,CT,Nessuno
+2026-10-26,Santa Maria di Licodia,CT,Basso
+2026-10-26,Santa Venerina,CT,Nessuno
+2026-10-26,Scordia,CT,Basso
+2026-10-26,Trecastagni,CT,Nessuno
+2026-10-26,Tremestieri Etneo,CT,Basso
+2026-10-26,Valverde,CT,Basso
+2026-10-26,Viagrande,CT,Nessuno
+2026-10-26,Vizzini,CT,Basso
+2026-10-26,Zafferana Etnea,CT,Nessuno
+2026-10-26,Mazzarrone,CT,Basso
+2026-10-26,Maniace,CT,Nessuno
+2026-10-26,Ragalna,CT,Nessuno
+2026-10-26,Acate,RG,Basso
+2026-10-26,Chiaramonte Gulfi,RG,Basso
+2026-10-26,Comiso,RG,Basso
+2026-10-26,Giarratana,RG,Nessuno
+2026-10-26,Ispica,RG,Basso
+2026-10-26,Modica,RG,Basso
+2026-10-26,Monterosso Almo,RG,Basso
+2026-10-26,Pozzallo,RG,Basso
+2026-10-26,Ragusa,RG,Basso
+2026-10-26,Santa Croce Camerina,RG,Basso
+2026-10-26,Scicli,RG,Basso
+2026-10-26,Vittoria,RG,Basso
+2026-10-26,Augusta,SR,Basso
+2026-10-26,Avola,SR,Basso
+2026-10-26,Buccheri,SR,Basso
+2026-10-26,Buscemi,SR,Basso
+2026-10-26,Canicattini Bagni,SR,Basso
+2026-10-26,Carlentini,SR,Basso
+2026-10-26,Cassaro,SR,Nessuno
+2026-10-26,Ferla,SR,Basso
+2026-10-26,Floridia,SR,Basso
+2026-10-26,Francofonte,SR,Basso
+2026-10-26,Lentini,SR,Basso
+2026-10-26,Melilli,SR,Basso
+2026-10-26,Noto,SR,Basso
+2026-10-26,Pachino,SR,Basso
+2026-10-26,Palazzolo Acreide,SR,Nessuno
+2026-10-26,Rosolini,SR,Basso
+2026-10-26,Siracusa,SR,Basso
+2026-10-26,Solarino,SR,Basso
+2026-10-26,Sortino,SR,Basso
+2026-10-26,Portopalo di Capo Passero,SR,Basso
+2026-10-26,Priolo Gargallo,SR,Basso
